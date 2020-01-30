@@ -68,7 +68,7 @@ const Signup = (props) =>{
         handleEmail('');
         handlePassword('')
         props.getUser(user);
-        props.history.push("/"); 
+        props.history.push("/dashboard"); 
       })
       .catch(error => {
         handleMessage(
