@@ -1,15 +1,11 @@
 import React from "react";
-import Signup from "./auth/Signup";
-import Login from './auth/Login';
-// import axios from 'axios';
-// import { Link } from 'react-router-dom';
+import Navbar from "./Navbar";
 
 const Home = () => {
   return (
     <div>
-      <h1>Teste</h1>
-      <Signup/>
-      <Login/>
+      <Navbar />
+      <h1>teste</h1>
     </div>
   );
 };

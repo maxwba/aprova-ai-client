@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import AuthService from "./auth-service";
 import { Link } from "react-router-dom";
+import Navbar from "../Navbar";
 
 class Login extends Component {
   constructor(props) {
@@ -30,7 +31,7 @@ class Login extends Component {
       })
       .catch(error =>{
           this.setState({
-              message: error.response.data.message
+              // message: error.response.data.message
           })
       });
   }
@@ -43,6 +44,7 @@ class Login extends Component {
   render() {
     return (
       <div>
+          <Navbar />
         <form onSubmit={this.handleFormSubmit}>
           <label>Email:</label>
           <input
@@ -58,7 +60,8 @@ class Login extends Component {
             value={this.state.password}
             onChange={this.handleChange}
           />
-          <input type="submit" value="Login" />
+           <Link to={"/"}> <input type="submit" value="Login" /> </Link>
+          
         </form>
         {this.state.message && <p>{this.state.message}</p>} {/* ESTILIZAR E COLOCAR NO LOGI */}
         <p>
