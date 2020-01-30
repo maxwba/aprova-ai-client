@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import AuthService from "./auth-service";
 import { _Link } from "react-router-dom";
-import Navbar from "../Navbar";
 
+//Material design UI
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -18,14 +18,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 
-
-
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+      <Link color="inherit" href="/">
+        Aprova.AI
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -33,6 +31,7 @@ function Copyright() {
   );
 }
 
+//Style methods
 const useStyles = makeStyles(theme => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -53,18 +52,14 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-
-
-
-
+//Hooks
 const Login = ({ location, getUser, history }) => {
   const [email, handleEmail] = useState('')
   const [password, handlePassword] = useState('')
-  const [message, handleMessage] = useState('')
+  const [message, handleMessage] = useState('') // <= Lembrar de tratar os erros
   const service = new AuthService()
 
-
-
+//
   const handleFormSubmit = (event) => {
     event.preventDefault();
     service
@@ -85,45 +80,18 @@ const Login = ({ location, getUser, history }) => {
         )
       });
   }
+
+  
   const classes = useStyles();
   return (
-    // <div>
-    //   <Navbar />
-    //   <form onSubmit={handleFormSubmit}>
-    //     <label>Email:</label>
-    //     <input
-    //       type="text"
-    //       name="email"
-    //       value={email}
-    //       onChange={(e) => handleEmail(e.target.value)}
-    //     />
-    //     <label>Password:</label>
-    //     <input
-    //       type="password"
-    //       name="password"
-    //       value={password}
-    //       onChange={(e) => handlePassword(e.target.value)}
-    //     />
-    //     <input type="submit" value="Login" />
-
-    //   </form>
-    //   {message && <p>{message}</p>}
-    //   <p>
-    //     Don't have account?
-    //       <_Link to={"/signup"}> Signup</_Link>
-    //   </p>
-    // </div>
-
-
-    
-    <Container component="main" maxWidth="xs">
+    <Container className='form' component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          Login
         </Typography>
         <form className={classes.form} onSubmit={handleFormSubmit}>
           <TextField
@@ -132,7 +100,7 @@ const Login = ({ location, getUser, history }) => {
             required
             fullWidth
             id="email"
-            label="Email Address"
+            label="Email"
             name="email"
             autoComplete="email"
             autoFocus
@@ -146,7 +114,7 @@ const Login = ({ location, getUser, history }) => {
             required
             fullWidth
             name="password"
-            label="Password"
+            label="Senha"
             type="password"
             id="password"
             autoComplete="current-password"
@@ -156,7 +124,7 @@ const Login = ({ location, getUser, history }) => {
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
+            label="Lembrar"
           />
           <Button
             type="submit"
@@ -168,14 +136,9 @@ const Login = ({ location, getUser, history }) => {
             Login
           </Button>
           <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
             <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
+              <Link href="/signup" variant="body2">
+                {"Não tem uma conta? Sign Up"}
               </Link>
             </Grid>
           </Grid>
