@@ -1,54 +1,67 @@
-
-
-
-
-
-
-
-/* FORM */
-
-#form {
-  margin: 6% auto 12% auto;
-  width: 370px;
-  font-size: 1.5em;
+/* NAVBAR */
+.btn-login:active {
+  color:#70e5c0
 }
 
-#form label {
-  color: #EB5F33;
-  display: inline-block;
-  margin-bottom: 10px;
+/* HOME */ 
+.slogan {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 150px;
+}
+
+.slogan h1{
+width: 800px;
+font-size: 68px;
+font-weight: bolder;
+color: black;
+}
+
+.slogan p {
+  width: 400px;
+  color: gray;
+  font-size: 22px;
+  font-weight: 500;
+}
+
+/* HOME__BUTTTON */
+.myButton {
+	box-shadow: 0px 10px 14px -7px #2d4e80;
+	background:linear-gradient(to bottom, #70e5c0 5%, #408c99 100%);
+	background-color:#70e5c0;
+	border-radius:8px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:20px;
+	font-weight:bold;
+	padding:13px 32px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #3d768a;
+}
+.myButton:hover {
+	background:linear-gradient(to bottom, #408c99 5%, #70e5c0 100%);
+	background-color:#408c99;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+
+/* ABOUT */ 
+.about img {
+ margin-left: 100px;
+}
+.about p {
+  line-height: 1.5;
+  color: gray;
+  font-weight: 500;
+  font-size: 18px;
   text-align: center;
-  width: 100%;
 }
 
-#form input,
-#form button {
-  box-sizing: border-box;
-  font-size: 14px;
-  outline: 0;
-  padding: 8px;
-  width: 100%;
-  margin-bottom: 20px;
-  border-radius: 1px;
+.steps {
+  margin-top: 120px;
 }
-
-#form button {
-  background: rgb(4, 37, 119);;
-  border: 1px solid #012FA2;
-  border-radius: 10px;
-  color: #fff;
-  cursor: pointer;
-  display: inline-block;
-  font-size: 0.7em;
-  padding: 8px 16px;
-  text-decoration: none;
-  text-transform: uppercase;
-  transition: .3s ease background;
-  width: 100%;
-}
-
-#form button:hover {
-  background: #fff;
-  color: #012FA2 ;
-  transition: .3s ease background;
-}
+     
