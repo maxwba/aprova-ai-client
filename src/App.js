@@ -6,6 +6,8 @@ import Home from './components/Home'
 import Signup from './components/auth/Signup'
 import Login from './components/auth/Login'
 import AuthService from "./components/auth/auth-service";
+import Dashboard from './components/Dashboard';
+import JobDetail from './components/JobDetail';
 
 
 class App extends Component {
@@ -45,6 +47,8 @@ class App extends Component {
       <div className="App">
         <Switch>
         <Route exact path="/" component={Home}  user={this.props.user} />
+        <Route path="/dashboard" component={Dashboard}  user={this.props.user} />
+        <Route path="/jobdetail" component={JobDetail} />
         <Route path="/signup" render={(props) => <Signup {...props} getUser={this.getTheUser} />} />
         <Route path="/login"  render={(props) => <Login {...props} getUser={this.getTheUser} />} />
         </Switch>
