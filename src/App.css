@@ -192,3 +192,18 @@ background-color: black;
 }
 
 
+.form {
+  margin-top: 100px;  
+}
+
+.App {
+  background-color: #fff;
+}
+
+.makeStyles-avatar-2 {
+  background-color: #428d9a !important;
+}
+
+.MuiButton-fullWidth {
+  background-color: #428d9a !important;
+}
