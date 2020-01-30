@@ -41,7 +41,6 @@ const Home = () => {
       </div>
       <footer className="foot">
     <div className="footer__text">
-     
       <p>® 2020 Aprova aí Labs, Inc</p>
     </div>
     <div className="footer__icons">
