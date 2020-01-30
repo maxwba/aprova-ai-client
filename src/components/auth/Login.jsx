@@ -1,5 +1,8 @@
+import React, { useState } from "react";
+import AuthService from "./auth-service";
+import { _Link } from "react-router-dom";
+import Navbar from "../Navbar";
 
-import React from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -14,9 +17,18 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
+
+
+
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
+      {'Copyright © '}
+      <Link color="inherit" href="https://material-ui.com/">
+        Your Website
+      </Link>{' '}
+      {new Date().getFullYear()}
+      {'.'}
     </Typography>
   );
 }
@@ -41,8 +53,69 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Login = () => {const classes = useStyles();
+
+
+
+
+const Login = ({ location, getUser, history }) => {
+  const [email, handleEmail] = useState('')
+  const [password, handlePassword] = useState('')
+  const [message, handleMessage] = useState('')
+  const service = new AuthService()
+
+
+
+  const handleFormSubmit = (event) => {
+    event.preventDefault();
+    service
+      .login(email, password)
+      .then(response => {
+        handleEmail('');
+        handlePassword('');
+        // getUser(response);
+        if (location.state) {
+          history.push(location.state.from.pathname);
+        } else {
+          history.push("/");
+        }
+      })
+      .catch(error => {
+        handleMessage(
+          error.response.data.message
+        )
+      });
+  }
+  const classes = useStyles();
   return (
+    // <div>
+    //   <Navbar />
+    //   <form onSubmit={handleFormSubmit}>
+    //     <label>Email:</label>
+    //     <input
+    //       type="text"
+    //       name="email"
+    //       value={email}
+    //       onChange={(e) => handleEmail(e.target.value)}
+    //     />
+    //     <label>Password:</label>
+    //     <input
+    //       type="password"
+    //       name="password"
+    //       value={password}
+    //       onChange={(e) => handlePassword(e.target.value)}
+    //     />
+    //     <input type="submit" value="Login" />
+
+    //   </form>
+    //   {message && <p>{message}</p>}
+    //   <p>
+    //     Don't have account?
+    //       <_Link to={"/signup"}> Signup</_Link>
+    //   </p>
+    // </div>
+
+
+    
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
@@ -52,7 +125,7 @@ const Login = () => {const classes = useStyles();
         <Typography component="h1" variant="h5">
           Sign in
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} onSubmit={handleFormSubmit}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -63,6 +136,9 @@ const Login = () => {const classes = useStyles();
             name="email"
             autoComplete="email"
             autoFocus
+            value={email}
+            onChange={(e) => handleEmail(e.target.value)}
+
           />
           <TextField
             variant="outlined"
@@ -74,6 +150,9 @@ const Login = () => {const classes = useStyles();
             type="password"
             id="password"
             autoComplete="current-password"
+            value={password}
+            onChange={(e) => handlePassword(e.target.value)}
+
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
@@ -86,7 +165,7 @@ const Login = () => {const classes = useStyles();
             color="primary"
             className={classes.submit}
           >
-            Sign In
+            Login
           </Button>
           <Grid container>
             <Grid item xs>
@@ -102,91 +181,13 @@ const Login = () => {const classes = useStyles();
           </Grid>
         </form>
       </div>
+      <Box mt={8}>
+        <Copyright />
+      </Box>
     </Container>
-  );
+
+    );
 }
-
-
-  
-
-
-
-
-
-// import React, { Component } from "react";
-// import AuthService from "./auth-service";
-// import { Link } from "react-router-dom";
-// import Navbar from "../Navbar";
-
-// class Login extends Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = { email: "", password: "", message:"" };
-//     this.service = new AuthService();
-//     this.handleFormSubmit = this.handleFormSubmit.bind(this);
-//     this.handleChange = this.handleChange.bind(this);
-//   }
-
-//   handleFormSubmit(event) {
-//     event.preventDefault();
-//     const email = this.state.email;
-//     const password = this.state.password;
-
-//     this.service
-//       .login(email, password)
-//       .then(response => {
-//         const { location } = this.props;
-//         this.setState({ email: "", password: "" });
-//         this.props.getUser(response);
-//         if (location.state) {
-//           this.props.history.push(location.state.from.pathname);
-//         } else {
-//           this.props.history.push("/projects");
-//         }
-//       })
-//       .catch(error =>{
-//           this.setState({
-//               // message: error.response.data.message
-//           })
-//       });
-//   }
-
-//   handleChange(event) {
-//     const { name, value } = event.target;
-//     this.setState({ [name]: value });
-//   }
-
-//   render() {
-//     return (
-//       <div>
-//           <Navbar />
-//         <form onSubmit={this.handleFormSubmit}>
-//           <label>Email:</label>
-//           <input
-//             type="text"
-//             name="email"
-//             value={this.state.email}
-//             onChange={this.handleChange}
-//           />
-//           <label>Password:</label>
-//           <input
-//             type="password"
-//             name="password"
-//             value={this.state.password}
-//             onChange={this.handleChange}
-//           />
-//            <Link to={"/"}> <input type="submit" value="Login" /> </Link>
-          
-//         </form>
-//         {this.state.message && <p>{this.state.message}</p>} {/* ESTILIZAR E COLOCAR NO LOGI */}
-//         <p>
-//           Don't have account?
-//           <Link to={"/signup"}> Signup</Link>
-//         </p>
-//       </div>
-//     );
-//   }
-// }
 
 export default Login;
 
