@@ -71,7 +71,7 @@ const Login = ({ location, getUser, history }) => {
         if (location.state) {
           history.push(location.state.from.pathname);
         } else {
-          history.push("/");
+          history.push("/dashboard");
         }
       })
       .catch(error => {
