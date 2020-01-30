@@ -67,7 +67,7 @@ const Login = ({ location, getUser, history }) => {
       .then(response => {
         handleEmail('');
         handlePassword('');
-        // getUser(response);
+        getUser(response);
         if (location.state) {
           history.push(location.state.from.pathname);
         } else {
