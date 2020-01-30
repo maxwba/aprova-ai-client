@@ -1,3 +1,129 @@
+/* NAVBAR */
+.btn-login:active {
+  color:#70e5c0
+}
+
+/* HOME */ 
+.slogan {
+  display: flex;
+  justify-content: space-around;
+}
+
+.slogan h1{
+font-size: 58px;
+font-weight: bolder;
+color: black;
+}
+
+.slogan p {
+  color: gray;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+/* HOME__BUTTTON */
+.myButton {
+	box-shadow: 0px 10px 14px -7px #276873;
+	background:linear-gradient(to bottom, #70e5c0 5%, #408c99 100%);
+	background-color:#70e5c0;
+	border-radius:8px;
+	display:inline;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:20px;
+	font-weight:bold;
+	padding:10px 19px;
+	text-decoration:none;
+  text-shadow:0px 1px 0px #3d768a;
+  margin: 0 auto;
+}
+.myButton:hover {
+	background:linear-gradient(to bottom, #408c99 5%, #70e5c0 100%);
+	background-color:#408c99;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
 
 
+/* ABOUT */ 
+.about img {
+ margin-left: 100px;
+}
+.about p {
+  line-height: 1.5;
+  color: gray;
+  font-weight: 700;
+  font-size: 18px;
+  text-align: center;
+}
 
+.steps {
+  margin-top: 10%;
+}
+.foot {
+  height: 7%;
+  width: 100%;
+  background-color: rgb(222, 248, 241);
+  color: white;
+  line-height: 0.3em;
+  position: fixed;
+  bottom: 0;
+  left: 0px;
+  right: 0px;
+  margin-bottom: 0px;  
+  display: flex;
+  justify-content: space-between;
+  padding: 1.5%;
+  padding-bottom: 0.4%;
+  color: gray;
+  font-size: 14px;
+}
+
+.footer__icons img:not(:first-child) {
+  margin: 2px;
+}
+
+.footer_text {
+  padding-top: 2px;
+}
+
+@media (min-width: 870px) {
+  .slogan {
+    margin-top: 130px;
+  }
+  .slogan h1{
+    font-size: 58px;
+  }
+  .slogan p{
+    font-size: 24px;
+  }
+  .foot {
+    padding-bottom: 3.5%;
+    }
+}
+
+@media (max-width: 869px) {
+  .slogan {
+    margin-top: 15px;
+  }
+  .slogan h1{
+    font-size: 40px;
+    text-align: center;
+  }
+  .slogan p{
+    font-size: 20px;
+    text-align: center;
+  }
+  .foot {
+  padding-top: 4%;
+  }
+  .footer__text {
+    font-size: 12px;
+  }
+  .steps {
+    padding-bottom: 50px;
+  }
+}
