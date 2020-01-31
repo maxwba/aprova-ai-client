@@ -10,7 +10,7 @@ const Home = () => {
       <Navbar />
       <div className="slogan d-flex row justify-content-around mb-5  mx-3">
         <div className="col-xs-12 col-md-6">
-        <h1>Solicite, prove e crie briefings personalizados</h1>
+        <h1>Solicite, aprove e crie briefings personalizados</h1>
         </div>
         <div className="d-flex flex-column col-xs-12 col-md-4">
           <p>Plataforma completa para gestão de aprovação de serviços</p>

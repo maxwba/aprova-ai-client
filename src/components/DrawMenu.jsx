@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom'
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -21,8 +22,10 @@ import ClientDetails from './ClientDetails'
 import AddToPhotosIcon from '@material-ui/icons/AddToPhotos';
 import HelpIcon from '@material-ui/icons/Help';
 import Avatar from '@material-ui/core/Avatar';
+import AuthService from './auth/auth-service';
 
 const drawerWidth = 240;
+
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -90,10 +93,11 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function MiniDrawer() {
+export default function MiniDrawer(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const [logout, handleLogout] = React.useState(props.loggedInCompany)
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -102,6 +106,18 @@ export default function MiniDrawer() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+
+  const service = new AuthService()
+const logoutCompany = (props) => {
+  if(logout){
+    service
+    .logout()
+    .then(response => {
+      handleLogout(null)
+    })
+  }
+}
 
   return (
     <div className={classes.root}>
@@ -126,6 +142,9 @@ export default function MiniDrawer() {
           </IconButton>
           <Typography variant="h6" noWrap>
             <img src="./images/logo.png"/> 
+            <Link to='/'>
+                <button onClick={() => logoutCompany(props)}>Logout</button>
+             </Link>
           </Typography>
         </Toolbar>
       </AppBar>
