@@ -71,9 +71,11 @@ const Signup = (props) =>{
         props.history.push("/dashboard"); 
       })
       .catch(error => {
-        handleMessage(
-         error.response.data.message
-        )
+        console.log(error)
+        // handleMessage(
+        //  error.response.data.message
+        // )
+
       });
   }
 

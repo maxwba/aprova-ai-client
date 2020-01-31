@@ -23,6 +23,8 @@ import AddToPhotosIcon from '@material-ui/icons/AddToPhotos';
 import HelpIcon from '@material-ui/icons/Help';
 import Avatar from '@material-ui/core/Avatar';
 import AuthService from './auth/auth-service';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import Axios from 'axios';
 
 const drawerWidth = 240;
 
@@ -98,6 +100,22 @@ export default function MiniDrawer(props) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [logout, handleLogout] = React.useState(props.loggedInCompany)
+  const [company, handleCompany] = React.useState([])
+
+  const getAllClient = () => {
+    Axios.get('http://localhost:5000/api/client')
+    .then(responseFromApi => {
+      console.log(responseFromApi)
+      handleCompany(responseFromApi.data)
+    })
+  }
+
+  // if(company.length > 0){
+  //   company.map((item,indice) =>{
+  //     console.log(item)
+  //     return item.name
+  //   })
+  // }
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -118,6 +136,13 @@ const logoutCompany = (props) => {
     })
   }
 }
+
+
+if(company.length === 0){
+  const companylist = getAllClient();
+  console.log('ihuuuuuul')
+}
+ 
 
   return (
     <div className={classes.root}>
@@ -143,7 +168,7 @@ const logoutCompany = (props) => {
           <Typography variant="h6" noWrap>
             <img src="./images/logo.png"/> 
             <Link to='/'>
-                <button onClick={() => logoutCompany(props)}>Logout</button>
+                <ExitToAppIcon onClick={() => logoutCompany(props)}>Logout</ExitToAppIcon>
              </Link>
           </Typography>
         </Toolbar>
@@ -173,16 +198,20 @@ const logoutCompany = (props) => {
         <Divider />
         <Divider />
         <List>
-          {['Coca-Cola', 'Dasa', 'Nubank', 'Globo'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{ <BusinessIcon/>}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
+          {company.map((text, index) =>{
+            const {name} = text;
+            const key = text+'-'+index
+              return(
+                <ListItem button key={key}>
+                  <ListItemIcon>{ <BusinessIcon/>}</ListItemIcon>
+                  <ListItemText primary={name} />
+                </ListItem>
+              )
+          } )}
         </List>
         <Divider />
         <List>
-          {['Add Empresa', 'Ajuda'].map((text, index) => (
+          {['Add','Bla','123'].map((text, index) => (
             <ListItem button key={text}>
               <ListItemIcon>{index % 2 === 0 ? <AddToPhotosIcon /> : <HelpIcon />}</ListItemIcon>
               <ListItemText primary={text} />
@@ -194,6 +223,7 @@ const logoutCompany = (props) => {
         <div className={classes.toolbar} />
 
         <ClientDetails />
+        
 
       </main>
     </div>
