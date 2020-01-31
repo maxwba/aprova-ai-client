@@ -16,6 +16,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import Alert from '@material-ui/lab/Alert';
 
 
 function Copyright() {
@@ -50,6 +51,12 @@ const useStyles = makeStyles(theme => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  root: {
+    width: '100%',
+    '& > * + *': {
+      marginTop: theme.spacing(2),
+    },
+  },
 }));
 
 //Hooks
@@ -71,10 +78,11 @@ const Login = ({ location, getUser, history }) => {
         if (location.state) {
           history.push(location.state.from.pathname);
         } else {
-          history.push("/");
+          history.push("/dashboard");
         }
       })
       .catch(error => {
+        console.log(error)
         handleMessage(
           error.response.data.message
         )
@@ -142,6 +150,9 @@ const Login = ({ location, getUser, history }) => {
               </Link>
             </Grid>
           </Grid>
+          <Alert variant="outlined" severity="error">
+{message} 
+</Alert>
         </form>
       </div>
       <Box mt={8}>
