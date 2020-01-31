@@ -207,3 +207,15 @@ background-color: black;
 .MuiButton-fullWidth {
   background-color: #428d9a !important;
 }
+
+.muiToolbar-root{
+  background-color: rgb(221, 1, 1) !important;
+}
+
+.MuiAppBar-colorPrimary{
+  background-color: #73C0A9 !important;
+}
+
+.MuiSvgIcon-root{
+  color: #000;
+}
