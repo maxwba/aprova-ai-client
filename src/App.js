@@ -8,36 +8,37 @@ import Login from './components/auth/Login'
 import AuthService from "./components/auth/auth-service";
 import Dashboard from './components/Dashboard';
 import JobDetail from './components/JobDetail';
+import ProtectedRoute from './components/auth/protected-route'
 
 
 class App extends Component {
   constructor(props){
     super(props)
-    this.state = { loggedInUser: null };
+    this.state = { loggedInCompany: null };
     this.service = new AuthService();
     this.getTheUser = this.getTheUser.bind(this);
   }
 
   fetchUser() {
-    if (this.state.loggedInUser === null) {
+    if (this.state.loggedInCompany === null) {
       this.service
         .loggedin()
         .then(response => {
           this.setState({
-            loggedInUser: response
+            loggedInCompany: response
           });
         })
         .catch(err => {
           this.setState({
-            loggedInUser: false
+            loggedInCompany: false
           });
         });
     }
   }
 
-  getTheUser(userObj) {
+  getTheUser(companyObj) {
     this.setState({
-      loggedInUser: userObj
+      loggedInCompany: companyObj
     })
   }
   
@@ -45,13 +46,23 @@ class App extends Component {
     this.fetchUser()
     return (
       <div className="App">
-        <Switch>
-        <Route exact path="/" component={Home}  user={this.props.user} />
-        <Route path="/dashboard" component={Dashboard}  user={this.props.user} />
-        <Route path="/jobdetail" component={JobDetail} />
-        <Route path="/signup" render={(props) => <Signup {...props} getUser={this.getTheUser} />} />
-        <Route path="/login"  render={(props) => <Login {...props} getUser={this.getTheUser} />} />
-        </Switch>
+        {this.state.loggedInCompany ? (
+          <Switch>
+          <Route exact path="/" component={Home}  company={this.props.email} />
+          <ProtectedRoute path="/dashboard" component={Dashboard}  company={this.state.loggedInCompany} />
+          <Route path="/jobdetail" component={JobDetail} />
+          <Route exact path="/logout"   />
+          <Route path="/signup" render={(props) => <Signup {...props} getUser={this.getTheUser} />} />
+          <Route path="/login"  render={(props) => <Login {...props} getUser={this.getTheUser} />} />
+          </Switch>
+        ):(
+          <Switch>
+          <Route exact path="/" component={Home}  company={this.props.email} />
+          <Route path="/signup" render={(props) => <Signup {...props} getUser={this.getTheUser} />} />
+          <Route path="/login"  render={(props) => <Login {...props} getUser={this.getTheUser} />} />
+          {/* <ProtectedRoute path="/dashboard" component={Dashboard}  company={this.state.loggedInCompany} /> */}
+          </Switch>
+        )}
       </div>
     );
   }

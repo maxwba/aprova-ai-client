@@ -2,10 +2,10 @@ import React from 'react';
 import Menu from './DrawMenu'
 import ClientDetails from './ClientDetails'
 
-const Dashboard = () => {
+const Dashboard = (props) => {
     return (
         <div>
-        <Menu />
+        <Menu loggedInCompany={props.loggedInCompany} />
         </div>
     )
 }

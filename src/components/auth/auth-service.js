@@ -30,7 +30,11 @@ class AuthService {
   }
   loggedin() {
     return this.service.get('/loggedin')
-      .then(response => response.data)
+      .then(response =>{
+        console.log(response.data)
+        return  response.data
+        
+      })
   }
 }
 
