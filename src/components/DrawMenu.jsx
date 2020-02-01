@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Link} from 'react-router-dom'
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -102,20 +102,18 @@ export default function MiniDrawer(props) {
   const [logout, handleLogout] = React.useState(props.loggedInCompany)
   const [company, handleCompany] = React.useState([])
 
-  const getAllClient = () => {
-    Axios.get('http://localhost:5000/api/client')
-    .then(responseFromApi => {
-      console.log(responseFromApi)
-      handleCompany(responseFromApi.data)
-    })
-  }
+  
 
-  // if(company.length > 0){
-  //   company.map((item,indice) =>{
-  //     console.log(item)
-  //     return item.name
-  //   })
-  // }
+   useEffect(() => {
+    async function getAllClient(){
+      Axios.get('http://localhost:5000/api/client')
+      .then(responseFromApi => {
+        console.log(responseFromApi)
+        handleCompany(responseFromApi.data)
+      })
+    }
+    getAllClient()
+  }, [open])
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -137,11 +135,6 @@ const logoutCompany = (props) => {
   }
 }
 
-
-if(company.length === 0){
-  const companylist = getAllClient();
-  console.log('ihuuuuuul')
-}
  
 
   return (
@@ -167,9 +160,6 @@ if(company.length === 0){
           </IconButton>
           <Typography variant="h6" noWrap>
             <img src="./images/logo.png"/> 
-            <Link to='/'>
-                <ExitToAppIcon onClick={() => logoutCompany(props)}>Logout</ExitToAppIcon>
-             </Link>
           </Typography>
         </Toolbar>
       </AppBar>
@@ -211,18 +201,37 @@ if(company.length === 0){
         </List>
         <Divider />
         <List>
-          {['Add','Bla','123'].map((text, index) => (
+          {/* {['Add New Company','Help','123'].map((text, index) => (
             <ListItem button key={text}>
               <ListItemIcon>{index % 2 === 0 ? <AddToPhotosIcon /> : <HelpIcon />}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
-          ))}
+          ))} */}
+            <Link to='/newcompany'>
+            <ListItem>
+              <ListItemIcon> <AddToPhotosIcon /> </ListItemIcon>
+              <ListItemText>Add Company</ListItemText>
+            </ListItem>
+            </Link>
+            <Link to='/help'>
+            <ListItem >
+              <ListItemIcon> <HelpIcon /></ListItemIcon>
+              <ListItemText>Help</ListItemText>
+            </ListItem>
+            </Link>
+            <Link to='/'>
+            <ListItem >
+              <ListItemIcon><ExitToAppIcon /></ListItemIcon>
+              <ListItemText onClick={() => logoutCompany(props)} >Logout</ListItemText>
+            </ListItem>
+            </Link>
+
         </List>
       </Drawer>
-      <main className={classes.content}>
+        <main className={classes.content}>
         <div className={classes.toolbar} />
 
-        <ClientDetails />
+      <ClientDetails />
         
 
       </main>
