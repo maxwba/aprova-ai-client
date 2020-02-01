@@ -25,6 +25,8 @@ import Avatar from '@material-ui/core/Avatar';
 import AuthService from './auth/auth-service';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Axios from 'axios';
+import NewClient from './NewClient'
+import JobDetail from './JobDetail';
 
 const drawerWidth = 240;
 
@@ -101,6 +103,7 @@ export default function MiniDrawer(props) {
   const [open, setOpen] = React.useState(false);
   const [logout, handleLogout] = React.useState(props.loggedInCompany)
   const [company, handleCompany] = React.useState([])
+  const [client, handleClient] = React.useState(false)
 
   
 
@@ -123,6 +126,9 @@ export default function MiniDrawer(props) {
     setOpen(false);
   };
 
+  const handleChangeClient = () => {
+    handleClient(true)
+  }
 
   const service = new AuthService()
 const logoutCompany = (props) => {
@@ -135,7 +141,7 @@ const logoutCompany = (props) => {
   }
 }
 
- 
+
 
   return (
     <div className={classes.root}>
@@ -207,16 +213,18 @@ const logoutCompany = (props) => {
               <ListItemText primary={text} />
             </ListItem>
           ))} */}
-            <Link to='/newcompany'>
-            <ListItem>
+
+            
+            <ListItem button onClick={handleChangeClient}>
               <ListItemIcon> <AddToPhotosIcon /> </ListItemIcon>
               <ListItemText>Add Company</ListItemText>
             </ListItem>
-            </Link>
+            
+
             <Link to='/help'>
             <ListItem >
               <ListItemIcon> <HelpIcon /></ListItemIcon>
-              <ListItemText>Help</ListItemText>
+              <ListItemText >Help</ListItemText>
             </ListItem>
             </Link>
             <Link to='/'>
@@ -228,12 +236,12 @@ const logoutCompany = (props) => {
 
         </List>
       </Drawer>
+
         <main className={classes.content}>
         <div className={classes.toolbar} />
 
-      <ClientDetails />
-        
-
+        {/* Condiction to change the view */}
+        { client ? <NewClient /> : <JobDetail />  }
       </main>
     </div>
   );
