@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import AuthService from "./auth-service";
-import { _Link } from "react-router-dom";
 
 //Material design UI
 import Avatar from "@material-ui/core/Avatar";
@@ -16,6 +15,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import Alert from "@material-ui/lab/Alert";
 
 function Copyright() {
   return (
@@ -68,10 +68,9 @@ const Signup = props => {
         props.history.push("/dashboard");
       })
       .catch(error => {
-        console.log(error);
-        // handleMessage(
-        //  error.response.data.message
-        // )
+        handleMessage(
+         error.response.data.message
+        )
       });
   };
 
@@ -95,6 +94,7 @@ const Signup = props => {
             id="email"
             label="Email"
             name="email"
+            require="true"
             autoComplete="email"
             autoFocus
             value={email}
@@ -133,6 +133,15 @@ const Signup = props => {
               </Link>
             </Grid>
           </Grid>
+          
+          {message ? (
+            <Alert variant="outlined" severity="error">
+              {message}
+            </Alert>
+          ) : (
+            <h1></h1>
+          )}
+
         </form>
       </div>
       <Box mt={8}>
