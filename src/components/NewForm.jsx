@@ -12,15 +12,15 @@ export default function Test() {
     title: "Formulário que adiciona inputs",
     description: "A simple form example.",
     type: "object",
-    required: ["title", "type"],
+    required: ["type"],
     properties: {
       title: {
         type: "string",
-        title: "Título"
-      }, //d
+        title: "Escreva um nome para esse campo",
+      },
       description: {
         type: "string",
-        title: "Descrição"
+        title: "Escreva o nome do campo para o Cliente"
       },
       type: {
         type: "string", //Enum, de valores definidos, string, date, email, password, bla
@@ -28,6 +28,7 @@ export default function Test() {
       }
     }
   };
+
 
   const handleSubmit = ({ formData }) => {
     setInputs(inputs => [...inputs, { ...formData }]);
@@ -63,12 +64,11 @@ export default function Test() {
     };
 
     const handleFormSubmit = () => {
-      console.log(formSchema);
-      const { title } = formSchema;
+      const { properties } = formSchema;
 
       Axios.post(
         "http://localhost:5000/api/form",
-        { title: title },
+        { properties: properties },
         { withCredentials: true }
       )
         .then(data => {
