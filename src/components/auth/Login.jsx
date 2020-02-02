@@ -144,9 +144,16 @@ const Login = ({ location, getUser, history }) => {
               </Link>
             </Grid>
           </Grid>
-          <Alert variant="outlined" severity="error">
-            {message}
-          </Alert>
+
+          {message ? (
+            <Alert variant="outlined" severity="error">
+              {message}
+            </Alert>
+          ) : (
+            <h1></h1>
+          )}
+
+          
         </form>
       </div>
       <Box mt={8}>
