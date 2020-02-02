@@ -184,13 +184,7 @@ export default function MiniDrawer(props) {
           </IconButton>
         </div>
         <Divider />
-        <List>
-          <Avatar
-            alt="Vinivibe"
-            src="./images/batman.png"
-            className={classes.large}
-          />
-        </List>
+        <List></List>
         <Divider />
         <Divider />
         <List>

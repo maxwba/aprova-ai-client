@@ -9,10 +9,6 @@ export default function Test() {
   const Form = withTheme(MuiTheme);
 
   const schema = {
-    title: "Formulário que adiciona inputs",
-    description: "A simple form example.",
-    type: "object",
-    required: ["title", "type"],
     properties: {
       title: {
         type: "string",
