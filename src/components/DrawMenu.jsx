@@ -27,6 +27,7 @@ import Axios from "axios";
 import NewClient from "./NewClient";
 import JobDetail from "./JobDetail";
 import Test from "./NewForm";
+import Renderform from "./Renderform";
 
 const drawerWidth = 240;
 
@@ -184,6 +185,7 @@ export default function MiniDrawer(props) {
           </IconButton>
         </div>
         <Divider />
+        <List></List>
         <Divider />
         <Divider />
         <List>
@@ -207,16 +209,14 @@ export default function MiniDrawer(props) {
             </ListItemIcon>
             <ListItemText>Criar cliente</ListItemText>
           </ListItem>
-            <ListItem button onClick={() => logoutCompany(props)}>
-              <ListItemIcon>
-                <ExitToAppIcon />
-              </ListItemIcon>
-              <ListItemText>
-                Sair
-              </ListItemText>
-            </ListItem>
-            <Divider />
-            {/* <ListItem>   
+          <ListItem button onClick={() => logoutCompany(props)}>
+            <ListItemIcon>
+              <ExitToAppIcon />
+            </ListItemIcon>
+            <ListItemText>Sair</ListItemText>
+          </ListItem>
+          <Divider />
+          {/* <ListItem>   
             <img src="./images/logo.png" />       
             </ListItem> */}
         </List>
@@ -226,7 +226,8 @@ export default function MiniDrawer(props) {
         <div className={classes.toolbar} />
 
         {/* Condiction to change the view */}
-        {client ? <NewClient /> : <Test />}
+        {client ? <Test /> : <NewClient />}
+        <Renderform></Renderform>
       </main>
     </div>
   );

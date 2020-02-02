@@ -9,14 +9,10 @@ export default function Test() {
   const Form = withTheme(MuiTheme);
 
   const schema = {
-    title: "Formulário que adiciona inputs",
-    description: "A simple form example.",
-    type: "object",
-    required: ["type"],
     properties: {
       title: {
         type: "string",
-        title: "Escreva um nome para esse campo",
+        title: "Escreva um nome para esse campo"
       },
       description: {
         type: "string",
@@ -29,7 +25,6 @@ export default function Test() {
     }
   };
 
-
   const handleSubmit = ({ formData }) => {
     setInputs(inputs => [...inputs, { ...formData }]);
   };
@@ -41,7 +36,7 @@ export default function Test() {
       return {
         [key]: {
           type,
-          placeholder: description
+          description: description
         }
       };
     });
