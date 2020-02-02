@@ -27,6 +27,7 @@ import Axios from "axios";
 import NewClient from "./NewClient";
 import JobDetail from "./JobDetail";
 import Test from "./NewForm";
+import Renderform from "./Renderform";
 
 const drawerWidth = 240;
 
@@ -225,7 +226,8 @@ export default function MiniDrawer(props) {
         <div className={classes.toolbar} />
 
         {/* Condiction to change the view */}
-        {client ? <NewClient /> : <Test />}
+        {client ? <Test /> : <NewClient />}
+        <Renderform></Renderform>
       </main>
     </div>
   );

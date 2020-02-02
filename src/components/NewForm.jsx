@@ -36,7 +36,7 @@ export default function Test() {
       return {
         [key]: {
           type,
-          placeholder: description
+          description: description
         }
       };
     });
