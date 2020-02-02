@@ -16,7 +16,6 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
 import BusinessIcon from "@material-ui/icons/Business";
 import ClientDetails from "./ClientDetails";
 import AddToPhotosIcon from "@material-ui/icons/AddToPhotos";
@@ -27,6 +26,7 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import Axios from "axios";
 import NewClient from "./NewClient";
 import JobDetail from "./JobDetail";
+import Test from "./NewForm";
 
 const drawerWidth = 240;
 
@@ -248,7 +248,7 @@ export default function MiniDrawer(props) {
         <div className={classes.toolbar} />
 
         {/* Condiction to change the view */}
-        {client ? <NewClient /> : <JobDetail />}
+        {client ? <NewClient /> : <Test />}
       </main>
     </div>
   );
