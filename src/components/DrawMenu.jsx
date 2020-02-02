@@ -156,9 +156,9 @@ export default function MiniDrawer(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
+          {/* <Typography variant="h6" noWrap>
             <img src="./images/logo.png" />
-          </Typography>
+          </Typography> */}
         </Toolbar>
       </AppBar>
       <Drawer
@@ -184,13 +184,6 @@ export default function MiniDrawer(props) {
           </IconButton>
         </div>
         <Divider />
-        <List>
-          <Avatar
-            alt="Vinivibe"
-            src="./images/batman.png"
-            className={classes.large}
-          />
-        </List>
         <Divider />
         <Divider />
         <List>
@@ -212,16 +205,20 @@ export default function MiniDrawer(props) {
               {" "}
               <AddToPhotosIcon />{" "}
             </ListItemIcon>
-            <ListItemText>Add Company</ListItemText>
+            <ListItemText>Criar cliente</ListItemText>
           </ListItem>
             <ListItem button onClick={() => logoutCompany(props)}>
               <ListItemIcon>
                 <ExitToAppIcon />
               </ListItemIcon>
               <ListItemText>
-                Logout
+                Sair
               </ListItemText>
             </ListItem>
+            <Divider />
+            {/* <ListItem>   
+            <img src="./images/logo.png" />       
+            </ListItem> */}
         </List>
       </Drawer>
 
