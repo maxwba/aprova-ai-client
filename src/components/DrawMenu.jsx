@@ -207,13 +207,6 @@ export default function MiniDrawer(props) {
         </List>
         <Divider />
         <List>
-          {/* {['Add New Company','Help','123'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <AddToPhotosIcon /> : <HelpIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))} */}
-
           <ListItem button onClick={handleChangeClient}>
             <ListItemIcon>
               {" "}
@@ -221,26 +214,14 @@ export default function MiniDrawer(props) {
             </ListItemIcon>
             <ListItemText>Add Company</ListItemText>
           </ListItem>
-
-          <Link to="/help">
-            <ListItem>
-              <ListItemIcon>
-                {" "}
-                <HelpIcon />
-              </ListItemIcon>
-              <ListItemText>Help</ListItemText>
-            </ListItem>
-          </Link>
-          <Link to="/">
-            <ListItem>
+            <ListItem button onClick={() => logoutCompany(props)}>
               <ListItemIcon>
                 <ExitToAppIcon />
               </ListItemIcon>
-              <ListItemText onClick={() => logoutCompany(props)}>
+              <ListItemText>
                 Logout
               </ListItemText>
             </ListItem>
-          </Link>
         </List>
       </Drawer>
 
