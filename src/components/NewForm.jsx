@@ -4,7 +4,7 @@ import { Theme as MuiTheme } from "rjsf-material-ui";
 import { Container, Typography, Box, Button } from "@material-ui/core";
 import Axios from "axios";
 
-export default function Test() {
+export default function NewForm() {
   const [inputs, setInputs] = useState([]);
   const Form = withTheme(MuiTheme);
 
