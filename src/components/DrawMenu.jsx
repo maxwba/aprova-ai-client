@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 import clsx from "clsx";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
@@ -210,7 +211,13 @@ export default function MiniDrawer(props) {
             </ListItemIcon>
             <ListItemText>Criar cliente</ListItemText>
           </ListItem>
-          <ListItem button onClick={() => logoutCompany(props)}>
+
+          <ListItem
+            component={Link}
+            to="/"
+            button
+            onClick={() => logoutCompany(props)}
+          >
             <ListItemIcon>
               <ExitToAppIcon />
             </ListItemIcon>
