@@ -33,14 +33,6 @@ const RenderForm = () => {
   //   return properties;
   // });
 
-  // const formSchema = {
-  //   title: "Formulario criado pelo user",
-  //   description: "User cria para empresa responder",
-  //   type: "string",
-  //   properties: convertArrayToObject(form)
-  // };
-
-  // Preciso fazer um map no forms pois está vindo tudo junto e misturado então precisamos renderizar um por um
   return (
     <Container>
       {forms.length > 0 &&
@@ -54,24 +46,6 @@ const RenderForm = () => {
           console.log(`=============>`, formSchema);
           return <Form schema={formSchema} onSubmit={``} />;
         })}
-      {/* <div className="vini">
-        <form onSubmit={``}>
-          <label>Formulario de exemplo</label>
-          {forms &&
-            forms.map(({ title, description, type }, index) => {
-              return (
-                <Box key={index}>
-                  <label>{title}</label>
-                  <br />
-                  <input type={type} name={title} value={description} />
-                  <br />
-                  <br />
-                </Box>
-              );
-            })}
-          <input type="submit" value="Submit" />
-        </form>
-      </div> */}
     </Container>
   );
 };
