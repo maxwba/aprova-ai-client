@@ -106,18 +106,18 @@ export default function MiniDrawer(props) {
   const [logout, handleLogout] = React.useState(props.loggedInCompany);
   const [company, handleCompany] = React.useState([]);
   const [client, handleClient] = React.useState(false);
+  const [clientDetail, handeClientDetail] = React.useState(false);
 
   useEffect(() => {
     async function getAllClient() {
       Axios.get("http://localhost:5000/api/client", {
         withCredentials: true
       }).then(responseFromApi => {
-        console.log(responseFromApi);
         handleCompany(responseFromApi.data);
       });
     }
     getAllClient();
-  }, [open]);
+  },[open]);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -129,7 +129,14 @@ export default function MiniDrawer(props) {
 
   const handleChangeClient = () => {
     handleClient(true);
+    handeClientDetail(false)
   };
+
+  const handleClientView = () => {
+    handeClientDetail(true);
+    handleClient(false);
+  };
+
 
   const service = new AuthService();
   const logoutCompany = props => {
@@ -190,21 +197,20 @@ export default function MiniDrawer(props) {
         <Divider />
         <Divider />
         <List>
-          {console.log(company)}
           {company.map((text, index) => {
-            const { name } = text;
+            const { name, _id } = text;
             const key = text + "-" + index;
             return (
-              <ListItem button key={key}>
+              <ListItem button key={key} onClick={handleClientView} id={_id} >
                 <ListItemIcon>{<BusinessIcon />}</ListItemIcon>
-                <ListItemText primary={name} />
+                <ListItemText primary={name}/>
               </ListItem>
             );
           })}
         </List>
         <Divider />
         <List>
-          <ListItem button onClick={handleChangeClient}>
+          <ListItem button onClick={handleChangeClient} >
             <ListItemIcon>
               {" "}
               <AddToPhotosIcon />{" "}
@@ -229,9 +235,11 @@ export default function MiniDrawer(props) {
 
       <main className={classes.content}>
         <div className={classes.toolbar} />
-
-        {/* Condiction to change the view */}
-        {client ? <Renderform /> : <NewForm></NewForm>}
+        {/* Condiction to change the main view */}
+        {client ? <NewClient /> 
+        : clientDetail ? <ClientDetails /> 
+        : <DefaultPage />
+        } 
       </main>
     </div>
   );
