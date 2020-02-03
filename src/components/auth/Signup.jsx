@@ -68,9 +68,7 @@ const Signup = props => {
         props.history.push("/dashboard");
       })
       .catch(error => {
-        handleMessage(
-         error.response.data.message
-        )
+        handleMessage(error.response.data.message);
       });
   };
 
@@ -133,7 +131,7 @@ const Signup = props => {
               </Link>
             </Grid>
           </Grid>
-          
+
           {message ? (
             <Alert variant="outlined" severity="error">
               {message}
@@ -141,7 +139,6 @@ const Signup = props => {
           ) : (
             <h1></h1>
           )}
-
         </form>
       </div>
       <Box mt={8}>
