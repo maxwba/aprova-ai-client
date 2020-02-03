@@ -1,6 +1,6 @@
 /* NAVBAR */
 .btn-login:active {
-  color: #70e5c0;
+  color: #70e5c0
 }
 
 /* HOME */
@@ -38,10 +38,12 @@
   text-shadow: 0px 1px 0px #3d768a;
   margin: 0 auto;
 }
+
 .myButton:hover {
   background: linear-gradient(to bottom, #408c99 5%, #70e5c0 100%);
   background-color: #408c99;
 }
+
 .myButton:active {
   position: relative;
   top: 1px;
@@ -52,6 +54,7 @@
   display: block;
   margin: 0 auto;
 }
+
 .about p {
   line-height: 1.5;
   color: gray;
@@ -63,6 +66,7 @@
 .steps {
   margin-top: 10%;
 }
+
 .foot {
   height: 7%;
   width: 100%;
@@ -86,6 +90,7 @@
   margin: 2px;
   margin-top: -5px;
 }
+
 .footer__text p {
   margin-top: 10px;
 }
@@ -94,46 +99,71 @@
   .slogan {
     margin-top: 130px;
   }
+
+
   .slogan h1 {
     font-size: 58px;
   }
+
   .slogan p {
     font-size: 24px;
   }
+
   .foot {
     padding-bottom: 3.5%;
   }
+
+
+  .newclient {
+    width: 500px;
+  }
+
 }
 
 @media (max-width: 869px) {
   .slogan {
     margin-top: 15px;
   }
+
   .slogan h1 {
     font-size: 40px;
     text-align: center;
   }
+
   .slogan p {
     font-size: 20px;
     text-align: center;
   }
+
   .foot {
     padding-top: 4%;
   }
+
   .footer__text {
     font-size: 12px;
   }
+
   .steps {
     padding-bottom: 50px;
+  }
+
+  .newclient {
+    width: 280px;
+  }
+
+  .newForm {
+    width: 280px;
   }
 }
 
 header {
   height: 4rem;
 }
+
 .burger-wrapper {
   cursor: pointer;
 }
+
 #meny {
   color: black;
   background: rgb(222, 248, 241);
@@ -147,11 +177,12 @@ header {
   z-index: 0;
   transition: 0.5s;
 }
+
 #menyAvPaa {
   display: none;
 }
 
-#menyAvPaa:checked ~ #meny {
+#menyAvPaa:checked~#meny {
   transform: translateX(0rem);
 }
 
@@ -167,24 +198,28 @@ header {
   flex-direction: column;
 }
 
-#burger > div {
+#burger>div {
   height: 2px;
   background-color: #000;
   transition: 0.5s;
   z-index: 999;
 }
 
-#menyAvPaa:checked ~ #burger > div {
+
+#menyAvPaa:checked~#burger>div {
+
   background-color: black;
 }
 
-#menyAvPaa:checked ~ #burger > div:nth-child(1) {
+#menyAvPaa:checked~#burger>div:nth-child(1) {
   transform: translateY(10px) rotate(45deg);
 }
-#menyAvPaa:checked ~ #burger > div:nth-child(2) {
+
+#menyAvPaa:checked~#burger>div:nth-child(2) {
   opacity: 0;
 }
-#menyAvPaa:checked ~ #burger > div:nth-child(3) {
+
+#menyAvPaa:checked~#burger>div:nth-child(3) {
   transform: translateY(-10px) rotate(-45deg);
 }
 
@@ -205,12 +240,29 @@ header {
 }
 
 .muiToolbar-root {
-  background-color: rgb(221, 1, 1) !important;
+
+  background-color: #73C0A9 !important;
 }
 
 .MuiAppBar-colorPrimary {
-  background-color: #73c0a9 !important;
+  background-color: #73C0A9 !important;
 }
-.vini {
-  display: flex;
+
+
+.newclient {
+  color: black;
+  font-size: 20px;
+}
+
+.btnClient {
+  background-color: #428d9a !important;
+  border-color: #73C0A9 !important;
+}
+
+.btnClient:hover {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+}
+
+.newForm {
+  border-color: #73C0A9;
 }
