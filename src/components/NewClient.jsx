@@ -1,6 +1,7 @@
 //new client
 import React, { Component } from "react";
 import axios from "axios";
+import { NavLink } from "react-router-dom";
 
 class NewClient extends Component {
   constructor(props) {
@@ -47,13 +48,15 @@ class NewClient extends Component {
               onChange={this.handleChange}
             />
             <br />
-            <button
-              type="submit"
-              value="Submit"
-              class="btnClient btn btn-primary"
-            >
-              Criar
-            </button>
+            <NavLink to="/">
+              <button
+                type="submit"
+                value="Submit"
+                class="btnClient btn btn-primary"
+              >
+                Criar
+              </button>
+            </NavLink>
           </div>
         </form>
       </div>
