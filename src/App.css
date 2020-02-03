@@ -99,9 +99,18 @@
   .slogan {
     margin-top: 130px;
   }
+<<<<<<< HEAD
   .slogan h1 {
     font-size: 58px;
   }
+=======
+
+
+  .slogan h1 {
+    font-size: 58px;
+  }
+
+>>>>>>> 9210f3128235902e16bd8c8803d1b6d032cd5f06
   .slogan p {
     font-size: 24px;
   }
@@ -109,16 +118,33 @@
   .foot {
     padding-bottom: 3.5%;
   }
+<<<<<<< HEAD
+=======
+
+
+  .newclient {
+    width: 500px;
+  }
+
+>>>>>>> 9210f3128235902e16bd8c8803d1b6d032cd5f06
 }
 
 @media (max-width: 869px) {
   .slogan {
     margin-top: 15px;
   }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9210f3128235902e16bd8c8803d1b6d032cd5f06
   .slogan h1 {
     font-size: 40px;
     text-align: center;
   }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9210f3128235902e16bd8c8803d1b6d032cd5f06
   .slogan p {
     font-size: 20px;
     text-align: center;
@@ -194,7 +220,13 @@ header {
   z-index: 999;
 }
 
+<<<<<<< HEAD
 #menyAvPaa:checked ~ #burger > div {
+=======
+
+#menyAvPaa:checked~#burger>div {
+
+>>>>>>> 9210f3128235902e16bd8c8803d1b6d032cd5f06
   background-color: black;
 }
 
@@ -227,6 +259,7 @@ header {
 }
 
 .muiToolbar-root {
+<<<<<<< HEAD
   background-color: rgb(221, 1, 1) !important;
 }
 
@@ -235,6 +268,14 @@ header {
 }
 .vini {
   display: flex;
+=======
+
+  background-color: #73C0A9 !important;
+}
+
+.MuiAppBar-colorPrimary {
+  background-color: #73C0A9 !important;
+>>>>>>> 9210f3128235902e16bd8c8803d1b6d032cd5f06
 }
 
 .newclient {
