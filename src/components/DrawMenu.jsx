@@ -117,7 +117,7 @@ export default function MiniDrawer(props) {
       });
     }
     getAllClient();
-  },[open]);
+  }, [open]);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -129,14 +129,13 @@ export default function MiniDrawer(props) {
 
   const handleChangeClient = () => {
     handleClient(true);
-    handeClientDetail(false)
+    handeClientDetail(false);
   };
 
   const handleClientView = () => {
     handeClientDetail(true);
     handleClient(false);
   };
-
 
   const service = new AuthService();
   const logoutCompany = props => {
@@ -201,16 +200,16 @@ export default function MiniDrawer(props) {
             const { name, _id } = text;
             const key = text + "-" + index;
             return (
-              <ListItem button key={key} onClick={handleClientView} id={_id} >
+              <ListItem button key={key} onClick={handleClientView} id={_id}>
                 <ListItemIcon>{<BusinessIcon />}</ListItemIcon>
-                <ListItemText primary={name}/>
+                <ListItemText primary={name} />
               </ListItem>
             );
           })}
         </List>
         <Divider />
         <List>
-          <ListItem button onClick={handleChangeClient} >
+          <ListItem button onClick={handleChangeClient}>
             <ListItemIcon>
               {" "}
               <AddToPhotosIcon />{" "}
@@ -236,10 +235,13 @@ export default function MiniDrawer(props) {
       <main className={classes.content}>
         <div className={classes.toolbar} />
         {/* Condiction to change the main view */}
-        {client ? <NewClient /> 
-        : clientDetail ? <ClientDetails /> 
-        : <DefaultPage />
-        } 
+        {client ? (
+          <NewForm />
+        ) : clientDetail ? (
+          <ClientDetails />
+        ) : (
+          <DefaultPage />
+        )}
       </main>
     </div>
   );
