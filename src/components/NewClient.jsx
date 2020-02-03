@@ -48,7 +48,6 @@ class NewClient extends Component {
               onChange={this.handleChange}
             />
             <br />
-            <NavLink to="/">
               <button
                 type="submit"
                 value="Submit"
@@ -56,7 +55,6 @@ class NewClient extends Component {
               >
                 Criar
               </button>
-            </NavLink>
           </div>
         </form>
       </div>
