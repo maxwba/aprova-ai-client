@@ -1,6 +1,6 @@
 /* NAVBAR */
 .btn-login:active {
-  color: #70e5c0
+  color: #70e5c0;
 }
 
 /* HOME */
@@ -49,7 +49,6 @@
   top: 1px;
 }
 
-
 /* ABOUT */
 .about img {
   display: block;
@@ -96,16 +95,22 @@
   margin-top: 10px;
 }
 
-
 @media (min-width: 870px) {
   .slogan {
     margin-top: 130px;
   }
+<<<<<<< HEAD
+  .slogan h1 {
+    font-size: 58px;
+  }
+=======
+
 
   .slogan h1 {
     font-size: 58px;
   }
 
+>>>>>>> 9210f3128235902e16bd8c8803d1b6d032cd5f06
   .slogan p {
     font-size: 24px;
   }
@@ -113,22 +118,33 @@
   .foot {
     padding-bottom: 3.5%;
   }
+<<<<<<< HEAD
+=======
+
 
   .newclient {
     width: 500px;
   }
+
+>>>>>>> 9210f3128235902e16bd8c8803d1b6d032cd5f06
 }
 
 @media (max-width: 869px) {
   .slogan {
     margin-top: 15px;
   }
+<<<<<<< HEAD
+=======
 
+>>>>>>> 9210f3128235902e16bd8c8803d1b6d032cd5f06
   .slogan h1 {
     font-size: 40px;
     text-align: center;
   }
+<<<<<<< HEAD
+=======
 
+>>>>>>> 9210f3128235902e16bd8c8803d1b6d032cd5f06
   .slogan p {
     font-size: 20px;
     text-align: center;
@@ -154,7 +170,6 @@
     width: 280px;
   }
 }
-
 
 header {
   height: 4rem;
@@ -182,7 +197,7 @@ header {
   display: none;
 }
 
-#menyAvPaa:checked~#meny {
+#menyAvPaa:checked ~ #meny {
   transform: translateX(0rem);
 }
 
@@ -198,29 +213,34 @@ header {
   flex-direction: column;
 }
 
-#burger>div {
+#burger > div {
   height: 2px;
   background-color: #000;
   transition: 0.5s;
   z-index: 999;
 }
 
+<<<<<<< HEAD
+#menyAvPaa:checked ~ #burger > div {
+=======
+
 #menyAvPaa:checked~#burger>div {
+
+>>>>>>> 9210f3128235902e16bd8c8803d1b6d032cd5f06
   background-color: black;
 }
 
-#menyAvPaa:checked~#burger>div:nth-child(1) {
+#menyAvPaa:checked ~ #burger > div:nth-child(1) {
   transform: translateY(10px) rotate(45deg);
 }
 
-#menyAvPaa:checked~#burger>div:nth-child(2) {
+#menyAvPaa:checked ~ #burger > div:nth-child(2) {
   opacity: 0;
 }
 
-#menyAvPaa:checked~#burger>div:nth-child(3) {
+#menyAvPaa:checked ~ #burger > div:nth-child(3) {
   transform: translateY(-10px) rotate(-45deg);
 }
-
 
 .form {
   margin-top: 100px;
@@ -239,13 +259,24 @@ header {
 }
 
 .muiToolbar-root {
+<<<<<<< HEAD
+  background-color: rgb(221, 1, 1) !important;
+}
+
+.MuiAppBar-colorPrimary {
+  background-color: #73c0a9 !important;
+}
+.vini {
+  display: flex;
+=======
+
   background-color: #73C0A9 !important;
 }
 
 .MuiAppBar-colorPrimary {
   background-color: #73C0A9 !important;
+>>>>>>> 9210f3128235902e16bd8c8803d1b6d032cd5f06
 }
-
 
 .newclient {
   color: black;
@@ -254,13 +285,14 @@ header {
 
 .btnClient {
   background-color: #428d9a !important;
-  border-color: #73C0A9 !important;
+  border-color: #73c0a9 !important;
 }
 
 .btnClient:hover {
-  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
 
 .newForm {
-  border-color: #73C0A9;
+  border-color: #73c0a9;
 }
