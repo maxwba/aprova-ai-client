@@ -24,7 +24,7 @@ export default function Test() {
       },
       type: {
         type: "string", //Enum, de valores definidos, string, date, email, password, bla
-        enum: ["string", "data", "number"]
+        enum: ["string", "date", "number", "files"]
       }
     }
   };
@@ -36,13 +36,31 @@ export default function Test() {
   const handleFormSave = () => {
     const data = inputs.map(({ title, description, type }) => {
       const key = title.toLowerCase().replace(/\s/g, "");
-
-      return {
-        [key]: {
-          type,
-          description: description
-        }
-      };
+      if (type === "date") {
+        return {
+          [key]: {
+            type: "string",
+            format: "date",
+            description: description
+          }
+        };
+      } else if (type === "files") {
+        return {
+          [key]: {
+            type: "string",
+            format: "data-url",
+            title: title,
+            description: description
+          }
+        };
+      } else {
+        return {
+          [key]: {
+            type,
+            description: description
+          }
+        };
+      }
     });
 
     const convertArrayToObject = array => {

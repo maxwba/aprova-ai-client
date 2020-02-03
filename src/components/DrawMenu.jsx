@@ -235,7 +235,6 @@ export default function MiniDrawer(props) {
 
       <main className={classes.content}>
         <div className={classes.toolbar} />
-
         {/* Condiction to change the main view */}
         {client ? <NewClient /> 
         : clientDetail ? <ClientDetails /> 

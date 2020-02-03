@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Axios from "axios";
 import { withTheme } from "react-jsonschema-form";
 import { Theme as MuiTheme } from "rjsf-material-ui";
@@ -17,27 +17,35 @@ const RenderForm = () => {
       };
     }, initialValue);
   };
-
-  const getAllForm = () => {
+  useEffect(() => {
     Axios.get("http://localhost:5000/api/form").then(responseFromApi => {
-      console.log(responseFromApi);
-      handleForm(responseFromApi.data);
+      const newForm = responseFromApi.data.map(prop => {
+        const { properties } = prop;
+        return {
+          ...properties
+        };
+      });
+      handleForm(newForm);
     });
-  };
+  }, []);
 
-  const formSchema = {
-    title: "Formulario criado pelo user",
-    description: "User cria para empresa responder",
-    type: "string",
-    properties: convertArrayToObject(forms)
-  };
+  // const novoform = forms.map(({ properties }, index) => {
+  //   return properties;
+  // });
 
-  console.log(`=========>`, forms);
-
-  // Preciso fazer um map no forms pois está vindo tudo junto e misturado então precisamos renderizar um por um
   return (
     <Container>
-      <Form schema={formSchema} onSubmit={console.log("foi")} />
+      {forms.length > 0 &&
+        forms.map(form => {
+          const formSchema = {
+            // title: "Oi monica",
+            // description: "User cria para empresa responder",
+            // type: "string",
+            properties: form
+          };
+          console.log(`=============>`, formSchema);
+          return <Form schema={formSchema} onSubmit={``} />;
+        })}
     </Container>
   );
 };
