@@ -105,6 +105,7 @@ export default function MiniDrawer(props) {
   const [open, setOpen] = React.useState(false);
   const [logout, handleLogout] = React.useState(props.loggedInCompany);
   const [company, handleCompany] = React.useState([]);
+  const [selectedClient, handleSelectClient] = React.useState(null);
   const [client, handleClient] = React.useState(false);
   const [clientDetail, handeClientDetail] = React.useState(false);
 
@@ -132,9 +133,10 @@ export default function MiniDrawer(props) {
     handeClientDetail(false);
   };
 
-  const handleClientView = () => {
+  const handleClientView = (selectedClient) => {
     handeClientDetail(true);
     handleClient(false);
+    handleSelectClient(selectedClient);
   };
 
   const service = new AuthService();
@@ -197,10 +199,13 @@ export default function MiniDrawer(props) {
         <Divider />
         <List>
           {company.map((text, index) => {
-            const { name, _id } = text;
+            const { name } = text;
             const key = text + "-" + index;
             return (
-              <ListItem button key={key} onClick={handleClientView} id={_id}>
+              <ListItem
+              button key={key} 
+              onClick={() => handleClientView(text) }
+              >
                 <ListItemIcon>{<BusinessIcon />}</ListItemIcon>
                 <ListItemText primary={name} />
               </ListItem>
@@ -234,14 +239,13 @@ export default function MiniDrawer(props) {
 
       <main className={classes.content}>
         <div className={classes.toolbar} />
+
+
         {/* Condiction to change the main view */}
-        {client ? (
-          <NewForm />
-        ) : clientDetail ? (
-          <ClientDetails />
-        ) : (
-          <DefaultPage />
-        )}
+        {client ? <NewClient /> 
+        : clientDetail ? <ClientDetails selectedClient={selectedClient} /> 
+        : <DefaultPage />
+        } 
       </main>
     </div>
   );
