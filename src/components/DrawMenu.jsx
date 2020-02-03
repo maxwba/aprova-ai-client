@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+
 import clsx from "clsx";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -26,8 +26,9 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import Axios from "axios";
 import NewClient from "./NewClient";
 import JobDetail from "./JobDetail";
-import Test from "./NewForm";
+import NewForm from "./NewForm";
 import Renderform from "./Renderform";
+import DefaultPage from "./DefaultPage";
 
 const drawerWidth = 240;
 
@@ -107,7 +108,9 @@ export default function MiniDrawer(props) {
 
   useEffect(() => {
     async function getAllClient() {
-      Axios.get("http://localhost:5000/api/client").then(responseFromApi => {
+      Axios.get("http://localhost:5000/api/client", {
+        withCredentials: true
+      }).then(responseFromApi => {
         console.log(responseFromApi);
         handleCompany(responseFromApi.data);
       });
@@ -139,6 +142,7 @@ export default function MiniDrawer(props) {
   return (
     <div className={classes.root}>
       <CssBaseline />
+
       <AppBar
         position="fixed"
         className={clsx(classes.appBar, {
@@ -157,11 +161,9 @@ export default function MiniDrawer(props) {
           >
             <MenuIcon />
           </IconButton>
-          {/* <Typography variant="h6" noWrap>
-            <img src="./images/logo.png" />
-          </Typography> */}
         </Toolbar>
       </AppBar>
+
       <Drawer
         variant="permanent"
         className={clsx(classes.drawer, {
@@ -185,10 +187,9 @@ export default function MiniDrawer(props) {
           </IconButton>
         </div>
         <Divider />
-        <List></List>
-        <Divider />
         <Divider />
         <List>
+          {console.log(company)}
           {company.map((text, index) => {
             const { name } = text;
             const key = text + "-" + index;
@@ -216,9 +217,6 @@ export default function MiniDrawer(props) {
             <ListItemText>Sair</ListItemText>
           </ListItem>
           <Divider />
-          {/* <ListItem>   
-            <img src="./images/logo.png" />       
-            </ListItem> */}
         </List>
       </Drawer>
 
@@ -226,8 +224,8 @@ export default function MiniDrawer(props) {
         <div className={classes.toolbar} />
 
         {/* Condiction to change the view */}
-        {client ? <Test /> : <NewClient />}
-        <Renderform></Renderform>
+        {client ? <NewClient /> : <DefaultPage />}
+        {/* <Renderform></Renderform> */}
       </main>
     </div>
   );
