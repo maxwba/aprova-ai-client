@@ -45,7 +45,10 @@ class App extends Component {
     this.fetchUser();
     return (
       <div className="App">
+
+        {/* If client is loggedIn */}
         {this.state.loggedInCompany ? (
+
           <Switch>
             <Route exact path="/" component={Home} company={this.props.email} />
             <ProtectedRoute
@@ -75,7 +78,6 @@ class App extends Component {
               path="/login"
               render={props => <Login {...props} getUser={this.getTheUser} />}
             />
-            {/* <ProtectedRoute path="/dashboard" component={Dashboard}  company={this.state.loggedInCompany} /> */}
           </Switch>
         )}
       </div>

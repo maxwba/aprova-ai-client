@@ -1,6 +1,7 @@
-
+//new client
 import React, { Component } from "react";
 import axios from "axios";
+import { NavLink } from "react-router-dom";
 
 class NewClient extends Component {
   constructor(props) {
@@ -16,14 +17,14 @@ class NewClient extends Component {
     const name = this.state.name;
     axios
       .post(
-      "http://localhost:5000/api/client",
-        { name:name },
-        {withCredentials: true}
+        "http://localhost:5000/api/client",
+        { name: name },
+        { withCredentials: true }
       )
-      .then((data) => {
-        console.log(data)
+      .then(data => {
+        console.log(data);
         this.props.getData();
-        this.setState({ name: ""});
+        this.setState({ name: "" });
       })
       .catch(error => console.log(error));
   }
@@ -37,17 +38,26 @@ class NewClient extends Component {
     return (
       <div>
         <form onSubmit={this.handleFormSubmit}>
-          <label>Client:</label>
-          <br />
-          <input
-            type="text"
-            name="name"
-            value={this.state.name}
-            onChange={this.handleChange}
-          />
-          <br />
-          <br />
-          <input type="submit" value="Submit" />
+          <div class="newclient form-group ">
+            <label className="newClient">Novo Cliente</label>
+            <input
+              type="text"
+              className="form-control"
+              name="name"
+              value={this.state.name}
+              onChange={this.handleChange}
+            />
+            <br />
+            <NavLink to="/">
+              <button
+                type="submit"
+                value="Submit"
+                class="btnClient btn btn-primary"
+              >
+                Criar
+              </button>
+            </NavLink>
+          </div>
         </form>
       </div>
     );
@@ -55,13 +65,3 @@ class NewClient extends Component {
 }
 
 export default NewClient;
-
-
-
-
-
-
-
-
-
-
