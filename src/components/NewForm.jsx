@@ -24,7 +24,7 @@ export default function Test() {
       },
       type: {
         type: "string", //Enum, de valores definidos, string, date, email, password, bla
-        enum: ["string", "date", "number"]
+        enum: ["string", "date", "number", "files"]
       }
     }
   };
@@ -41,6 +41,15 @@ export default function Test() {
           [key]: {
             type: "string",
             format: "date",
+            description: description
+          }
+        };
+      } else if (type === "files") {
+        return {
+          [key]: {
+            type: "string",
+            format: "data-url",
+            title: title,
             description: description
           }
         };

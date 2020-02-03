@@ -231,8 +231,7 @@ export default function MiniDrawer(props) {
         <div className={classes.toolbar} />
 
         {/* Condiction to change the view */}
-        {client ? <NewClient /> : <DefaultPage />}
-        {/* <Renderform></Renderform> */}
+        {client ? <Renderform /> : <NewForm></NewForm>}
       </main>
     </div>
   );
