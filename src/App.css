@@ -255,3 +255,15 @@ header {
 .newForm {
   border-color: #73c0a9;
 }
+
+
+.labels {
+  margin-left: 3%;
+}
+
+.btnDelete {
+  border-color: red !important;
+  color: red !important;
+  width: 100px;
+  font-size: 10px !important;
+}
