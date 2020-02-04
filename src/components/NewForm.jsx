@@ -112,7 +112,7 @@ export default function NewForm(props) {
   };
 
   return (
-    <Container className="newForm">
+    <>
       <h1>{selectedClient.name}</h1>
       <Container className="newForm">
         <Form schema={schema} onSubmit={handleSubmit} />
@@ -133,7 +133,6 @@ export default function NewForm(props) {
           Salvar Formulário
         </Button>
       </Container>
-      ,
-    </>
+      </>
   );
 }

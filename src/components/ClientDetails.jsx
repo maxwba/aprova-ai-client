@@ -1,6 +1,7 @@
 import React from "react";
 import axios from "axios";        
 import Link from "@material-ui/core/Link";
+import { Link as LinkRouter } from 'react-router-dom';
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
@@ -120,10 +121,10 @@ export default function ClienteDetails(props) {
           </Button>
           <br />
           <br />
-          <Link to="/renderform"> Mostrar formulários </Link>
+          <LinkRouter to="/renderform"> Mostrar formulários </LinkRouter>
           <br />
           <br />
           <button onClick={deleteProject}> Deletar Cliente</button>
         </div>
       )}
-
+      </div>)}
