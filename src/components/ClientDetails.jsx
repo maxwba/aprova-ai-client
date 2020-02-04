@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";        
 import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
@@ -82,7 +83,21 @@ export default function ClienteDetails(props) {
   const handleDrawerOpen = () => {
     setForm(true);
   };
-
+  
+    
+    function deleteProject() {
+    axios
+      .delete(`http://localhost:5000/api/client/${selectedClient._id}`, {
+        withCredentials: true
+      })
+      .then(() => {
+        props.handleDeleteClient();
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+    
   return (
     <div>
       {form ? (
@@ -105,10 +120,10 @@ export default function ClienteDetails(props) {
           </Button>
           <br />
           <br />
+          <Link to="/renderform"> Mostrar formulários </Link>
           <br />
           <br />
+          <button onClick={deleteProject}> Deletar Cliente</button>
         </div>
       )}
-    </div>
-  );
-}
+

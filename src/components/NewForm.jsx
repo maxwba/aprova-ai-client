@@ -3,11 +3,13 @@ import { withTheme } from "react-jsonschema-form";
 import { Theme as MuiTheme } from "rjsf-material-ui";
 import { Container, Typography, Box, Button } from "@material-ui/core";
 import Axios from "axios";
+import ClientDetail from "./ClientDetails";
 
 export default function NewForm(props) {
   const [inputs, setInputs] = useState([]);
   const Form = withTheme(MuiTheme);
   const { selectedClient } = props;
+  const [cDetail, handleClientDetail] = useState(false);
 
   const schema = {
     title: "Crie seu formulário",
@@ -32,6 +34,10 @@ export default function NewForm(props) {
 
   const handleSubmit = ({ formData }) => {
     setInputs(inputs => [...inputs, { ...formData }]);
+  };
+
+  const turnClientDetail = () => {
+    handleClientDetail(true);
   };
 
   const handleFormSave = () => {
@@ -97,6 +103,7 @@ export default function NewForm(props) {
     };
 
     handleFormSubmit();
+    turnClientDetail();
 
     //1. salvar na api
     //2. criar um endpoint que recupera este json
@@ -107,22 +114,26 @@ export default function NewForm(props) {
   return (
     <Container className="newForm">
       <h1>{selectedClient.name}</h1>
-      <Form schema={schema} onSubmit={handleSubmit} />
+      <Container className="newForm">
+        <Form schema={schema} onSubmit={handleSubmit} />
 
-      {inputs &&
-        inputs.map(({ title, description, type }, index) => {
-          return (
-            <Box key={index} p={2}>
-              <Typography>Título:{title}</Typography>
-              <Typography>Descrição:{description}</Typography>
-              <Typography>Tipo:{type}</Typography>
-            </Box>
-          );
-        })}
-      <br />
-      <Button variant="contained" color="primary" onClick={handleFormSave}>
-        Salvar Formulário
-      </Button>
-    </Container>
+        {inputs &&
+          inputs.map(({ title, description, type }, index) => {
+            return (
+              <Box key={index} p={2}>
+                <form action="/action_page.php">
+                  {description}:<br />
+                  <input type={type} name={title} />
+                </form>
+              </Box>
+            );
+          })}
+        <br />
+        <Button variant="contained" color="primary" onClick={handleFormSave}>
+          Salvar Formulário
+        </Button>
+      </Container>
+      ,
+    </>
   );
 }
