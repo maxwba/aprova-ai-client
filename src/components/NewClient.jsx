@@ -1,7 +1,7 @@
 //new client
 import React, { Component } from "react";
 import axios from "axios";
-import { NavLink } from "react-router-dom";
+
 
 class NewClient extends Component {
   constructor(props) {
@@ -22,9 +22,9 @@ class NewClient extends Component {
         { withCredentials: true }
       )
       .then(data => {
-        console.log(data);
-        this.props.getData();
         this.setState({ name: "" });
+        console.log("DATA=>", data)
+        this.props.handleClientView(data.data)
       })
       .catch(error => console.log(error));
   }
