@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import React from "react";
 import axios from "axios";
 import Link from "@material-ui/core/Link";
@@ -141,8 +142,8 @@ export default function ClienteDetails(props) {
   const { selectedClient } = props;
   const classes = useStyles();
   const [form, setForm] = React.useState(false);
+  const [clientForm, handleClientForm] = React.useState([]);
   const [open, setOpen] = React.useState(false);
-  
 
   const handleDrawerOpen = () => {
     setForm(true);
@@ -168,6 +169,23 @@ export default function ClienteDetails(props) {
         console.log(err);
       });
   }
+
+function getClient() {
+  axios.get('http://localhost:5000/api/form')
+    .then(
+      responseFromApi => {
+        const forms = responseFromApi.data.map(checkClient =>{
+          if (checkClient.clientId === selectedClient._id) {
+            return checkClient.properties;
+          }
+        })
+        return forms;
+      }
+    )
+}
+
+getClient();
+
   return (
     <div>
       {form ? (
@@ -267,7 +285,6 @@ export default function ClienteDetails(props) {
     
       <Icon style={{ color: green[400], fontSize: 60 }}>add_circle</Icon>
     </div>
-
         </div>
       )}
     </div>
