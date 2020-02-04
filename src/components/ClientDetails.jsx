@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+
 import axios from "axios";
 
 export default function ClienteDetails(props) {
@@ -11,12 +12,12 @@ export default function ClienteDetails(props) {
         withCredentials: true
       })
       .then(() => {
-        props.handleDeleteClient()
+        props.handleDeleteClient();
       })
       .catch(err => {
         console.log(err);
       });
-  } 
+  }
 
   return (
     <div>
@@ -25,8 +26,8 @@ export default function ClienteDetails(props) {
 
       <br />
       <Link to={selectedClient.shareLink}>LINK PARA CLIENTE</Link>
-      <br/>
-      <br/>
+      <br />
+      <br />
       <Link to="/renderform"> Mostrar formulários </Link>
       <br />
       <br />
