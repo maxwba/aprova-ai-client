@@ -112,7 +112,7 @@ export default function MiniDrawer(props) {
       });
     }
     getAllClient();
-  },[open]);
+  }, [open]);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -124,7 +124,7 @@ export default function MiniDrawer(props) {
 
   const handleChangeClient = () => {
     handleClient(true);
-    handeClientDetail(false)
+    handeClientDetail(false);
   };
 
   const handleClientView = (selectedClient) => {
@@ -133,7 +133,6 @@ export default function MiniDrawer(props) {
     handleSelectClient(selectedClient);
     
   };
-
 
   const service = new AuthService();
   const logoutCompany = props => {
@@ -198,20 +197,19 @@ export default function MiniDrawer(props) {
             const { name } = text;
             const key = text + "-" + index;
             return (
-
               <ListItem
               button key={key} 
               onClick={() => handleClientView(text) }
               >
                 <ListItemIcon>{<BusinessIcon />}</ListItemIcon>
-                <ListItemText primary={name}/>
+                <ListItemText primary={name} />
               </ListItem>
             );
           })}
         </List>
         <Divider />
         <List>
-          <ListItem button onClick={handleChangeClient} >
+          <ListItem button onClick={handleChangeClient}>
             <ListItemIcon>
               {" "}
               <AddToPhotosIcon />{" "}
