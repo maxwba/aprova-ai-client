@@ -108,6 +108,7 @@ export default function MiniDrawer(props) {
   const [selectedClient, handleSelectClient] = React.useState(null);
   const [client, handleClient] = React.useState(false);
   const [clientDetail, handeClientDetail] = React.useState(false);
+ 
 
   useEffect(() => {
     async function getAllClient() {
@@ -133,11 +134,23 @@ export default function MiniDrawer(props) {
     handeClientDetail(false);
   };
 
-  const handleClientView = (selectedClient) => {
+  const handleClientView = selectedClient => {
+    handleSelectClient(selectedClient);
     handeClientDetail(true);
     handleClient(false);
-    handleSelectClient(selectedClient);
   };
+
+  const handleDeleteClient = () => {
+    Axios.get("http://localhost:5000/api/client", {
+      withCredentials: true
+    }).then(responseFromApi => {
+      handleCompany(responseFromApi.data);
+      handleSelectClient(null);
+      handeClientDetail(false);
+      handleClient(false);
+    })
+  }
+
 
   const service = new AuthService();
   const logoutCompany = props => {
@@ -202,10 +215,7 @@ export default function MiniDrawer(props) {
             const { name } = text;
             const key = text + "-" + index;
             return (
-              <ListItem
-              button key={key} 
-              onClick={() => handleClientView(text) }
-              >
+              <ListItem button key={key} onClick={() => handleClientView(text)}>
                 <ListItemIcon>{<BusinessIcon />}</ListItemIcon>
                 <ListItemText primary={name} />
               </ListItem>
@@ -240,12 +250,14 @@ export default function MiniDrawer(props) {
       <main className={classes.content}>
         <div className={classes.toolbar} />
 
-
-        {/* Condiction to change the main view */}
-        {client ? <NewClient /> 
-        : clientDetail ? <ClientDetails selectedClient={selectedClient} /> 
-        : <DefaultPage />
-        } 
+        
+        {client ? (
+          <NewClient handleClientView={handleClientView}/>
+        ) : clientDetail && selectedClient ? (
+          <ClientDetails selectedClient={selectedClient} handleDeleteClient={handleDeleteClient} />
+        ) : (
+          <DefaultPage />
+        )}
       </main>
     </div>
   );
