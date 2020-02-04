@@ -5,9 +5,10 @@ import { Container, Typography, Box, Button } from "@material-ui/core";
 import Axios from "axios";
 import ClientDetail from "./ClientDetails";
 
-export default function NewForm() {
+export default function NewForm(props) {
   const [inputs, setInputs] = useState([]);
   const Form = withTheme(MuiTheme);
+  const { selectedClient } = props;
   const [cDetail, handleClientDetail] = useState(false);
 
   const schema = {
@@ -111,7 +112,8 @@ export default function NewForm() {
   };
 
   return (
-    <>
+    <Container className="newForm">
+      <h1>{selectedClient.name}</h1>
       <Container className="newForm">
         <Form schema={schema} onSubmit={handleSubmit} />
 
@@ -126,7 +128,6 @@ export default function NewForm() {
               </Box>
             );
           })}
-
         <br />
         <Button variant="contained" color="primary" onClick={handleFormSave}>
           Salvar Formulário
