@@ -1,7 +1,7 @@
-import React from "react";
-import axios from "axios";        
+import React, { useEffect } from "react";
+import axios from "axios";
 import Link from "@material-ui/core/Link";
-import { Link as LinkRouter } from 'react-router-dom';
+import { Link as LinkRouter } from "react-router-dom";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
@@ -80,13 +80,13 @@ export default function ClienteDetails(props) {
   const { selectedClient } = props;
   const classes = useStyles();
   const [form, setForm] = React.useState(false);
+  const [clientForm, handleClientForm] = React.useState([]);
 
   const handleDrawerOpen = () => {
     setForm(true);
   };
-  
-    
-    function deleteProject() {
+
+  function deleteClient() {
     axios
       .delete(`http://localhost:5000/api/client/${selectedClient._id}`, {
         withCredentials: true
@@ -98,23 +98,39 @@ export default function ClienteDetails(props) {
         console.log(err);
       });
   }
-    
+
+function getClient() {
+  axios.get('http://localhost:5000/api/form')
+    .then(
+      responseFromApi => {
+        const forms = responseFromApi.data.map(checkClient =>{
+          if (checkClient.clientId === selectedClient._id) {
+            return checkClient.properties;
+          }
+        })
+        return forms;
+      }
+    )
+}
+
+getClient();
+
   return (
     <div>
       {form ? (
-        <NewForm selectedClient = {selectedClient} />
+        <NewForm selectedClient={selectedClient} />
       ) : (
         <div>
           <h1>{selectedClient.name} </h1>
           <br />
           <Typography className={classes.root}>
-            <Link href="#" variant="body2">
-              {selectedClient.shareLink}
+            <Link href={selectedClient.shareLink} variant="body1">
+              Link de acesso para o cliente
             </Link>
           </Typography>
           <br />
-          <br />
-          <br />
+          <br />       
+          <br />    
           <br />
           <Button color="primary" onClick={handleDrawerOpen}>
             Criar formulário
@@ -124,7 +140,9 @@ export default function ClienteDetails(props) {
           <LinkRouter to="/renderform"> Mostrar formulários </LinkRouter>
           <br />
           <br />
-          <button onClick={deleteProject}> Deletar Cliente</button>
+          <button onClick={deleteClient}> Deletar Cliente</button>
         </div>
       )}
-      </div>)}
+    </div>
+  );
+}

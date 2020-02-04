@@ -8,15 +8,6 @@ const RenderForm = () => {
   const [forms, handleForm] = React.useState([]);
   const Form = withTheme(MuiTheme);
 
-  const convertArrayToObject = array => {
-    const initialValue = {};
-    return array.reduce((obj, item) => {
-      return {
-        ...obj,
-        ...item
-      };
-    }, initialValue);
-  };
   useEffect(() => {
     Axios.get("http://localhost:5000/api/form").then(responseFromApi => {
       const newForm = responseFromApi.data.map(prop => {
@@ -28,10 +19,6 @@ const RenderForm = () => {
       handleForm(newForm);
     });
   }, []);
-
-  // const novoform = forms.map(({ properties }, index) => {
-  //   return properties;
-  // });
 
   return (
     <Container>
