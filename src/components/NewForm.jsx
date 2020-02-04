@@ -4,9 +4,10 @@ import { Theme as MuiTheme } from "rjsf-material-ui";
 import { Container, Typography, Box, Button } from "@material-ui/core";
 import Axios from "axios";
 
-export default function Test() {
+export default function Test(props) {
   const [inputs, setInputs] = useState([]);
   const Form = withTheme(MuiTheme);
+  const { selectedClient } = props;
 
   const schema = {
     title: "Crie seu formulário",
@@ -105,6 +106,7 @@ export default function Test() {
 
   return (
     <Container className="newForm">
+      <h1>{selectedClient.name}</h1>
       <Form schema={schema} onSubmit={handleSubmit} />
 
       {inputs &&

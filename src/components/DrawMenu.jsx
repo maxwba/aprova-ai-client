@@ -8,7 +8,6 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import List from "@material-ui/core/List";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -20,15 +19,10 @@ import ListItemText from "@material-ui/core/ListItemText";
 import BusinessIcon from "@material-ui/icons/Business";
 import ClientDetails from "./ClientDetails";
 import AddToPhotosIcon from "@material-ui/icons/AddToPhotos";
-import HelpIcon from "@material-ui/icons/Help";
-import Avatar from "@material-ui/core/Avatar";
 import AuthService from "./auth/auth-service";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import Axios from "axios";
 import NewClient from "./NewClient";
-import JobDetail from "./JobDetail";
-import NewForm from "./NewForm";
-import Renderform from "./Renderform";
 import DefaultPage from "./DefaultPage";
 
 const drawerWidth = 240;
@@ -137,6 +131,7 @@ export default function MiniDrawer(props) {
     handeClientDetail(true);
     handleClient(false);
     handleSelectClient(selectedClient);
+    
   };
 
 
