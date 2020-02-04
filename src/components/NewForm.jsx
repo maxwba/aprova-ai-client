@@ -4,6 +4,7 @@ import { Theme as MuiTheme } from "rjsf-material-ui";
 import { Container, Typography, Box, Button } from "@material-ui/core";
 import Axios from "axios";
 import ClientDetail from "./ClientDetails";
+import { type } from "os";
 
 export default function NewForm(props) {
   const [inputs, setInputs] = useState([]);
@@ -11,15 +12,16 @@ export default function NewForm(props) {
   const { selectedClient } = props;
   const [cDetail, handleClientDetail] = useState(false);
 
+
   const schema = {
     title: "Crie seu formulário",
     /*  description: "A simple form example.", */
     type: "object",
     required: ["type"],
     properties: {
-      title: {
+      prop: {
         type: "string",
-        title: "Título"
+        title: "Nome da propriedade"
       },
       description: {
         type: "string",
@@ -28,7 +30,7 @@ export default function NewForm(props) {
       type: {
         type: "string", //Enum, de valores definidos, string, date, email, password, bla
         enum: ["string", "date", "number", "files"]
-      }
+      },
     }
   };
 
@@ -41,8 +43,8 @@ export default function NewForm(props) {
   };
 
   const handleFormSave = () => {
-    const data = inputs.map(({ title, description, type }) => {
-      const key = title.toLowerCase().replace(/\s/g, "");
+    const data = inputs.map(({ prop, description, type }) => {
+      const key = prop.toLowerCase().replace(/\s/g, "");
       if (type === "date") {
         return {
           [key]: {
@@ -56,7 +58,7 @@ export default function NewForm(props) {
           [key]: {
             type: "string",
             format: "data-url",
-            title: title,
+            title: prop,
             description: description
           }
         };
@@ -89,10 +91,11 @@ export default function NewForm(props) {
 
     const handleFormSubmit = () => {
       const { properties } = formSchema;
+      const { _id } = selectedClient
 
       Axios.post(
         "http://localhost:5000/api/form",
-        { properties: properties },
+        { properties, clientId: _id, },
         { withCredentials: true }
       )
         .then(data => {
@@ -116,7 +119,6 @@ export default function NewForm(props) {
       <h1>{selectedClient.name}</h1>
       <Container className="newForm">
         <Form schema={schema} onSubmit={handleSubmit} />
-
         {inputs &&
           inputs.map(({ title, description, type }, index) => {
             return (

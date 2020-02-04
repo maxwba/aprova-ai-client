@@ -145,7 +145,6 @@ export default function MiniDrawer(props) {
     })
   }
 
-
   const service = new AuthService();
   const logoutCompany = props => {
     if (logout) {
