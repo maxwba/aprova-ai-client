@@ -48,13 +48,13 @@ class NewClient extends Component {
               onChange={this.handleChange}
             />
             <br />
-              <button
-                type="submit"
-                value="Submit"
-                class="btnClient btn btn-primary"
-              >
-                Criar
-              </button>
+            <button
+              type="submit"
+              value="Submit"
+              class="btnClient btn btn-primary"
+            >
+              Criar
+            </button>
           </div>
         </form>
       </div>
