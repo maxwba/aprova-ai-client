@@ -12,6 +12,7 @@ import Signup from "./components/auth/Signup";
 import Login from "./components/auth/Login";
 import AuthService from "./components/auth/auth-service";
 import Dashboard from "./components/Dashboard";
+import ClientDashboard from "./components/ClientDashboard";
 import JobDetail from "./components/JobDetail";
 import Renderform from "./components/Renderform";
 import ProtectedRoute from "./components/auth/protected-route";
@@ -59,6 +60,7 @@ class App extends Component {
 
               <Switch >
               <Route exact path = "/" component = {Home} company = {this.props.email}/> 
+              <Route exact path = "/clientdashboard" component = {ClientDashboard} /> 
               <ProtectedRoute path = "/dashboard" component = {Dashboard} company = {this.state.loggedInCompany}/> 
               <Route path = "/jobdetail" component = {JobDetail}/>
               <Route path = "/renderform" component = {Renderform}/> 
