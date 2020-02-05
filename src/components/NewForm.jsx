@@ -3,6 +3,7 @@ import { withTheme } from "react-jsonschema-form";
 import { Theme as MuiTheme } from "rjsf-material-ui";
 import { Container, Typography, Box, Button } from "@material-ui/core";
 import Axios from "axios";
+import { Link } from "react-router-dom"
 import ClientDetail from "./ClientDetails";
 import { type } from "os";
 
@@ -11,6 +12,8 @@ export default function NewForm(props) {
   const Form = withTheme(MuiTheme);
   const { selectedClient } = props;
   const [cDetail, handleClientDetail] = useState(false);
+
+  console.log(props)
 
   const schema = {
     title: "Crie seu formulário",
@@ -100,6 +103,7 @@ export default function NewForm(props) {
         .then(data => {
           console.log(data);
           setInputs([]);
+          props.handleDrawerClose()
         })
         .catch(error => console.log(error));
     };
@@ -115,7 +119,14 @@ export default function NewForm(props) {
 
   return (
     <>
-      <h1>{selectedClient.name}</h1>
+         <div className="name">
+            <Typography variant="h3">
+              {selectedClient.name}
+            </Typography>
+            
+            </div>
+            <br />
+            <br />
       <Container className="newForm">
         <Form schema={schema} onSubmit={handleSubmit} />
         {inputs &&
@@ -130,9 +141,12 @@ export default function NewForm(props) {
             );
           })}
         <br />
+     
         <Button variant="contained" color="primary" onClick={handleFormSave}>
           Salvar Formulário
         </Button>
+
+
       </Container>
     </>
   );
