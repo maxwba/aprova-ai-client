@@ -96,7 +96,7 @@ export default function NewForm(props) {
       const { _id } = selectedClient;
 
       Axios.post(
-        "http://localhost:5000/api/form",
+        process.env.REACT_APP_API_URL + "/form",
         { properties, clientId: _id },
         { withCredentials: true }
       )

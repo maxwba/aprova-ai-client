@@ -18,7 +18,7 @@ class NewClient extends Component {
     const name = this.state.name;
     axios
       .post(
-        "http://localhost:5000/api/client",
+        process.env.REACT_APP_API_URL + "/client",
         { name: name },
         { withCredentials: true }
       )

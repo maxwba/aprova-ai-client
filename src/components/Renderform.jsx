@@ -19,7 +19,7 @@ const RenderForm = (props) => {
 
   // Task post
   Axios.post(
-    "http://localhost:5000/api/task",
+    process.env.REACT_APP_API_URL + "/task",
     { properties: inputs },
     { withCredentials: true }
   )
@@ -30,7 +30,7 @@ const RenderForm = (props) => {
 
   //Get Form detail
   useEffect(() => {
-    Axios.get("http://localhost:5000/api/form").then(responseFromApi => {
+    Axios.get(process.env.REACT_APP_API_URL + "/form").then(responseFromApi => {
       const newForm = responseFromApi.data.map(prop => {
         if (currentClient._id === prop.clientId && prop._id === props.location.pathname.split('/')[2]) {
           const { properties} = prop;

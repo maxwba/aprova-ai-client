@@ -168,7 +168,7 @@ export default function ClienteDetails(props) {
 
   function deleteProject() {
     axios
-      .delete(`http://localhost:5000/api/client/${selectedClient._id}`, {
+      .delete(process.env.REACT_APP_API_URL + `/client/${selectedClient._id}`, {
         withCredentials: true
       })
       .then(() => {
@@ -181,7 +181,7 @@ export default function ClienteDetails(props) {
 
   if (id !== selectedClient._id) {
     handleId(selectedClient._id);
-    axios.get("http://localhost:5000/api/form").then(responseFromApi => {
+    axios.get(process.env.REACT_APP_API_URL + "/form").then(responseFromApi => {
       const forms = responseFromApi.data.filter(checkClient => {
         if (checkClient.clientId === selectedClient._id) {
           return checkClient;
