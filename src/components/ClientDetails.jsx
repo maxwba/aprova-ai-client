@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import React from "react";
 import axios from "axios";
 import Link from "@material-ui/core/Link";
 import { Link as LinkRouter } from "react-router-dom";
@@ -209,6 +208,7 @@ getClient();
         </Typography>
     </div>
           <br />
+          
     <div className="cards d-flex col-md-3 ml-4">
       <Card className={classes.root} variant="outlined">
       <CardContent>
@@ -227,9 +227,8 @@ getClient();
     </Card>
       </div>
 
-
-          <Button color="primary" onClick={handleDrawerOpen}>
-            Criar formulário
+          <Button onClick={handleDrawerOpen}>
+      <Icon style={{ color: green[400], fontSize: 60 }}>add_circle</Icon>
           </Button>
           <br />
       <br />
@@ -283,7 +282,7 @@ getClient();
 
           <div className={classes.root}>
     
-      <Icon style={{ color: green[400], fontSize: 60 }}>add_circle</Icon>
+      
     </div>
         </div>
       )}
