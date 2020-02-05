@@ -187,9 +187,6 @@ export default function ClienteDetails(props) {
         <NewForm selectedClient={selectedClient} />
       ) : (
         <div>
-
-    
-
           <div className="labels">
             <Typography variant="h4" component="h2">
               {selectedClient.name}
@@ -207,7 +204,6 @@ export default function ClienteDetails(props) {
           </div>
 
           <br />
-
 
           {clientForm.length > 0 ? (
             clientForm.map(({ _id }, idx) => {
@@ -236,7 +232,6 @@ export default function ClienteDetails(props) {
 
           <Button color="primary" onClick={handleDrawerOpen}>
             Criar formulário
-
           </Button>
           <br />
 
@@ -292,15 +287,9 @@ export default function ClienteDetails(props) {
             </DialogActions>
           </Dialog>
 
-          <div className={classes.root}>
+          <div className={classes.root}></div>
 
-    
-      
-    </div>
-
-            <Icon style={{ color: green[400], fontSize: 60 }}>add_circle</Icon>
-          </div>
-
+          <Icon style={{ color: green[400], fontSize: 60 }}>add_circle</Icon>
         </div>
       )}
     </div>
