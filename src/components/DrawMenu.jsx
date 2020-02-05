@@ -106,7 +106,7 @@ export default function MiniDrawer(props) {
 
   useEffect(() => {
     async function getAllClient() {
-      Axios.get("http://localhost:5000/api/client", {
+      Axios.get(process.env.REACT_APP_API_URL + "/client", {
         withCredentials: true
       }).then(responseFromApi => {
         handleCompany(responseFromApi.data);
@@ -133,10 +133,11 @@ export default function MiniDrawer(props) {
     handeClientDetail(true);
     handleClient(false);
     handlState(true);
+    props.getTheClient(selectedClient)
   };
 
   const handleDeleteClient = () => {
-    Axios.get("http://localhost:5000/api/client", {
+    Axios.get(process.env.REACT_APP_API_URL + "/client", {
       withCredentials: true
     }).then(responseFromApi => {
       handleCompany(responseFromApi.data);

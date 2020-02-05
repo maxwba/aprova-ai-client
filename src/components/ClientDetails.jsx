@@ -19,6 +19,11 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import { green } from "@material-ui/core/colors";
 import Icon from "@material-ui/core/Icon";
+import Grid from '@material-ui/core/Grid';
+import Tooltip from '@material-ui/core/Tooltip';
+import Fab from '@material-ui/core/Fab';
+import AddIcon from '@material-ui/icons/Add';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const drawerWidth = 240;
 
@@ -29,6 +34,7 @@ const useStyles = makeStyles(theme => ({
     },
     display: "flex"
   },
+  flexGrow:1,
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
     transition: theme.transitions.create(["width", "margin"], {
@@ -147,6 +153,11 @@ export default function ClienteDetails(props) {
     setForm(true);
   };
 
+  const handleDrawerClose = () => {
+    setForm(false);
+    handleId(null)
+  };
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -157,7 +168,7 @@ export default function ClienteDetails(props) {
 
   function deleteProject() {
     axios
-      .delete(`http://localhost:5000/api/client/${selectedClient._id}`, {
+      .delete(process.env.REACT_APP_API_URL + `/client/${selectedClient._id}`, {
         withCredentials: true
       })
       .then(() => {
@@ -170,13 +181,12 @@ export default function ClienteDetails(props) {
 
   if (id !== selectedClient._id) {
     handleId(selectedClient._id);
-    axios.get("http://localhost:5000/api/form").then(responseFromApi => {
+    axios.get(process.env.REACT_APP_API_URL + "/form").then(responseFromApi => {
       const forms = responseFromApi.data.filter(checkClient => {
         if (checkClient.clientId === selectedClient._id) {
           return checkClient;
         }
       });
-      console.log(forms);
       handleClientForm(forms);
     });
   }
@@ -184,21 +194,33 @@ export default function ClienteDetails(props) {
   return (
     <div>
       {form ? (
-        <NewForm selectedClient={selectedClient} />
+        <NewForm selectedClient={selectedClient} handleDrawerClose={handleDrawerClose} />
       ) : (
         <div>
+<<<<<<< HEAD
           <div className="labels">
             <Typography variant="h4" component="h2">
+=======
+
+
+    
+
+          <div className="name">
+            <Typography variant="h3">
+
+>>>>>>> 891e2b54b66df3062d8cf5594f5f830a7b3a4986
               {selectedClient.name}
             </Typography>
             <Typography className={classes.root}>
-              <Link href="#" variant="body2">
+              <Link href="#" variant="subtitle1">
                 {selectedClient.shareLink}
               </Link>
             </Typography>
+            </div>
             <br />
             <br />
-            <Typography variant="h5" component="h2">
+            <div className="labels">
+            <Typography variant="h4" >
               Formulários
             </Typography>
           </div>
@@ -208,65 +230,74 @@ export default function ClienteDetails(props) {
           {clientForm.length > 0 ? (
             clientForm.map(({ _id }, idx) => {
               return (
-                <div className="cards d-flex col-md-3 ml-4">
-                  <Card className={classes.root} variant="outlined">
-                    <CardContent>
-                      <Typography variant="h6" component="h2">
-                        {_id}
-                      </Typography>
-                      <br />
-                      <Typography variant="body1" component="p">
-                        {_id}
-                        <br />
-                      </Typography>
-                      <br />
-                      <LinkRouter to="/renderform"> Detalhes </LinkRouter>
-                    </CardContent>
-                  </Card>
+
+
+                <div className="card flex-wrap col-md-3 mx-3 mb-3 d-inline-flex flex-row justify-content-around">
+                  <div className="card-body ">
+              <h5 className="card-title"> Fomulário { idx + 1} </h5>
+                    
+                    <LinkRouter className="link" to={`/renderform/${_id}`}> Detalhes </LinkRouter>
+                  </div>
+
                 </div>
+
               );
             })
           ) : (
-            <h1>Nenhum formulario</h1>
+            <div className="d-inline-flex ml-4 flex-column justify-content-around">
+      
+            <Typography variant="button" display="block" gutterBottom>
+            Você não tem formulários disponíveis
+          </Typography>
+         
+          </div>
           )}
 
+<<<<<<< HEAD
           <Button color="primary" onClick={handleDrawerOpen}>
             Criar formulário
           </Button>
+=======
+
+       
+          <Tooltip className="mt-3 ml-2" title="Add" aria-label="add" onClick={handleDrawerOpen}>
+        <Fab color="secondary" className={classes.absolute}>
+          <AddIcon />
+        </Fab>
+      </Tooltip>
+
+>>>>>>> 891e2b54b66df3062d8cf5594f5f830a7b3a4986
           <br />
 
           <br />
           <div className="labels">
-            <Typography variant="h5" component="h2">
+            <Typography variant="h4" >
               Jobs
             </Typography>
           </div>
           <br />
-          <div className="cards d-flex col-md-4 ml-4">
-            <Card className={classes.root} variant="outlined">
-              <CardContent>
-                <Typography variant="h6" component="h2">
-                  NOME DO JOBB
-                </Typography>
-                <br />
-                <Typography variant="body1" component="p">
-                  status?? label??
-                </Typography>
-                <br />
-                <LinkRouter to="/renderform"> Detalhes </LinkRouter>
-              </CardContent>
-            </Card>
+
+          <div >
+       
+            <div className="card flex-wrap col-md-3 mx-3 d-inline-flex flex-row justify-content-around">
+                  <div className="card-body ">
+                    <h5 className="card-title"> NOME DO JOB </h5>
+                    <p className="card-textt"> status?? label?? </p> 
+                    <LinkRouter className="link" to="/renderform"> Detalhes </LinkRouter>
+                  </div>
+                </div>
+
           </div>
 
           <br />
           <br />
-          <Button
-            className="btnDelete"
-            variant="outlined"
-            onClick={handleClickOpen}
-          >
-            Deletar cliente
-          </Button>
+
+          <Tooltip title="Delete" style={{width: 30}} >
+        <IconButton aria-label="delete" onClick={handleClickOpen}>
+          <DeleteIcon />
+        </IconButton>
+      </Tooltip>
+         
           <Dialog
             onClose={handleClose}
             aria-labelledby="customized-dialog-title"
@@ -287,10 +318,17 @@ export default function ClienteDetails(props) {
             </DialogActions>
           </Dialog>
 
+<<<<<<< HEAD
           <div className={classes.root}></div>
 
           <Icon style={{ color: green[400], fontSize: 60 }}>add_circle</Icon>
         </div>
+=======
+          <div className={classes.root}>
+    </div>
+          </div>
+
+>>>>>>> 891e2b54b66df3062d8cf5594f5f830a7b3a4986
       )}
     </div>
   );

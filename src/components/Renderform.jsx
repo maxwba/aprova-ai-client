@@ -1,37 +1,61 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import { withTheme } from "react-jsonschema-form";
 import { Theme as MuiTheme } from "rjsf-material-ui";
 import { Container, Typography, Box, Button } from "@material-ui/core";
 
-const RenderForm = () => {
-  const [forms, handleForm] = React.useState([]);
+const RenderForm = (props) => {
+  const { currentClient } = props
+  const [forms, handleForm] = useState([]);
+  const [inputs, setInputs] = useState([]);
   const Form = withTheme(MuiTheme);
 
+
+
+  // Method for capturing inputs
+  const handleSubmit = ({ formData }) => {
+    setInputs([{ ...formData }]);
+  };
+
+  // Task post
+  Axios.post(
+    process.env.REACT_APP_API_URL + "/task",
+    { properties: inputs },
+    { withCredentials: true }
+  )
+    .then(data => {
+      console.log(data);
+    })
+    .catch(error => console.log(error));
+
+  //Get Form detail
   useEffect(() => {
-    Axios.get("http://localhost:5000/api/form").then(responseFromApi => {
+    Axios.get(process.env.REACT_APP_API_URL + "/form").then(responseFromApi => {
       const newForm = responseFromApi.data.map(prop => {
-        const { properties } = prop;
-        return {
-          ...properties
-        };
+        if (currentClient._id === prop.clientId && prop._id === props.location.pathname.split('/')[2]) {
+          const { properties} = prop;
+          return {
+            ...properties,
+          }
+        }
       });
-      handleForm(newForm);
+      handleForm(newForm.filter(a => a !== undefined));
     });
   }, []);
 
+
   return (
     <Container>
-      {forms.length > 0 &&
+      <Typography>{currentClient.name}</Typography>
+      {forms.length > 0  &&
         forms.map(form => {
           const formSchema = {
-            // title: "Oi monica",
             // description: "User cria para empresa responder",
             // type: "string",
             properties: form
           };
           console.log(`=============>`, formSchema);
-          return <Form schema={formSchema} onSubmit={``} />;
+          return <Form schema={formSchema} onSubmit={handleSubmit} />;
         })}
     </Container>
   );

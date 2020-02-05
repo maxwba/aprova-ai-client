@@ -138,7 +138,7 @@ const Login = ({ location, getUser, history }) => {
             Login
           </Button>
           <img src="/images/Google.png" alt="" style={{width: 21, marginRight:8, marginLeft: -4}} />
-              <Link href={`http://localhost:5000/api/auth/google`} variant="body2">
+              <Link href={process.env.REACT_APP_API_URL + '/auth/google'} variant="body2">
                 {"Login com o Google"}
               </Link>
               <br />

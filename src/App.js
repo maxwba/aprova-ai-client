@@ -21,10 +21,12 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loggedInCompany: null
+      loggedInCompany: null,
+      currentClient: {},
     };
     this.service = new AuthService();
     this.getTheUser = this.getTheUser.bind(this);
+    this.getTheClient = this.getTheClient.bind(this)
   }
 
   fetchUser() {
@@ -50,6 +52,13 @@ class App extends Component {
     });
   }
 
+  getTheClient(clientObj) {
+    console.log(`Recebi a parada`, clientObj)
+    this.setState({
+      currentClient:clientObj,
+    }, () => console.log(`Gravei a parada`, this.state.currentClient));
+  }
+
   render() {
       this.fetchUser();
       return ( <div className = "App" >
@@ -61,9 +70,9 @@ class App extends Component {
               <Switch >
               <Route exact path = "/" component = {Home} company = {this.props.email}/> 
               <Route exact path = "/clientdashboard" component = {ClientDashboard} /> 
-              <ProtectedRoute path = "/dashboard" component = {Dashboard} company = {this.state.loggedInCompany}/> 
+              <ProtectedRoute path = "/dashboard" component = {Dashboard} company = {this.state.loggedInCompany} getTheClient={this.getTheClient} currentClient={this.state.currentClient}/> 
               <Route path = "/jobdetail" component = {JobDetail}/>
-              <Route path = "/renderform" component = {Renderform}/> 
+              <Route path = "/renderform" render = {props => <Renderform {...props} currentClient = {this.state.currentClient}/>}/> 
               <Route exact path = "/logout" />
               <Route path = "/signup" render = {props => < Signup {...props} getUser = {this.getTheUser}/>} />
               <Route

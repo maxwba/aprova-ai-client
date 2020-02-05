@@ -127,7 +127,7 @@ const Signup = props => {
         
           <img src="/images/Google.png" alt="" style={{width: 21, marginRight:8, marginLeft: -4}} />
       
-          <Link href={`http://localhost:5000/api/auth/google`} variant="body2">
+          <Link href={process.env.REACT_APP_API_URL + `/auth/google`} variant="body2">
           {"Sign up com o Google"}
               </Link>
         
