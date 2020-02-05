@@ -7,7 +7,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import FormDetail from "./Renderform";
 import NewForm from "./NewForm";
-
 import { withStyles } from "@material-ui/core/styles";
 import Dialog from "@material-ui/core/Dialog";
 import MuiDialogTitle from "@material-ui/core/DialogTitle";
@@ -15,19 +14,18 @@ import MuiDialogContent from "@material-ui/core/DialogContent";
 import MuiDialogActions from "@material-ui/core/DialogActions";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
-import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import { green } from '@material-ui/core/colors';
-import Icon from '@material-ui/core/Icon';
-
+import Card from "@material-ui/core/Card";
+import CardActions from "@material-ui/core/CardActions";
+import CardContent from "@material-ui/core/CardContent";
+import { green } from "@material-ui/core/colors";
+import Icon from "@material-ui/core/Icon";
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
   root: {
-    '& > span': {
-      margin: theme.spacing(2),
+    "& > span": {
+      margin: theme.spacing(2)
     },
     display: "flex"
   },
@@ -96,7 +94,7 @@ const useStyles = makeStyles(theme => ({
 const styles = theme => ({
   root: {
     margin: 0,
-    padding: theme.spacing(2),
+    padding: theme.spacing(2)
   },
   closeButton: {
     position: "absolute",
@@ -138,11 +136,12 @@ const DialogActions = withStyles(theme => ({
 }))(MuiDialogActions);
 
 export default function ClienteDetails(props) {
-  const { selectedClient } = props;
+  let { selectedClient, resetState } = props;
   const classes = useStyles();
   const [form, setForm] = React.useState(false);
   const [clientForm, handleClientForm] = React.useState([]);
   const [open, setOpen] = React.useState(false);
+  const [id, handleId] = React.useState(null);
 
   const handleDrawerOpen = () => {
     setForm(true);
@@ -169,21 +168,18 @@ export default function ClienteDetails(props) {
       });
   }
 
-function getClient() {
-  axios.get('http://localhost:5000/api/form')
-    .then(
-      responseFromApi => {
-        const forms = responseFromApi.data.map(checkClient =>{
-          if (checkClient.clientId === selectedClient._id) {
-            return checkClient.properties;
-          }
-        })
-        return forms;
-      }
-    )
-}
-
-getClient();
+  if (id !== selectedClient._id) {
+    handleId(selectedClient._id);
+    axios.get("http://localhost:5000/api/form").then(responseFromApi => {
+      const forms = responseFromApi.data.filter(checkClient => {
+        if (checkClient.clientId === selectedClient._id) {
+          return checkClient;
+        }
+      });
+      console.log(forms);
+      handleClientForm(forms);
+    });
+  }
 
   return (
     <div>
@@ -191,72 +187,89 @@ getClient();
         <NewForm selectedClient={selectedClient} />
       ) : (
         <div>
-                
-    <div className="labels">
-      <Typography variant="h4" component="h2">
-      {selectedClient.name}
-        </Typography>
-          <Typography className={classes.root}>
-           <Link href="#" variant="body2">
-             {selectedClient.shareLink}
-            </Link>
-          </Typography>
-          <br />
-          <br />
-        <Typography variant="h5" component="h2">
-          Formulários
-        </Typography>
-    </div>
-          <br />
-          
-    <div className="cards d-flex col-md-3 ml-4">
-      <Card className={classes.root} variant="outlined">
-      <CardContent>
-        <Typography variant="h6" component="h2">
-          NOME DO FORM 
-        </Typography>
-        <br />
-        <Typography variant="body1" component="p">
-          DESCRIÇÃO
-          <br />
-          {'.....'}
-        </Typography>
-        <br />
-          <LinkRouter to="/renderform" > Detalhes </LinkRouter>
-      </CardContent>
-    </Card>
-      </div>
 
-          <Button onClick={handleDrawerOpen}>
-      <Icon style={{ color: green[400], fontSize: 60 }}>add_circle</Icon>
+    
+
+          <div className="labels">
+            <Typography variant="h4" component="h2">
+              {selectedClient.name}
+            </Typography>
+            <Typography className={classes.root}>
+              <Link href="#" variant="body2">
+                {selectedClient.shareLink}
+              </Link>
+            </Typography>
+            <br />
+            <br />
+            <Typography variant="h5" component="h2">
+              Formulários
+            </Typography>
+          </div>
+
+          <br />
+
+
+          {clientForm.length > 0 ? (
+            clientForm.map(({ _id }, idx) => {
+              return (
+                <div className="cards d-flex col-md-3 ml-4">
+                  <Card className={classes.root} variant="outlined">
+                    <CardContent>
+                      <Typography variant="h6" component="h2">
+                        {_id}
+                      </Typography>
+                      <br />
+                      <Typography variant="body1" component="p">
+                        {_id}
+                        <br />
+                      </Typography>
+                      <br />
+                      <LinkRouter to="/renderform"> Detalhes </LinkRouter>
+                    </CardContent>
+                  </Card>
+                </div>
+              );
+            })
+          ) : (
+            <h1>Nenhum formulario</h1>
+          )}
+
+          <Button color="primary" onClick={handleDrawerOpen}>
+            Criar formulário
+
           </Button>
           <br />
-      <br />
-      <div className="labels">
-        <Typography variant="h5" component="h2">
-          Jobs
-        </Typography>
-    </div>
-     <br />
-    <div className="cards d-flex col-md-4 ml-4">
-      <Card className={classes.root} variant="outlined">
-      <CardContent>
-        <Typography variant="h6" component="h2">
-          NOME DO JOBB
-        </Typography>
-        <br />
-        <Typography variant="body1" component="p">
-          status?? label??
-        </Typography>
-        <br />
-          <LinkRouter to="/renderform" > Detalhes </LinkRouter>
-      </CardContent>
-    </Card>
-      </div>
-     
-      <br />
-      <br />
-          <Button className="btnDelete" variant="outlined" onClick={handleClickOpen}>
+
+          <br />
+          <div className="labels">
+            <Typography variant="h5" component="h2">
+              Jobs
+            </Typography>
+          </div>
+          <br />
+          <div className="cards d-flex col-md-4 ml-4">
+            <Card className={classes.root} variant="outlined">
+              <CardContent>
+                <Typography variant="h6" component="h2">
+                  NOME DO JOBB
+                </Typography>
+                <br />
+                <Typography variant="body1" component="p">
+                  status?? label??
+                </Typography>
+                <br />
+                <LinkRouter to="/renderform"> Detalhes </LinkRouter>
+              </CardContent>
+            </Card>
+          </div>
+
+          <br />
+          <br />
+          <Button
+            className="btnDelete"
+            variant="outlined"
+            onClick={handleClickOpen}
+          >
             Deletar cliente
           </Button>
           <Dialog
@@ -279,11 +292,15 @@ getClient();
             </DialogActions>
           </Dialog>
 
-
           <div className={classes.root}>
+
     
       
     </div>
+
+            <Icon style={{ color: green[400], fontSize: 60 }}>add_circle</Icon>
+          </div>
+
         </div>
       )}
     </div>

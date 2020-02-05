@@ -12,7 +12,6 @@ export default function NewForm(props) {
   const { selectedClient } = props;
   const [cDetail, handleClientDetail] = useState(false);
 
-
   const schema = {
     title: "Crie seu formulário",
     /*  description: "A simple form example.", */
@@ -30,7 +29,7 @@ export default function NewForm(props) {
       type: {
         type: "string", //Enum, de valores definidos, string, date, email, password, bla
         enum: ["string", "date", "number", "files"]
-      },
+      }
     }
   };
 
@@ -91,11 +90,11 @@ export default function NewForm(props) {
 
     const handleFormSubmit = () => {
       const { properties } = formSchema;
-      const { _id } = selectedClient
+      const { _id } = selectedClient;
 
       Axios.post(
         "http://localhost:5000/api/form",
-        { properties, clientId: _id, },
+        { properties, clientId: _id },
         { withCredentials: true }
       )
         .then(data => {
@@ -135,6 +134,6 @@ export default function NewForm(props) {
           Salvar Formulário
         </Button>
       </Container>
-      </>
+    </>
   );
 }

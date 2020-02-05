@@ -102,7 +102,7 @@ export default function MiniDrawer(props) {
   const [selectedClient, handleSelectClient] = React.useState(null);
   const [client, handleClient] = React.useState(false);
   const [clientDetail, handeClientDetail] = React.useState(false);
- 
+  const [resetState, handlState] = React.useState(false);
 
   useEffect(() => {
     async function getAllClient() {
@@ -132,6 +132,7 @@ export default function MiniDrawer(props) {
     handleSelectClient(selectedClient);
     handeClientDetail(true);
     handleClient(false);
+    handlState(true);
   };
 
   const handleDeleteClient = () => {
@@ -142,8 +143,8 @@ export default function MiniDrawer(props) {
       handleSelectClient(null);
       handeClientDetail(false);
       handleClient(false);
-    })
-  }
+    });
+  };
 
   const service = new AuthService();
   const logoutCompany = props => {
@@ -243,11 +244,14 @@ export default function MiniDrawer(props) {
       <main className={classes.content}>
         <div className={classes.toolbar} />
 
-        
         {client ? (
-          <NewClient handleClientView={handleClientView}/>
+          <NewClient handleClientView={handleClientView} />
         ) : clientDetail && selectedClient ? (
-          <ClientDetails selectedClient={selectedClient} handleDeleteClient={handleDeleteClient} />
+          <ClientDetails
+            selectedClient={selectedClient}
+            handleDeleteClient={handleDeleteClient}
+            resetState={resetState}
+          />
         ) : (
           <DefaultPage />
         )}
