@@ -133,6 +133,7 @@ export default function MiniDrawer(props) {
     handeClientDetail(true);
     handleClient(false);
     handlState(true);
+    props.getTheClient(selectedClient)
   };
 
   const handleDeleteClient = () => {
