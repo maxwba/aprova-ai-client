@@ -187,7 +187,6 @@ export default function ClienteDetails(props) {
           return checkClient;
         }
       });
-      console.log(forms);
       handleClientForm(forms);
     });
   }
@@ -199,10 +198,12 @@ export default function ClienteDetails(props) {
       ) : (
         <div>
 
+
     
 
           <div className="name">
             <Typography variant="h3">
+
               {selectedClient.name}
             </Typography>
             <Typography className={classes.root}>
@@ -221,17 +222,18 @@ export default function ClienteDetails(props) {
 
           <br />
 
-
           {clientForm.length > 0 ? (
             clientForm.map(({ _id }, idx) => {
               return (
+
 
                 <div className="card flex-wrap col-md-3 mx-3 mb-3 d-inline-flex flex-row justify-content-around">
                   <div className="card-body ">
               <h5 className="card-title"> Fomulário { idx + 1} </h5>
                     
-                    <LinkRouter className="link" to="/renderform"> Detalhes </LinkRouter>
+                    <LinkRouter className="link" to={`/renderform/${_id}`}> Detalhes </LinkRouter>
                   </div>
+
                 </div>
 
               );
@@ -246,12 +248,14 @@ export default function ClienteDetails(props) {
           </div>
           )}
 
+
        
           <Tooltip className="mt-3 ml-2" title="Add" aria-label="add" onClick={handleDrawerOpen}>
         <Fab color="secondary" className={classes.absolute}>
           <AddIcon />
         </Fab>
       </Tooltip>
+
           <br />
 
           <br />
@@ -261,6 +265,7 @@ export default function ClienteDetails(props) {
             </Typography>
           </div>
           <br />
+
           <div >
        
             <div className="card flex-wrap col-md-3 mx-3 d-inline-flex flex-row justify-content-around">
@@ -270,6 +275,7 @@ export default function ClienteDetails(props) {
                     <LinkRouter className="link" to="/renderform"> Detalhes </LinkRouter>
                   </div>
                 </div>
+
           </div>
 
           <br />
@@ -304,6 +310,7 @@ export default function ClienteDetails(props) {
           <div className={classes.root}>
     </div>
           </div>
+
       )}
     </div>
   );

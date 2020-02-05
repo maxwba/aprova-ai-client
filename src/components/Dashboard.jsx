@@ -1,11 +1,12 @@
 import React from "react";
 import Menu from "./DrawMenu";
-import Teste from "./Teste";
 
 const Dashboard = props => {
+
+
   return (
     <div>
-      <Menu loggedInCompany={props.loggedInCompany} />
+      <Menu loggedInCompany={props.loggedInCompany} getTheClient={props.getTheClient} currentClient={props.currentClient}/>
     </div>
   );
 };
