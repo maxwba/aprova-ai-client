@@ -156,6 +156,7 @@ export default function MiniDrawer(props) {
     }
   };
 
+  console.log("COMPANY -> ", company)
   return (
     <div className={classes.root}>
       <CssBaseline />
