@@ -98,22 +98,25 @@ export default function MiniDrawer(props) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [logout, handleLogout] = React.useState(props.loggedInCompany);
-  const [company, handleCompany] = React.useState([]);
+  const [company, handleCompany] = React.useState(false);
   const [selectedClient, handleSelectClient] = React.useState(null);
   const [client, handleClient] = React.useState(false);
   const [clientDetail, handeClientDetail] = React.useState(false);
   const [resetState, handlState] = React.useState(false);
 
   useEffect(() => {
-    async function getAllClient() {
+    function getAllClient() {
       Axios.get(process.env.REACT_APP_API_URL + "/client", {
         withCredentials: true
       }).then(responseFromApi => {
+        console.log("RESPONSE FROM API -> ",responseFromApi)
         handleCompany(responseFromApi.data);
-      });
+      }).catch(error => console.log(error))
+    } 
+    if (!company) {
+      getAllClient();
     }
-    getAllClient();
-  }, [open]);
+  });
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -156,6 +159,7 @@ export default function MiniDrawer(props) {
     }
   };
 
+  console.log("COMPANY -> ", company)
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -206,7 +210,7 @@ export default function MiniDrawer(props) {
         <Divider />
         <Divider />
         <List>
-          {company.map((text, index) => {
+          {company && company.map((text, index) => {
             const { name } = text;
             const key = text + "-" + index;
             return (

@@ -57,7 +57,6 @@ const Signup = props => {
   const service = new AuthService();
 
   const handleFormSubmit = event => {
-    console.log(props);
     event.preventDefault();
     service
       .signup(email, password)

@@ -146,6 +146,7 @@ export default function ClienteDetails(props) {
   const classes = useStyles();
   const [form, setForm] = React.useState(false);
   const [clientForm, handleClientForm] = React.useState([]);
+  const [clientTasks, handleClientTasks] = React.useState([]);
   const [open, setOpen] = React.useState(false);
   const [id, handleId] = React.useState(null);
 
@@ -191,6 +192,20 @@ export default function ClienteDetails(props) {
     });
   }
 
+  if (id !== selectedClient._id) {
+    handleId(selectedClient._id);
+    axios.get(process.env.REACT_APP_API_URL + "/task").then(responseFromApi => {
+      const task = responseFromApi.data.filter(checkClient => {
+        if (checkClient.clientId === selectedClient._id) {
+          return checkClient;
+        }
+      });
+      handleClientTasks(task);
+    });
+  }
+
+  console.log(clientTasks);
+
   return (
     <div>
       {form ? (
@@ -218,6 +233,7 @@ export default function ClienteDetails(props) {
 
           <br />
 
+          {/* Random Forms*/}
           {clientForm.length > 0 ? (
             clientForm.map(({ _id }, idx) => {
               return (
@@ -245,7 +261,6 @@ export default function ClienteDetails(props) {
             Criar formulário
           </Button>
           <br />
-
           <br />
           <div className="labels">
             <Typography variant="h4">Jobs</Typography>
@@ -267,6 +282,11 @@ export default function ClienteDetails(props) {
 
           <br />
           <br />
+          <Tooltip title="Delete" style={{ width: 30 }}>
+            <IconButton aria-label="delete" onClick={handleClickOpen}>
+              <DeleteIcon />
+            </IconButton>
+          </Tooltip>
 
           <Tooltip title="Delete" style={{ width: 30 }}>
             <IconButton aria-label="delete" onClick={handleClickOpen}>
