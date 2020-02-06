@@ -180,6 +180,22 @@ export default function ClienteDetails(props) {
       });
   }
 
+
+  //Aproval method < ======= TEMOS QUE UTILIZA-LOS NO JobDetails
+  function setAproval() {
+    console.log(clientTasks)
+    axios
+    .post(process.env.REACT_APP_API_URL + `/task/${clientTasks._id}`, {
+      withCredentials: true
+    })
+    .then(() => {
+      clientTasks.aproval = 'Aprovado';
+    })
+    .catch(err => {
+      console.log(err);
+    });
+  }
+
   if (id !== selectedClient._id) {
     handleId(selectedClient._id);
     axios.get(process.env.REACT_APP_API_URL + "/form").then(responseFromApi => {
@@ -203,8 +219,6 @@ export default function ClienteDetails(props) {
       handleClientTasks(task);
     });
   }
-
-  console.log(clientTasks);
 
   return (
     <div>
@@ -240,7 +254,6 @@ export default function ClienteDetails(props) {
                 <div className="card flex-wrap col-md-3 mx-3 mb-3 d-inline-flex flex-row justify-content-around">
                   <div className="card-body ">
                     <h5 className="card-title"> Fomulário {idx + 1} </h5>
-
                     <LinkRouter className="link" to={`/renderform/${_id}`}>
                       {" "}
                       Detalhes{" "}
@@ -267,7 +280,35 @@ export default function ClienteDetails(props) {
           </div>
           <br />
 
-          <div>
+          {clientTasks.length > 0 ? (
+            clientTasks.map(({ _id, aproval }, idx) => {
+              return (
+                <div>
+                  <div className="card flex-wrap col-md-3 mx-3 d-inline-flex flex-row justify-content-around">
+                    <div className="card-body ">
+                      <h5 className="card-title">Tarefa {idx + 1} </h5>
+                      <p className="card-text">
+                        <b>Status: </b>{aproval}
+                      </p>
+                      <LinkRouter className="link" to="/JobDetail">
+                        {" "}
+                          Detalhes{" "}
+                      </LinkRouter>
+                    </div>
+                  </div>
+                </div>
+              );
+            })
+          ) : (
+            <div className="d-inline-flex ml-4 flex-column justify-content-around">
+              <Typography variant="button" display="block" gutterBottom>
+                Você não tem tarefas
+              </Typography>
+            </div>
+          )}
+
+          {/* <div>
+
             <div className="card flex-wrap col-md-3 mx-3 d-inline-flex flex-row justify-content-around">
               <div className="card-body ">
                 <h5 className="card-title"> NOME DO JOB </h5>
@@ -278,7 +319,7 @@ export default function ClienteDetails(props) {
                 </LinkRouter>
               </div>
             </div>
-          </div>
+          </div> */}
 
           <br />
           <br />
