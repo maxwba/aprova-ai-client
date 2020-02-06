@@ -13,7 +13,6 @@ export default function NewForm(props) {
   const { selectedClient } = props;
   const [cDetail, handleClientDetail] = useState(false);
 
-  console.log(props)
 
   const schema = {
     title: "Crie seu formulário",
@@ -101,7 +100,6 @@ export default function NewForm(props) {
         { withCredentials: true }
       )
         .then(data => {
-          console.log(data);
           setInputs([]);
           props.handleDrawerClose()
         })

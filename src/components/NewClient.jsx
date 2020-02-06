@@ -24,7 +24,6 @@ class NewClient extends Component {
       )
       .then(data => {
         this.setState({ name: "" });
-        console.log("DATA=>", data)
         this.props.handleClientView(data.data)
       })
       .catch(error => console.log(error));

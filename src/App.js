@@ -1,11 +1,6 @@
-import React, {
-  Component
-} from "react";
+import React, { Component } from "react";
 import "./App.css";
-import {
-  Switch,
-  Route
-} from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 
 import Home from "./components/Home";
 import Signup from "./components/auth/Signup";
@@ -22,11 +17,11 @@ class App extends Component {
     super(props);
     this.state = {
       loggedInCompany: null,
-      currentClient: {},
+      currentClient: {}
     };
     this.service = new AuthService();
     this.getTheUser = this.getTheUser.bind(this);
-    this.getTheClient = this.getTheClient.bind(this)
+    this.getTheClient = this.getTheClient.bind(this);
   }
 
   fetchUser() {
@@ -53,72 +48,63 @@ class App extends Component {
   }
 
   getTheClient(clientObj) {
-    console.log(`Recebi a parada`, clientObj)
     this.setState({
-      currentClient:clientObj,
-    }, () => console.log(`Gravei a parada`, this.state.currentClient));
+      currentClient: clientObj
+    });
   }
 
   render() {
-      this.fetchUser();
-      return ( <div className = "App" >
-
-          {/* If client is loggedIn */ } 
-          {
-            this.state.loggedInCompany ? (
-
-              <Switch >
-              <Route exact path = "/" component = {Home} company = {this.props.email}/> 
-              <Route exact path = "/clientdashboard" component = {ClientDashboard} /> 
-              <ProtectedRoute path = "/dashboard" component = {Dashboard} company = {this.state.loggedInCompany} getTheClient={this.getTheClient} currentClient={this.state.currentClient}/> 
-              <Route path = "/jobdetail" component = {JobDetail}/>
-              <Route path = "/renderform" render = {props => <Renderform {...props} currentClient = {this.state.currentClient}/>}/> 
-              <Route exact path = "/logout" />
-              <Route path = "/signup" render = {props => < Signup {...props} getUser = {this.getTheUser}/>} />
-              <Route
-                path = "/login"
-                render = {
-                  props => < Login {
-                    ...props
-                  }
-                  getUser = {
-                    this.getTheUser
-                  }
-                  />} />
-                  </Switch>
-                ): ( <Switch >
-                  <Route exact path = "/"
-                  component = {
-                    Home
-                  }
-                  company = {
-                    this.props.email
-                  }
-                  /> 
-                  <Route path = "/signup"
-                  render = {
-                    props => < Signup {
-                      ...props
-                    }
-                    getUser = {
-                      this.getTheUser
-                    }
-                    />} />
-                    <Route
-                    path = "/login"
-                    render = {
-                      props => < Login {
-                        ...props
-                      }
-                      getUser = {
-                        this.getTheUser
-                      }
-                      />} />
-                      </Switch>
-                    )
-                  } </div>
-                );
-              }
-            }
+    this.fetchUser();
+    return (
+      <div className="App">
+        {/* If client is loggedIn */}
+        {this.state.loggedInCompany ? (
+          <Switch>
+            <Route exact path="/" component={Home} company={this.props.email} />
+            <Route exact path="/clientdashboard" component={ClientDashboard} />
+            <ProtectedRoute
+              path="/dashboard"
+              component={Dashboard}
+              company={this.state.loggedInCompany}
+              getTheClient={this.getTheClient}
+              currentClient={this.state.currentClient}
+            />
+            <Route path="/jobdetail" component={JobDetail} />
+            <Route
+              path="/renderform"
+              render={props => (
+                <Renderform
+                  {...props}
+                  currentClient={this.state.currentClient}
+                />
+              )}
+            />
+            <Route exact path="/logout" />
+            <Route
+              path="/signup"
+              render={props => <Signup {...props} getUser={this.getTheUser} />}
+            />
+            <Route
+              path="/login"
+              render={props => <Login {...props} getUser={this.getTheUser} />}
+            />
+          </Switch>
+        ) : (
+          <Switch>
+            <Route exact path="/" component={Home} company={this.props.email} />
+            <Route
+              path="/signup"
+              render={props => <Signup {...props} getUser={this.getTheUser} />}
+            />
+            <Route
+              path="/login"
+              render={props => <Login {...props} getUser={this.getTheUser} />}
+            />
+          </Switch>
+        )}{" "}
+      </div>
+    );
+  }
+}
 
 export default App;

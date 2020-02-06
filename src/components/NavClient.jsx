@@ -27,10 +27,7 @@ export default function ButtonAppBar() {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <Link to="/">
-            <img  src="./profile.png" alt="logo" style={{width: 30}}/>
-            </Link>   
+          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">  
           </IconButton>
           <Typography variant="h6" className={classes.title}>
           </Typography>
