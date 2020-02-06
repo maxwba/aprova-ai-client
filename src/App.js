@@ -61,7 +61,6 @@ class App extends Component {
         {this.state.loggedInCompany ? (
           <Switch>
             <Route exact path="/" component={Home} company={this.props.email} />
-            <Route exact path="/clientdashboard" component={ClientDashboard} />
             <ProtectedRoute
               path="/dashboard"
               component={Dashboard}
@@ -100,6 +99,7 @@ class App extends Component {
               path="/login"
               render={props => <Login {...props} getUser={this.getTheUser} />}
             />
+            <Route path="/clientdashboard" component={ClientDashboard} />
           </Switch>
         )}{" "}
       </div>
