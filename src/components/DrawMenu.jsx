@@ -207,7 +207,8 @@ export default function MiniDrawer(props) {
         <Divider />
         <Divider />
         <List>
-          {company.map((text, index) => {
+
+          {company.length > 0 && company.map((text, index) => {
             console.log("COMPANY -> ", company)
             const { name } = text;
             const key = text + "-" + index;
