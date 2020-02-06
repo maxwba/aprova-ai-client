@@ -98,7 +98,7 @@ export default function MiniDrawer(props) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [logout, handleLogout] = React.useState(props.loggedInCompany);
-  const [company, handleCompany] = React.useState([]);
+  const [company, handleCompany] = React.useState(false);
   const [selectedClient, handleSelectClient] = React.useState(null);
   const [client, handleClient] = React.useState(false);
   const [clientDetail, handeClientDetail] = React.useState(false);
@@ -109,11 +109,14 @@ export default function MiniDrawer(props) {
       Axios.get(process.env.REACT_APP_API_URL + "/client", {
         withCredentials: true
       }).then(responseFromApi => {
+        console.log("RESPONSE FROM API -> ",responseFromApi.data)
         handleCompany(responseFromApi.data);
       }).catch(error => console.log(error))
+    } 
+    if (company ) {
+      getAllClient();
     }
-    getAllClient();
-  }, [open]);
+  });
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -208,7 +211,7 @@ export default function MiniDrawer(props) {
         <Divider />
         <List>
 
-          {company.length > 0 && company.map((text, index) => {
+          {company && company.map((text, index) => {
             console.log("COMPANY -> ", company)
             const { name } = text;
             const key = text + "-" + index;
