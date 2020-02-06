@@ -105,13 +105,14 @@ export default function MiniDrawer(props) {
   const [resetState, handlState] = React.useState(false);
 
   useEffect(() => {
-     function getAllClient() {
+    function getAllClient() {
       Axios.get(process.env.REACT_APP_API_URL + "/client", {
         withCredentials: true
       }).then(responseFromApi => {
+        console.log("RESPONSE FROM API -> ",responseFromApi)
         handleCompany(responseFromApi.data);
       }).catch(error => console.log(error))
-    }
+    } 
     if (!company) {
       getAllClient();
     }
@@ -158,6 +159,7 @@ export default function MiniDrawer(props) {
     }
   };
 
+  console.log("COMPANY -> ", company)
   return (
     <div className={classes.root}>
       <CssBaseline />
