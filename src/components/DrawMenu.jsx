@@ -116,7 +116,7 @@ export default function MiniDrawer(props) {
     if (company ) {
       getAllClient();
     }
-  });
+  }, [open] );
 
   const handleDrawerOpen = () => {
     setOpen(true);
