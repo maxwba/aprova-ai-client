@@ -215,8 +215,10 @@ export default function ClienteDetails(props) {
         />
       ) : (
         <div>
-          <div className="name">
-            <Typography variant="h3">{selectedClient.name}</Typography>
+          <div className="labels">
+            <Typography variant="h4" component="h2">
+              {selectedClient.name}
+            </Typography>
             <Typography className={classes.root}>
               <Link href="#" variant="subtitle1">
                 {selectedClient.shareLink}
@@ -255,16 +257,9 @@ export default function ClienteDetails(props) {
             </div>
           )}
 
-          <Tooltip
-            className="mt-3 ml-2"
-            title="Criar novo formulário"
-            aria-label="add"
-            onClick={handleDrawerOpen}
-          >
-            <Fab color="secondary" className={classes.absolute}>
-              <AddIcon />
-            </Fab>
-          </Tooltip>
+          <Button color="primary" onClick={handleDrawerOpen}>
+            Criar formulário
+          </Button>
           <br />
           <br />
           <div className="labels">
@@ -272,36 +267,7 @@ export default function ClienteDetails(props) {
           </div>
           <br />
 
-
-          {clientTasks.length > 0 ? (
-            clientTasks.map(({ _id }, idx) => {
-              return (
-                <div>
-                <div className="card flex-wrap col-md-3 mx-3 d-inline-flex flex-row justify-content-around">
-                  <div className="card-body ">
-                    <h5 className="card-title">Tarefa {idx + 1} </h5>
-                    <p className="card-text"><b> Status:</b> Aguardando aprovação </p>
-                    <LinkRouter className="link" to="/JobDetail">
-                      {" "}
-                      Detalhes{" "}
-                    </LinkRouter>
-                  </div>
-                </div>
-              </div>
-              );
-            })
-          ) : (
-            <div className="d-inline-flex ml-4 flex-column justify-content-around">
-              <Typography variant="button" display="block" gutterBottom>
-                Você não tem tarefas
-              </Typography>
-            </div>
-          )}
-
-
-
-
-          {/* <div>
+          <div>
             <div className="card flex-wrap col-md-3 mx-3 d-inline-flex flex-row justify-content-around">
               <div className="card-body ">
                 <h5 className="card-title"> NOME DO JOB </h5>
@@ -312,12 +278,16 @@ export default function ClienteDetails(props) {
                 </LinkRouter>
               </div>
             </div>
-          </div> */}
-
-
+          </div>
 
           <br />
           <br />
+          <Tooltip title="Delete" style={{ width: 30 }}>
+            <IconButton aria-label="delete" onClick={handleClickOpen}>
+              <DeleteIcon />
+            </IconButton>
+          </Tooltip>
+
           <Tooltip title="Delete" style={{ width: 30 }}>
             <IconButton aria-label="delete" onClick={handleClickOpen}>
               <DeleteIcon />
@@ -345,6 +315,8 @@ export default function ClienteDetails(props) {
           </Dialog>
 
           <div className={classes.root}></div>
+
+          <Icon style={{ color: green[400], fontSize: 60 }}>add_circle</Icon>
         </div>
       )}
     </div>
