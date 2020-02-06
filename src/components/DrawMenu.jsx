@@ -113,10 +113,10 @@ export default function MiniDrawer(props) {
         handleCompany(responseFromApi.data);
       }).catch(error => console.log(error))
     } 
-    if (company ) {
+    if (!company) {
       getAllClient();
     }
-  }, [open] );
+  });
 
   const handleDrawerOpen = () => {
     setOpen(true);
