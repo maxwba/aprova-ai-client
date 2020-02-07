@@ -40,13 +40,17 @@ export default function Dashboard(props) {
   const [clientName, handleClientName] = React.useState(props.history.action);
   const [stateInfo, handleStateInfo] = React.useState(false);
   const [taskInfo, handleTaskInfo] = React.useState(false);
+  const max = props.location.pathname.split("/")[3];
 
-  const handleLogin = () => {
+  
+
+  const handleLogin = (props) => {
     const { password } = formSchema.properties;
-    const url = props.location.pathname.split("/")[2];
+    const url = max;
+    console.log(typeof password)
     Axios.post(process.env.REACT_APP_API_URL + "/clientside/" + url, {
       clientId: url,
-      password: password
+      password: password.title
     })
       .then(console.log("Logado"), changeAuth(true))
       .catch(error => console.log(error));
@@ -67,6 +71,7 @@ export default function Dashboard(props) {
         });
         changeForm(newForm.filter(a => a !== undefined));
         handleStateInfo(true);
+        props.getClientSection(max)
       })
       .catch(erro => console.log(erro));
   }
@@ -75,7 +80,6 @@ export default function Dashboard(props) {
       const url = props.location.pathname.split("/")[3];
       Axios.get(process.env.REACT_APP_API_URL + "/infos/tasks")
         .then(responseFromApi => {
-          console.log(responseFromApi)
           const task = responseFromApi.data.map(prop => {
             if (url === prop.clientId) {
               const { properties, _id, aproval } = prop;
