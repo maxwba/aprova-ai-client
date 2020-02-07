@@ -17,13 +17,15 @@ class App extends Component {
     super(props);
     this.state = {
       loggedInCompany: null,
-      currentClient: {}
+      currentClient: {},
+      clientSection: {} // <===== novo
     };
     this.service = new AuthService();
     this.getTheUser = this.getTheUser.bind(this);
     this.getTheClient = this.getTheClient.bind(this);
+    this.getClientSection = this.getClientSection.bind(this);
   }
-
+  
   fetchUser() {
     if (this.state.loggedInCompany === null) {
       this.service
@@ -53,7 +55,14 @@ class App extends Component {
     });
   }
 
+  getClientSection(clientSession){
+    this.setState({
+      clientSection: clientSession 
+    })
+  }
+  
   render() {
+    console.log(this.state.clientSection)
     this.fetchUser();
     return (
       <div className="App">
@@ -79,7 +88,9 @@ class App extends Component {
               render={props => (
                 <Renderform
                   {...props}
+                  batman="babababab"
                   currentClient={this.state.currentClient}
+                  clientSection={this.state.clientSection}
                 />
               )}
             />
@@ -104,13 +115,15 @@ class App extends Component {
               path="/login"
               render={props => <Login {...props} getUser={this.getTheUser} />}
             />
-            <Route path="/clientdashboard" component={ClientDashboard} />
+            <Route path="/clientdashboard" render={props => <ClientDashboard {...props} getClientSection={this.getClientSection} clientSection={this.state.clientSection}/>}/>
             <Route
               path="/renderform"
               render={props => (
                 <Renderform
                   {...props}
+                  batman="babababab"
                   currentClient={this.state.currentClient}
+                  clientSection={this.state.clientSection}
                 />
               )}
             />

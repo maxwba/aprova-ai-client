@@ -6,11 +6,12 @@ import { Container, Typography, Box, Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
 const RenderForm = props => {
+  const { clientSection } = props
   const { currentClient } = props;
   const [forms, handleForm] = useState([]);
   const Form = withTheme(MuiTheme);
 
-  console.log(props)
+  console.log(clientSection)
 
   // Method for capturing inputs
   const handleSubmit = ({ formData }) => {
@@ -18,7 +19,7 @@ const RenderForm = props => {
     Axios.post(
       process.env.REACT_APP_API_URL + "/task",
       // eslint-disable-next-line no-restricted-globals
-      { properties: formData, clientId: props.currentClient._id, aproval: 'Aguardando aprovação' },
+      { properties: formData, clientId: clientSection, aproval: 'Aguardando aprovação' },
       { withCredentials: true }
     )
       .then(data => {
@@ -32,9 +33,6 @@ const RenderForm = props => {
   useEffect(() => {
     Axios.get(process.env.REACT_APP_API_URL + "/form").then(responseFromApi => {
       const newForm = responseFromApi.data.map(prop => {
-        console.log(`====> chegou ate o response`,responseFromApi)
-        console.log(`=====> esse e o currentc`,currentClient._id)
-        console.log(`=====> esse e o propclient`,prop.clientId)
         if (
           currentClient._id === prop.clientId ||
           prop._id === props.location.pathname.split("/")[2] 
