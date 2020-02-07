@@ -161,8 +161,7 @@ export default function Dashboard(props) {
           {tasks.length > 0 ? (
             tasks.map(({ _id, aproval }, idx) => {
               return (
-                <div>
-                  <div className="card flex-wrap col-md-3 mx-3 d-inline-flex flex-row justify-content-around">
+                <div className="card flex-wrap col-md-3 col-sm-12 mx-md-3 mb-3 d-inline-flex flex-row justify-content-around">
                     <div className="card-body ">
                       <h5 className="card-title">Tarefa {idx + 1} </h5>
                       <p className="card-text">
@@ -175,7 +174,6 @@ export default function Dashboard(props) {
                       </LinkRouter>
                     </div>
                   </div>
-                </div>
               );
             })
           ) : (
