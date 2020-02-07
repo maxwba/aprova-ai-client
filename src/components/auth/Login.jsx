@@ -134,13 +134,18 @@ const Login = ({ location, getUser, history }) => {
             variant="contained"
             color="primary"
             className={classes.submit}
+        
           >
             Login
           </Button>
+          <button
+          className="google">
           <img src="/images/Google.png" alt="" style={{width: 21, marginRight:8, marginLeft: -4}} />
-              <Link href={process.env.REACT_APP_API_URL + '/auth/google'} variant="body2">
-                {"Login com o Google"}
+              <Link className="login" href={process.env.REACT_APP_API_URL + '/auth/google'} variant="body2">
+                {"LOGIN COM O GOOGLE"}
               </Link>
+
+          </button>
               <br />
           <Grid container>
             <Grid item>
