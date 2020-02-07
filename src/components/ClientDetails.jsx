@@ -181,6 +181,22 @@ export default function ClienteDetails(props) {
       });
   }
 
+
+  //Aproval method < ======= TEMOS QUE UTILIZA-LOS NO JobDetails
+  function setAproval() {
+    console.log(clientTasks)
+    axios
+    .post(process.env.REACT_APP_API_URL + `/task/${clientTasks._id}`, {
+      withCredentials: true
+    })
+    .then(() => {
+      clientTasks.aproval = 'Aprovado';
+    })
+    .catch(err => {
+      console.log(err);
+    });
+  }
+
   if (id !== selectedClient._id) {
     handleId(selectedClient._id);
     axios.get(process.env.REACT_APP_API_URL + "/form").then(responseFromApi => {
@@ -205,8 +221,6 @@ export default function ClienteDetails(props) {
     });
   }
 
-  console.log(clientTasks);
-
   return (
     <div>
       {form ? (
@@ -218,7 +232,6 @@ export default function ClienteDetails(props) {
         <div>
           <div className="name">
            <h2>{selectedClient.name}</h2>
-      
             <Typography className={classes.root}>
               <Link href="#" variant="subtitle1">
                 {selectedClient.shareLink}
@@ -241,7 +254,6 @@ export default function ClienteDetails(props) {
                 <div className="card flex-wrap col-md-3 col-sm-12 mx-md-3 mb-3 d-inline-flex flex-row justify-content-around">
                   <div className="card-body ">
                     <h5 className="card-title"> Fomulário {idx + 1} </h5>
-
                     <LinkRouter className="link" to={`/renderform/${_id}`}>
                       {" "}
                       Detalhes{" "}
@@ -257,6 +269,7 @@ export default function ClienteDetails(props) {
               </Typography>
             </div>
           )}
+
 
           <Tooltip
             className="mt-3 ml-2 "
@@ -277,22 +290,24 @@ export default function ClienteDetails(props) {
           </div>
           <br />
 
-
           {clientTasks.length > 0 ? (
-            clientTasks.map(({ _id }, idx) => {
+            clientTasks.map(({ _id, aproval }, idx) => {
               return (
+
                 
                 <div className="card flex-wrap col-md-3 mx-md-3 col-sm-12 mb-3 d-inline-flex flex-row justify-content-around">
                   <div className="card-body ">
                     <h5 className="card-title">Tarefa {idx + 1} </h5>
-                    <p className="card-text"><b> Status:</b> Aguardando aprovação </p>
+                   <p className="card-text">
+                        <b>Status: </b>{aproval}
+                      </p>
                     <LinkRouter className="link" to="/JobDetail">
                       {" "}
                       Detalhes{" "}
                     </LinkRouter>
                   </div>
                 </div>
-              
+             
               );
             })
           ) : (
@@ -302,8 +317,15 @@ export default function ClienteDetails(props) {
               </Typography>
             </div>
           )}
+
           <br />
           <br />
+          <Tooltip title="Delete" style={{ width: 30 }}>
+            <IconButton aria-label="delete" onClick={handleClickOpen}>
+              <DeleteIcon />
+            </IconButton>
+          </Tooltip>
+
           <Tooltip title="Delete" style={{ width: 30 }}>
             <IconButton aria-label="delete" onClick={handleClickOpen}>
               <DeleteIcon />
@@ -331,6 +353,8 @@ export default function ClienteDetails(props) {
           </Dialog>
 
           <div className={classes.root}></div>
+
+          <Icon style={{ color: green[400], fontSize: 60 }}>add_circle</Icon>
         </div>
       )}
     </div>

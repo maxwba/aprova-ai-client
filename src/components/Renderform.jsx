@@ -12,15 +12,14 @@ const RenderForm = props => {
   const [inputs, setInputs] = useState([]);
   const Form = withTheme(MuiTheme);
 
-  console.log(props.currentClient._id);
-
   // Method for capturing inputs
   const handleSubmit = ({ formData }) => {
     setInputs([{ ...formData }]);
     // Task post
     Axios.post(
       process.env.REACT_APP_API_URL + "/task",
-      { properties: inputs, clientId: props.currentClient._id },
+      // eslint-disable-next-line no-restricted-globals
+      { properties: inputs, clientId: props.currentClient._id, aproval: 'Aguardando aprovação' },
       { withCredentials: true }
     )
       .then(data => {

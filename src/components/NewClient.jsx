@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import axios from "axios";
 
 
-
 class NewClient extends Component {
   constructor(props) {
     super(props);
     this.state = { name: "" };
+    this.state = { email: "" };
 
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -15,23 +15,31 @@ class NewClient extends Component {
   handleFormSubmit(event) {
     event.preventDefault();
     const name = this.state.name;
+    const email = this.state.email;
     axios
       .post(
         process.env.REACT_APP_API_URL + "/client",
-        { name: name },
+        { name: name, email: email },
         { withCredentials: true }
       )
       .then(data => {
-        this.setState({ name: "" });
-        this.props.handleClientView(data.data)
+        this.setState({
+          name: "",
+          email: ""
+        });
+        this.props.handleClientView(data.data);
         this.props.getAllClient();
       })
       .catch(error => console.log(error));
   }
 
   handleChange(event) {
-    const { name, value } = event.target;
-    this.setState({ [name]: value });
+    const { name, email, value } = event.target;
+
+    this.setState({
+      [name]: value,
+      [email]: value
+    });
   }
 
   render() {
@@ -44,7 +52,17 @@ class NewClient extends Component {
               type="text"
               className="form-control"
               name="name"
+              placeholder="Nome do seu cliente"
               value={this.state.name}
+              onChange={this.handleChange}
+            />
+            <br />
+            <input
+              type="text"
+              className="form-control"
+              placeholder="E-mail do stackholder do seu cliente"
+              name="email"
+              value={this.state.email}
               onChange={this.handleChange}
             />
             <br />

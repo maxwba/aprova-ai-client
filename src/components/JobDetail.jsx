@@ -1,12 +1,13 @@
-import React from 'react'; 
+import React from "react";
+import NavClient from "./NavClient";
 
 
 const JobDetail = () => {
-    return (
-        <div>
-        <h2> MEU JOB DETAIL...É O FORM PARA EDIT E DELETE</h2>
-        </div>
-    )
-}
+  return (
+    <div>
+      <NavClient />
+    </div>
+  );
+};
 
 export default JobDetail;
