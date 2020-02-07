@@ -124,12 +124,15 @@ const Signup = props => {
             Signup
           </Button>
         
+          <button
+          className="google">
           <img src="/images/Google.png" alt="" style={{width: 21, marginRight:8, marginLeft: -4}} />
-      
-          <Link href={process.env.REACT_APP_API_URL + `/auth/google`} variant="body2">
-          {"Sign up com o Google"}
+              <Link className="login" href={process.env.REACT_APP_API_URL + '/auth/google'} variant="body2">
+                {"SIGN UP COM O GOOGLE"}
               </Link>
-        
+
+          </button>
+          <br />
           <Grid container>
             <Grid item>
               <Link href="/login" variant="body2">

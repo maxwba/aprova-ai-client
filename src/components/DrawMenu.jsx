@@ -101,22 +101,23 @@ export default function MiniDrawer(props) {
   const [company, handleCompany] = React.useState(false);
   const [selectedClient, handleSelectClient] = React.useState(null);
   const [client, handleClient] = React.useState(false);
-  const [clientDetail, handeClientDetail] = React.useState(false);
-  const [resetState, handlState] = React.useState(false);
+  const [clientDetail, handleClientDetail] = React.useState(false);
+  const [resetState, handleState] = React.useState(false);
 
   useEffect(() => {
-    function getAllClient() {
-      Axios.get(process.env.REACT_APP_API_URL + "/client", {
-        withCredentials: true
-      }).then(responseFromApi => {
-        console.log("RESPONSE FROM API -> ",responseFromApi)
-        handleCompany(responseFromApi.data);
-      }).catch(error => console.log(error))
-    } 
     if (!company) {
       getAllClient();
     }
   });
+
+  function getAllClient() {
+    Axios.get(process.env.REACT_APP_API_URL + "/client", {
+      withCredentials: true
+    }).then(responseFromApi => {
+      handleCompany(responseFromApi.data);
+    }).catch(error => console.log(error))
+  } 
+
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -128,14 +129,14 @@ export default function MiniDrawer(props) {
 
   const handleChangeClient = () => {
     handleClient(true);
-    handeClientDetail(false);
+    handleClientDetail(false);
   };
 
   const handleClientView = selectedClient => {
     handleSelectClient(selectedClient);
-    handeClientDetail(true);
+    handleClientDetail(true);
     handleClient(false);
-    handlState(true);
+    handleState(true);
     props.getTheClient(selectedClient)
   };
 
@@ -145,7 +146,7 @@ export default function MiniDrawer(props) {
     }).then(responseFromApi => {
       handleCompany(responseFromApi.data);
       handleSelectClient(null);
-      handeClientDetail(false);
+      handleClientDetail(false);
       handleClient(false);
     });
   };
@@ -223,6 +224,7 @@ export default function MiniDrawer(props) {
         </List>
         <Divider />
         <List>
+
           <ListItem button onClick={handleChangeClient}>
             <ListItemIcon>
               {" "}
@@ -230,6 +232,7 @@ export default function MiniDrawer(props) {
             </ListItemIcon>
             <ListItemText>Criar cliente</ListItemText>
           </ListItem>
+
 
           <ListItem
             component={Link}
@@ -250,12 +253,13 @@ export default function MiniDrawer(props) {
         <div className={classes.toolbar} />
 
         {client ? (
-          <NewClient handleClientView={handleClientView} />
+          <NewClient handleClientView={handleClientView} getAllClient={getAllClient}/>
         ) : clientDetail && selectedClient ? (
           <ClientDetails
             selectedClient={selectedClient}
             handleDeleteClient={handleDeleteClient}
             resetState={resetState}
+            handleClientView={handleClientView}
           />
         ) : (
           <DefaultPage />

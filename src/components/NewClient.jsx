@@ -1,7 +1,6 @@
-//new client
 import React, { Component } from "react";
 import axios from "axios";
-import { typography } from "@material-ui/system";
+
 
 
 class NewClient extends Component {
@@ -25,6 +24,7 @@ class NewClient extends Component {
       .then(data => {
         this.setState({ name: "" });
         this.props.handleClientView(data.data)
+        this.props.getAllClient();
       })
       .catch(error => console.log(error));
   }

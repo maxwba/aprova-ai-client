@@ -167,6 +167,7 @@ export default function ClienteDetails(props) {
     setOpen(false);
   };
 
+
   function deleteProject() {
     axios
       .delete(process.env.REACT_APP_API_URL + `/client/${selectedClient._id}`, {
@@ -216,7 +217,8 @@ export default function ClienteDetails(props) {
       ) : (
         <div>
           <div className="name">
-            <Typography variant="h3">{selectedClient.name}</Typography>
+           <h2>{selectedClient.name}</h2>
+      
             <Typography className={classes.root}>
               <Link href="#" variant="subtitle1">
                 {selectedClient.shareLink}
@@ -226,7 +228,8 @@ export default function ClienteDetails(props) {
           <br />
           <br />
           <div className="labels">
-            <Typography variant="h4">Formulários</Typography>
+            <h3>Formulários</h3>
+          
           </div>
 
           <br />
@@ -235,7 +238,7 @@ export default function ClienteDetails(props) {
           {clientForm.length > 0 ? (
             clientForm.map(({ _id }, idx) => {
               return (
-                <div className="card flex-wrap col-md-3 mx-3 mb-3 d-inline-flex flex-row justify-content-around">
+                <div className="card flex-wrap col-md-3 col-sm-12 mx-md-3 mb-3 d-inline-flex flex-row justify-content-around">
                   <div className="card-body ">
                     <h5 className="card-title"> Fomulário {idx + 1} </h5>
 
@@ -256,7 +259,7 @@ export default function ClienteDetails(props) {
           )}
 
           <Tooltip
-            className="mt-3 ml-2"
+            className="mt-3 ml-2 "
             title="Criar novo formulário"
             aria-label="add"
             onClick={handleDrawerOpen}
@@ -267,8 +270,10 @@ export default function ClienteDetails(props) {
           </Tooltip>
           <br />
           <br />
+       
           <div className="labels">
-            <Typography variant="h4">Jobs</Typography>
+            <h3>Jobs</h3>
+          
           </div>
           <br />
 
@@ -276,8 +281,8 @@ export default function ClienteDetails(props) {
           {clientTasks.length > 0 ? (
             clientTasks.map(({ _id }, idx) => {
               return (
-                <div>
-                <div className="card flex-wrap col-md-3 mx-3 d-inline-flex flex-row justify-content-around">
+                
+                <div className="card flex-wrap col-md-3 mx-md-3 col-sm-12 mb-3 d-inline-flex flex-row justify-content-around">
                   <div className="card-body ">
                     <h5 className="card-title">Tarefa {idx + 1} </h5>
                     <p className="card-text"><b> Status:</b> Aguardando aprovação </p>
@@ -287,7 +292,7 @@ export default function ClienteDetails(props) {
                     </LinkRouter>
                   </div>
                 </div>
-              </div>
+              
               );
             })
           ) : (
@@ -297,25 +302,6 @@ export default function ClienteDetails(props) {
               </Typography>
             </div>
           )}
-
-
-
-
-          {/* <div>
-            <div className="card flex-wrap col-md-3 mx-3 d-inline-flex flex-row justify-content-around">
-              <div className="card-body ">
-                <h5 className="card-title"> NOME DO JOB </h5>
-                <p className="card-textt"> status?? label?? </p>
-                <LinkRouter className="link" to="/renderform">
-                  {" "}
-                  Detalhes{" "}
-                </LinkRouter>
-              </div>
-            </div>
-          </div> */}
-
-
-
           <br />
           <br />
           <Tooltip title="Delete" style={{ width: 30 }}>
