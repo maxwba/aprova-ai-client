@@ -68,7 +68,11 @@ class App extends Component {
               getTheClient={this.getTheClient}
               currentClient={this.state.currentClient}
             />
-            <Route path="/jobdetail" component={JobDetail} />
+            <Route path="/jobdetail" 
+            component={JobDetail} 
+            getTheClient={this.getTheClient}
+            currentClient={this.state.currentClient}
+            />
             <Route
               path="/renderform"
               render={props => (
