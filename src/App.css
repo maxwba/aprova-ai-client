@@ -339,7 +339,12 @@ header {
   color: #2F6F84;
   font-weight: bold;
 }
-
+.link1 {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  margin-top: 4px;
+}
 .renderForm {
   margin-top: 20px;
 }
@@ -362,4 +367,10 @@ header {
   font-size: 30px;
   border-radius: 3%;
   box-shadow: none;
+}
+
+.clientLink {
+  overflow-wrap: break-word !important;
+  word-wrap: break-word !important;
+  width: 80vh !important;
 }
