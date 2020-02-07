@@ -38,8 +38,8 @@ export default function Dashboard(props) {
   const [forms, changeForm] = React.useState([]);
   const [tasks, changeTask] = React.useState([]);
   const [clientName, handleClientName] = React.useState(props.history.action);
-
-  console.log(props.history.action);
+  const [stateInfo, handleStateInfo] = React.useState(false);
+  const [taskInfo, handleTaskInfo] = React.useState(false);
 
   const handleLogin = () => {
     const { password } = formSchema.properties;
@@ -51,43 +51,46 @@ export default function Dashboard(props) {
       .then(console.log("Logado"), changeAuth(true))
       .catch(error => console.log(error));
   };
-  // props.location.pathname.split("/")[3]
 
-  const handleInfos = () => {
+  if (!stateInfo) {
     const url = props.location.pathname.split("/")[3];
     Axios.get(process.env.REACT_APP_API_URL + "/infos/forms")
       .then(responseFromApi => {
         const newForm = responseFromApi.data.map(prop => {
           if (url === prop.clientId) {
-            const { properties } = prop;
+            const { properties, _id } = prop;
             return {
-              ...properties
+              ...properties,
+              _id
             };
           }
         });
         changeForm(newForm.filter(a => a !== undefined));
+        handleStateInfo(true);
       })
       .catch(erro => console.log(erro));
-  };
+  }
 
-  const handleTask = () => {
-    const url = props.location.pathname.split("/")[3];
-    Axios.get(process.env.REACT_APP_API_URL + "/infos/task")
-      .then(responseFromApi => {
-        const task = responseFromApi.data.map(prop => {
-          if (url === prop.clientId) {
-            const { properties } = prop;
-            return {
-              ...properties
-            };
-          }
-        });
-        changeTask(task.filter(a => a !== undefined));
-      })
-      .catch(erro => console.log(erro));
-  };
-
-  console.log("===========>", tasks);
+  if (!taskInfo) {
+      const url = props.location.pathname.split("/")[3];
+      Axios.get(process.env.REACT_APP_API_URL + "/infos/tasks")
+        .then(responseFromApi => {
+          console.log(responseFromApi)
+          const task = responseFromApi.data.map(prop => {
+            if (url === prop.clientId) {
+              const { properties, _id, aproval } = prop;
+              return {
+                ...properties,
+                _id,
+                aproval
+              };
+            }
+          });
+          changeTask(task.filter(a => a !== undefined));
+          handleTaskInfo(true)
+        })
+        .catch(erro => console.log(erro));
+    };
 
   const formSchema = {
     title: "Digite a senha informada no seu e-mail",
@@ -99,6 +102,7 @@ export default function Dashboard(props) {
       }
     }
   };
+
 
   return (
     <div>
@@ -158,7 +162,7 @@ export default function Dashboard(props) {
                         <b>Status: </b>
                         {aproval}
                       </p>
-                      <LinkRouter className="link" to="/JobDetail">
+                      <LinkRouter className="link" to={`/JobDetail:${_id}`}>
                         {" "}
                         Detalhes{" "}
                       </LinkRouter>
