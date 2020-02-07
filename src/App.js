@@ -68,10 +68,11 @@ class App extends Component {
               getTheClient={this.getTheClient}
               currentClient={this.state.currentClient}
             />
-            <Route path="/jobdetail" 
-            component={JobDetail} 
-            getTheClient={this.getTheClient}
-            currentClient={this.state.currentClient}
+            <Route
+              path="/jobdetail"
+              component={JobDetail}
+              getTheClient={this.getTheClient}
+              currentClient={this.state.currentClient}
             />
             <Route
               path="/renderform"
@@ -104,6 +105,15 @@ class App extends Component {
               render={props => <Login {...props} getUser={this.getTheUser} />}
             />
             <Route path="/clientdashboard" component={ClientDashboard} />
+            <Route
+              path="/renderform"
+              render={props => (
+                <Renderform
+                  {...props}
+                  currentClient={this.state.currentClient}
+                />
+              )}
+            />
           </Switch>
         )}{" "}
       </div>

@@ -321,7 +321,7 @@ export default function ClienteDetails(props) {
                         <b>Status: </b>
                         {aproval}
                       </p>
-                      <LinkRouter className="link" to="/JobDetail">
+                      <LinkRouter className="link" to={`/JobDetail/${_id}`}>
                         {" "}
                         Detalhes{" "}
                       </LinkRouter>
