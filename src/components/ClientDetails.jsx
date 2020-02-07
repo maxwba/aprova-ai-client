@@ -364,9 +364,14 @@ export default function ClienteDetails(props) {
             
               <div className="d-flex ml-3 "> 
 
-            <AssignmentIndIcon className="d-flex mr-1 "color="black" style={{ fontSize: 30 }} />
-            <Link className="clientLink" style={{color: "black"}} href="#" variant="subtitle1">{selectedClient.shareLink}  </Link>
-            
+            <AssignmentIndIcon className="d-flex mr-1" style={{ fontSize: 30, color: "#2F6F84" }} />
+            <LinkRouter className="link1" to={selectedClient.shareLink}>
+                      {" "}
+                      Link do cliente{" "} 
+            </LinkRouter>
+
+
+
           </div>
 
           <Dialog
