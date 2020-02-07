@@ -2,7 +2,7 @@ import React from "react";
 import { withTheme } from "react-jsonschema-form";
 import { Theme as MuiTheme } from "rjsf-material-ui";
 import NavClient from "./NavClient";
-import { Link } from "react-router-dom";
+import { Link as LinkRouter } from "react-router-dom";
 import Renderform from "./Renderform";
 
 import { makeStyles } from "@material-ui/core/styles";
@@ -35,6 +35,11 @@ export default function Dashboard(props) {
   const classes = useStyles();
   const [auth, changeAuth] = React.useState(false);
   const Form = withTheme(MuiTheme);
+  const [forms, changeForm] = React.useState([]);
+  const [tasks, changeTask] = React.useState([]);
+  const [clientName, handleClientName] = React.useState(props.history.action);
+
+  console.log(props.history.action);
 
   const handleLogin = () => {
     const { password } = formSchema.properties;
@@ -47,6 +52,42 @@ export default function Dashboard(props) {
       .catch(error => console.log(error));
   };
   // props.location.pathname.split("/")[3]
+
+  const handleInfos = () => {
+    const url = props.location.pathname.split("/")[3];
+    Axios.get(process.env.REACT_APP_API_URL + "/infos/forms")
+      .then(responseFromApi => {
+        const newForm = responseFromApi.data.map(prop => {
+          if (url === prop.clientId) {
+            const { properties } = prop;
+            return {
+              ...properties
+            };
+          }
+        });
+        changeForm(newForm.filter(a => a !== undefined));
+      })
+      .catch(erro => console.log(erro));
+  };
+
+  const handleTask = () => {
+    const url = props.location.pathname.split("/")[3];
+    Axios.get(process.env.REACT_APP_API_URL + "/infos/task")
+      .then(responseFromApi => {
+        const task = responseFromApi.data.map(prop => {
+          if (url === prop.clientId) {
+            const { properties } = prop;
+            return {
+              ...properties
+            };
+          }
+        });
+        changeTask(task.filter(a => a !== undefined));
+      })
+      .catch(erro => console.log(erro));
+  };
+
+  console.log("===========>", tasks);
 
   const formSchema = {
     title: "Digite a senha informada no seu e-mail",
@@ -68,7 +109,7 @@ export default function Dashboard(props) {
 
           <div className="labels">
             <Typography variant="h3" component="h2">
-              Olá, @nome
+              Olá, {clientName}
             </Typography>
             <br />
             <Typography variant="h5" component="h2">
@@ -76,24 +117,28 @@ export default function Dashboard(props) {
             </Typography>
           </div>
           <br />
-          <div className="cards d-flex col-md-3 ml-4">
-            <Card className={classes.root} variant="outlined">
-              <CardContent>
-                <Typography variant="h6" component="h2">
-                  NOME DO FORM
-                </Typography>
-                <br />
-                <Typography variant="body1" component="p">
-                  DESCRIÇÃO
-                  <br />
-                  {"....."}
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Link to="/renderform"> Detalhes </Link>
-              </CardActions>
-            </Card>
-          </div>
+          {/* Random Forms*/}
+          {forms.length > 0 ? (
+            forms.map(({ _id }, idx) => {
+              return (
+                <div className="card flex-wrap col-md-3 mx-3 mb-3 d-inline-flex flex-row justify-content-around">
+                  <div className="card-body ">
+                    <h5 className="card-title"> Fomulário {idx + 1} </h5>
+                    <LinkRouter className="link" to={`/renderform/${_id}`}>
+                      {" "}
+                      Detalhes{" "}
+                    </LinkRouter>
+                  </div>
+                </div>
+              );
+            })
+          ) : (
+            <div className="d-inline-flex ml-4 flex-column justify-content-around">
+              <Typography variant="button" display="block" gutterBottom>
+                Você não tem formulários disponíveis
+              </Typography>
+            </div>
+          )}
           <br />
           <br />
           <div className="labels">
@@ -102,22 +147,33 @@ export default function Dashboard(props) {
             </Typography>
           </div>
           <br />
-          <div className="cards d-flex col-md-4 ml-4">
-            <Card className={classes.root} variant="outlined">
-              <CardContent>
-                <Typography variant="h6" component="h2">
-                  NOME DO JOBB
-                </Typography>
-                <br />
-                <Typography variant="body1" component="p">
-                  status?? label??
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Link to="/renderform"> Detalhes (??) </Link>
-              </CardActions>
-            </Card>
-          </div>
+          {tasks.length > 0 ? (
+            tasks.map(({ _id, aproval }, idx) => {
+              return (
+                <div>
+                  <div className="card flex-wrap col-md-3 mx-3 d-inline-flex flex-row justify-content-around">
+                    <div className="card-body ">
+                      <h5 className="card-title">Tarefa {idx + 1} </h5>
+                      <p className="card-text">
+                        <b>Status: </b>
+                        {aproval}
+                      </p>
+                      <LinkRouter className="link" to="/JobDetail">
+                        {" "}
+                        Detalhes{" "}
+                      </LinkRouter>
+                    </div>
+                  </div>
+                </div>
+              );
+            })
+          ) : (
+            <div className="d-inline-flex ml-4 flex-column justify-content-around">
+              <Typography variant="button" display="block" gutterBottom>
+                Você não tem tarefas
+              </Typography>
+            </div>
+          )}
         </div>
       ) : (
         <div>
@@ -128,3 +184,14 @@ export default function Dashboard(props) {
     </div>
   );
 }
+
+// {forms.length > 0 &&
+//   forms.map(form => {
+//     const formSchema = {
+//       // description: "User cria para empresa responder",
+//       // type: "string",
+//       properties: form
+//     };
+//     console.log(`=============>`, formSchema);
+//     return <Form schema={formSchema} onSubmit={""} />;
+//   })}
