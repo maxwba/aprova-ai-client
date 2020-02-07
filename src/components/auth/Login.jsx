@@ -91,9 +91,7 @@ const Login = ({ location, getUser, history }) => {
     <Container className="form" component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
+       <img src='./images/locked.png' alt='' />
         <Typography component="h1" variant="h5">
           Login
         </Typography>

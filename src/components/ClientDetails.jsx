@@ -24,6 +24,7 @@ import Tooltip from "@material-ui/core/Tooltip";
 import Fab from "@material-ui/core/Fab";
 import AddIcon from "@material-ui/icons/Add";
 import DeleteIcon from "@material-ui/icons/Delete";
+import AssignmentIndIcon from '@material-ui/icons/AssignmentInd';
 
 const drawerWidth = 240;
 
@@ -246,15 +247,18 @@ export default function ClienteDetails(props) {
         />
       ) : (
         <div>
-          <div className="name">
-           <h2>{selectedClient.name}</h2>
-            <Typography className={classes.root}>
-              <Link href="#" variant="subtitle1">
-                {selectedClient.shareLink}
-              </Link>
-            </Typography>
+          <div className="name d-flex">
+           <h2 className="mt-2">{selectedClient.name}</h2>
+           
+
+           <Tooltip color="black" title="Delete">
+            <IconButton  aria-label="delete" onClick={handleClickOpen}>
+              <DeleteIcon  style={{ fontSize: 22 }} />
+            </IconButton>
+          </Tooltip>
+        
           </div>
-          <br />
+       
           <br />
           <div className="labels">
             <h3>Formulários</h3>
@@ -309,7 +313,7 @@ export default function ClienteDetails(props) {
           {clientTasks.length > 0 ? (
             clientTasks.map(({ _id, aproval }, idx) => {
               return (
-                <div>
+                
                 <div className="card flex-wrap col-md-3 mx-md-3 col-sm-12 mb-3 d-inline-flex flex-row justify-content-around">
                     <div className="card-body ">
                       <h5 className="card-title">Tarefa {idx + 1} </h5>
@@ -321,8 +325,9 @@ export default function ClienteDetails(props) {
                         {" "}
                         Detalhes{" "}
                       </LinkRouter>
-
-                      <Button
+                      
+                      {/* mover para o formdetail */}
+                      {/* <Button
                         variant="outlined"
                         size="small"
                         color="primary"
@@ -340,10 +345,10 @@ export default function ClienteDetails(props) {
                         onClick={() => setDenied(_id)}
                       >
                         Recusar
-                      </Button>
+                      </Button> */}
                     </div>
                   </div>
-                </div>
+                
              
               );
             })
@@ -356,17 +361,13 @@ export default function ClienteDetails(props) {
           )}
           <br />
           <br />
-          <Tooltip title="Delete" style={{ width: 30 }}>
-            <IconButton aria-label="delete" onClick={handleClickOpen}>
-              <DeleteIcon />
-            </IconButton>
-          </Tooltip>
+            
+              <div className="d-flex ml-3 "> 
 
-          <Tooltip title="Delete" style={{ width: 30 }}>
-            <IconButton aria-label="delete" onClick={handleClickOpen}>
-              <DeleteIcon />
-            </IconButton>
-          </Tooltip>
+            <AssignmentIndIcon className="d-flex mr-1 "color="black" style={{ fontSize: 30 }} />
+            <Link className="clientLink" style={{color: "black"}} href="#" variant="subtitle1">{selectedClient.shareLink}  </Link>
+            
+          </div>
 
           <Dialog
             onClose={handleClose}
@@ -390,7 +391,7 @@ export default function ClienteDetails(props) {
 
           <div className={classes.root}></div>
 
-          <Icon style={{ color: green[400], fontSize: 60 }}>add_circle</Icon>
+       
         </div>
       )}
     </div>

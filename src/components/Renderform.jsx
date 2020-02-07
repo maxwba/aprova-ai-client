@@ -51,7 +51,7 @@ const RenderForm = props => {
   return (
     <div>
       <Link
-          className="logo navbar-brand d-inline-block align-top ml-5 mt-1"
+          className="logo navbar-brand d-inline-block align-top ml-4 mt-3"
           exact
           to="/"
         >
@@ -61,10 +61,7 @@ const RenderForm = props => {
 
     <div className="renderForm">
     <Container>
-
-      <Typography variant="h3">{currentClient.name}</Typography>
-   
-
+    <h2 className="mt-2">{currentClient.name}</h2>
       {forms.length > 0 &&
         forms.map(form => {
           const formSchema = {

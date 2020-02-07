@@ -118,13 +118,12 @@ export default function NewForm(props) {
   return (
     <>
          <div className="name">
-            <Typography variant="h3">
-              {selectedClient.name}
-            </Typography>
+          
+            <h2 className="mt-2">{selectedClient.name}</h2>
             
             </div>
             <br />
-            <br />
+       
       <Container className="newForm">
         <Form schema={schema} onSubmit={handleSubmit} />
         {inputs &&
@@ -133,19 +132,22 @@ export default function NewForm(props) {
               <Box key={index} p={2}>
                 <form action="/action_page.php">
                   {description}:<br />
-                  <input type={type} name={title} />
+                  <div class="form-group createForm">
+              <input type={type} name={title}  class="form-control createForm" id="exampleInputEmail1" />
+                    </div>
+
                 </form>
               </Box>
             );
           })}
         <br />
      
-        <Button variant="contained" color="primary" onClick={handleFormSave}>
+        <Button style={{backgroundColor: "#2F6F84" }} variant="contained" color="primary" onClick={handleFormSave}>
           Salvar Formulário
         </Button>
 
-
       </Container>
+
     </>
   );
 }
