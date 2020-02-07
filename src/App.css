@@ -55,6 +55,11 @@
   margin: 0 auto;
 }
 
+.about1 img {
+  display: block;
+  margin: 0 auto;
+}
+
 .about p {
   line-height: 1.5;
   color: gray;
@@ -63,10 +68,23 @@
   text-align: center;
 }
 
+.about1 p {
+  line-height: 1.5;
+  color: gray;
+  font-weight: 500;
+  font-size: 22px;
+  text-align: center;
+}
+
 .steps {
   margin-top: 10%;
 }
 
+.span {
+  color: #2F6F84;
+  font-size: 24px;
+  font-weight: 600;
+}
 .foot {
   height: 7%;
   width: 100%;
@@ -109,6 +127,11 @@
   .foot {
     padding-bottom: 3.5%;
   }
+
+  .name {
+    margin-left: 2%;
+    font-size: 110px;
+  }
 }
 
 @media (max-width: 869px) {
@@ -143,6 +166,19 @@
   .newForm {
     width: 280px;
   }
+
+  .name {
+    margin-left: 30px;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    font-size: 20px;
+  }
+
+  .labels h3 {
+    margin-left: 54px;
+    font-size: 30px;
+  }
+  
 }
 
 header {
@@ -264,19 +300,27 @@ header {
   font-weight: bold;
 }
 
-.name {
-  margin-left: 2%;
+.btn-info {
+  background-color: #2F6F84 !important;
 }
 
-.btnDelete {
-  border-color: red !important;
-  color: red !important;
-  width: 100px;
-  font-size: 10px !important;
+
+.btnBack {
+  background-color: white;
+  border: none;
+  margin-top: 10px;
+  font-size: 15px;
+  color: #2F6F84;
+  font-weight: bold;
 }
 
 .card-body {
   color:black;
+}
+
+.card:hover {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
 
 .MuiFab-secondary {
@@ -287,4 +331,22 @@ header {
   text-decoration: none;
   color: #2F6F84;
   font-weight: bold;
+}
+
+.renderForm {
+  margin-top: 20px;
+}
+
+.google {
+  border: 1.2px solid #2F6F84;
+  background-color: transparent;
+  border-radius: 3%;
+  width: 380px;
+  padding: 5px;
+  margin-bottom: 8px;
+  color: #000;
+}
+.login {
+  text-decoration: none;
+  color: #2F6F84 !important;
 }

@@ -167,6 +167,7 @@ export default function ClienteDetails(props) {
     setOpen(false);
   };
 
+
   function deleteProject() {
     axios
       .delete(process.env.REACT_APP_API_URL + `/client/${selectedClient._id}`, {
@@ -245,10 +246,8 @@ export default function ClienteDetails(props) {
         />
       ) : (
         <div>
-          <div className="labels">
-            <Typography variant="h4" component="h2">
-              {selectedClient.name}
-            </Typography>
+          <div className="name">
+           <h2>{selectedClient.name}</h2>
             <Typography className={classes.root}>
               <Link href="#" variant="subtitle1">
                 {selectedClient.shareLink}
@@ -258,7 +257,8 @@ export default function ClienteDetails(props) {
           <br />
           <br />
           <div className="labels">
-            <Typography variant="h4">Formulários</Typography>
+            <h3>Formulários</h3>
+          
           </div>
 
           <br />
@@ -267,7 +267,7 @@ export default function ClienteDetails(props) {
           {clientForm.length > 0 ? (
             clientForm.map(({ _id }, idx) => {
               return (
-                <div className="card flex-wrap col-md-3 mx-3 mb-3 d-inline-flex flex-row justify-content-around">
+                <div className="card flex-wrap col-md-3 col-sm-12 mx-md-3 mb-3 d-inline-flex flex-row justify-content-around">
                   <div className="card-body ">
                     <h5 className="card-title"> Fomulário {idx + 1} </h5>
                     <LinkRouter className="link" to={`/renderform/${_id}`}>
@@ -286,13 +286,23 @@ export default function ClienteDetails(props) {
             </div>
           )}
 
-          <Button color="primary" onClick={handleDrawerOpen}>
-            Criar formulário
-          </Button>
+
+          <Tooltip
+            className="mt-3 ml-2 "
+            title="Criar novo formulário"
+            aria-label="add"
+            onClick={handleDrawerOpen}
+          >
+            <Fab color="secondary" className={classes.absolute}>
+              <AddIcon />
+            </Fab>
+          </Tooltip>
           <br />
           <br />
+       
           <div className="labels">
-            <Typography variant="h4">Jobs</Typography>
+            <h3>Jobs</h3>
+          
           </div>
           <br />
 
@@ -300,7 +310,7 @@ export default function ClienteDetails(props) {
             clientTasks.map(({ _id, aproval }, idx) => {
               return (
                 <div>
-                  <div className="card flex-wrap col-md-3 mx-3 d-inline-flex flex-row justify-content-around">
+                <div className="card flex-wrap col-md-3 mx-md-3 col-sm-12 mb-3 d-inline-flex flex-row justify-content-around">
                     <div className="card-body ">
                       <h5 className="card-title">Tarefa {idx + 1} </h5>
                       <p className="card-text">
@@ -334,6 +344,7 @@ export default function ClienteDetails(props) {
                     </div>
                   </div>
                 </div>
+             
               );
             })
           ) : (
