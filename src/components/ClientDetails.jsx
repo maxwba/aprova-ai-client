@@ -314,8 +314,8 @@ export default function ClienteDetails(props) {
             clientTasks.map(({ _id, aproval }, idx) => {
               return (
                 
-                <div className="card flex-wrap col-md-3 mx-md-3 col-sm-12 mb-3 d-inline-flex flex-row justify-content-around">
-                    <div className="card-body ">
+                <div className="card flex-wrap col-md-3 mx-3 d-inline-flex flex-row justify-content-around">
+                <div className="card-body ">
                       <h5 className="card-title">Tarefa {idx + 1} </h5>
                       <p className="card-text">
                         <b>Status: </b>
