@@ -180,20 +180,36 @@ export default function ClienteDetails(props) {
       });
   }
 
-
   //Aproval method < ======= TEMOS QUE UTILIZA-LOS NO JobDetails
-  function setAproval() {
-    console.log(clientTasks)
+
+  function setAproval(taskId) {
     axios
-    .post(process.env.REACT_APP_API_URL + `/task/${clientTasks._id}`, {
-      withCredentials: true
-    })
-    .then(() => {
-      clientTasks.aproval = 'Aprovado';
-    })
-    .catch(err => {
-      console.log(err);
-    });
+      .post(process.env.REACT_APP_API_URL + `/task/${taskId}`, {
+        aproval: "Aprovado",
+        withCredentials: true
+      })
+      .then(response => {
+        console.log(clientTasks.aproval);
+        console.log(response);
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
+  function setDenied(taskId) {
+    axios
+      .post(process.env.REACT_APP_API_URL + `/task/${taskId}`, {
+        aproval: "Recusado",
+        withCredentials: true
+      })
+      .then(response => {
+        console.log(clientTasks.aproval);
+        console.log(response);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
   if (id !== selectedClient._id) {
@@ -288,12 +304,33 @@ export default function ClienteDetails(props) {
                     <div className="card-body ">
                       <h5 className="card-title">Tarefa {idx + 1} </h5>
                       <p className="card-text">
-                        <b>Status: </b>{aproval}
+                        <b>Status: </b>
+                        {aproval}
                       </p>
                       <LinkRouter className="link" to="/JobDetail">
                         {" "}
-                          Detalhes{" "}
+                        Detalhes{" "}
                       </LinkRouter>
+
+                      <Button
+                        variant="outlined"
+                        size="small"
+                        color="primary"
+                        className={classes.margin}
+                        onClick={() => setAproval(_id)}
+                      >
+                        Aprovar
+                      </Button>
+
+                      <Button
+                        variant="outlined"
+                        size="small"
+                        color="secondary"
+                        className={classes.margin}
+                        onClick={() => setDenied(_id)}
+                      >
+                        Recusar
+                      </Button>
                     </div>
                   </div>
                 </div>
@@ -306,21 +343,6 @@ export default function ClienteDetails(props) {
               </Typography>
             </div>
           )}
-
-          {/* <div>
-
-            <div className="card flex-wrap col-md-3 mx-3 d-inline-flex flex-row justify-content-around">
-              <div className="card-body ">
-                <h5 className="card-title"> NOME DO JOB </h5>
-                <p className="card-textt"> status?? label?? </p>
-                <LinkRouter className="link" to="/renderform">
-                  {" "}
-                  Detalhes{" "}
-                </LinkRouter>
-              </div>
-            </div>
-          </div> */}
-
           <br />
           <br />
           <Tooltip title="Delete" style={{ width: 30 }}>
