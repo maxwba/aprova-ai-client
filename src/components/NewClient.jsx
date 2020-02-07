@@ -23,11 +23,11 @@ class NewClient extends Component {
         { withCredentials: true }
       )
       .then(data => {
+        this.props.handleClientView(data.data);
         this.setState({
           name: "",
           email: ""
         });
-        this.props.handleClientView(data.data);
         this.props.getAllClient();
       })
       .catch(error => console.log(error));
@@ -48,24 +48,25 @@ class NewClient extends Component {
         <form onSubmit={this.handleFormSubmit}>
           <div class="newclient form-group ">
             <label className="newClient">Novo Cliente</label>
+            <br />
             <input
               type="text"
-              className="form-control"
+              className="form-control mb-3"
               name="name"
               placeholder="Nome do seu cliente"
               value={this.state.name}
               onChange={this.handleChange}
             />
-            <br />
+          
             <input
               type="text"
-              className="form-control"
-              placeholder="E-mail do stackholder do seu cliente"
+              className="form-control mb-4"
+              placeholder="E-mail do seu cliente"
               name="email"
               value={this.state.email}
               onChange={this.handleChange}
             />
-            <br />
+         
             <button
               type="submit"
               value="Submit"
@@ -75,6 +76,7 @@ class NewClient extends Component {
             </button>
           </div>
         </form>
+       
       </div>
     );
   }

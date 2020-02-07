@@ -174,6 +174,13 @@
     font-size: 20px;
   }
 
+  .name h1 {
+    margin-left: 35px;
+  }
+
+ .clientLink{
+   font-size: 13px !important;
+ }
   .labels h3 {
     margin-left: 54px;
     font-size: 30px;
@@ -275,7 +282,7 @@ header {
 
 .newclient {
   color: black;
-  font-size: 20px;
+  font-size: 30px;
 }
 
 .btnClient {
@@ -290,7 +297,7 @@ header {
 
 .newForm {
   border-color: #73c0a9;
-  margin-left: -10px;
+  margin-left: -7px !important;
 }
 
 
@@ -349,4 +356,10 @@ header {
 .login {
   text-decoration: none;
   color: #2F6F84 !important;
+}
+
+.createForm {
+  font-size: 30px;
+  border-radius: 3%;
+  box-shadow: none;
 }
