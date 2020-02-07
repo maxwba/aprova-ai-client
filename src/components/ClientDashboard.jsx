@@ -111,21 +111,23 @@ export default function Dashboard(props) {
           <NavClient />
           <br />
 
-          <div className="labels">
-            <Typography variant="h3" component="h2">
-              Olá, {clientName}
-            </Typography>
-            <br />
-            <Typography variant="h5" component="h2">
-              Formulários
-            </Typography>
+          <div className="name d-flex">
+           <h2 className="mt-2">Bem vindo,</h2>
           </div>
+    
+          <br />
+          <div className="labels">
+            <h3>Formulários</h3>
+          
+          </div>
+
+        
           <br />
           {/* Random Forms*/}
           {forms.length > 0 ? (
             forms.map(({ _id }, idx) => {
               return (
-                <div className="card flex-wrap col-md-3 mx-3 mb-3 d-inline-flex flex-row justify-content-around">
+                <div className="card flex-wrap col-md-3 col-sm-12 mx-md-3 mb-3 d-inline-flex flex-row justify-content-around">
                   <div className="card-body ">
                     <h5 className="card-title"> Fomulário {idx + 1} </h5>
                     <LinkRouter className="link" to={`/renderform/${_id}`}>
@@ -145,11 +147,12 @@ export default function Dashboard(props) {
           )}
           <br />
           <br />
+
           <div className="labels">
-            <Typography variant="h5" component="h2">
-              Jobs
-            </Typography>
+            <h3>Jobs</h3>
+          
           </div>
+          
           <br />
           {tasks.length > 0 ? (
             tasks.map(({ _id, aproval }, idx) => {
