@@ -1,11 +1,7 @@
 import React from "react";
 import NavClient from "./NavClient";
 
-
-const JobDetail = (props) => {
-
-  console.log(props)
-  
+const JobDetail = props => {
   return (
     <div>
       <NavClient />

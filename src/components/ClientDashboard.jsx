@@ -100,6 +100,8 @@ export default function Dashboard(props) {
     }
   };
 
+  handleInfos();
+
   return (
     <div>
       {auth ? (

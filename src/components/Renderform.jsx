@@ -4,7 +4,7 @@ import { withTheme } from "react-jsonschema-form";
 import { Theme as MuiTheme } from "rjsf-material-ui";
 import { Container, Typography, Box, Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import axios from "axios"
+import axios from "axios";
 
 const RenderForm = props => {
   const { currentClient } = props;
@@ -14,21 +14,26 @@ const RenderForm = props => {
 
   // Method for capturing inputs
   const handleSubmit = ({ formData }) => {
-    setInputs([{ ...formData }]);
     // Task post
     Axios.post(
       process.env.REACT_APP_API_URL + "/task",
       // eslint-disable-next-line no-restricted-globals
-      { properties: inputs, clientId: props.currentClient._id, aproval: 'Aguardando aprovação' },
+      {
+        properties: {
+          formData
+        },
+        clientId: props.currentClient._id,
+        aproval: "Aguardando aprovação"
+      },
       { withCredentials: true }
     )
       .then(data => {
-        console.log(data)
+        console.log(data);
       })
       .catch(error => console.log(error));
   };
 
-  console.log("forms ->", forms)
+  console.log("forms ->", forms);
   //Get Form detail
   useEffect(() => {
     Axios.get(process.env.REACT_APP_API_URL + "/form").then(responseFromApi => {
@@ -47,38 +52,34 @@ const RenderForm = props => {
     });
   }, []);
 
-
   return (
     <div>
       <Link
-          className="logo navbar-brand d-inline-block align-top ml-5 mt-1"
-          exact
-          to="/"
-        >
+        className="logo navbar-brand d-inline-block align-top ml-5 mt-1"
+        exact
+        to="/"
+      >
+        <img src="../images/logo.png" alt="" />
+      </Link>
 
-          <img src="../images/logo.png" alt=""/> 
-        </Link>
+      <div className="renderForm">
+        <Container>
+          <Typography variant="h3">{currentClient.name}</Typography>
 
-    <div className="renderForm">
-    <Container>
-
-      <Typography variant="h3">{currentClient.name}</Typography>
-   
-
-      {forms.length > 0 &&
-        forms.map(form => {
-          const formSchema = {
-            // description: "User cria para empresa responder",
-            // type: "string",
-            properties: form
-          };
-          return <Form schema={formSchema} onSubmit={handleSubmit} />;
-        })}    
-        <button class="btnBack" onClick={props.history.goBack}>Voltar</button>
-
-    </Container>
-        </div> 
-
+          {forms.length > 0 &&
+            forms.map(form => {
+              const formSchema = {
+                // description: "User cria para empresa responder",
+                // type: "string",
+                properties: form
+              };
+              return <Form schema={formSchema} onSubmit={handleSubmit} />;
+            })}
+          <button class="btnBack" onClick={props.history.goBack}>
+            Voltar
+          </button>
+        </Container>
+      </div>
     </div>
   );
 };
