@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import AuthService from "./auth-service";
-import { _Link } from "react-router-dom";
 
 //Material design UI
-import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
@@ -12,7 +10,6 @@ import Checkbox from "@material-ui/core/Checkbox";
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
@@ -81,7 +78,7 @@ const Login = ({ location, getUser, history }) => {
         }
       })
       .catch(error => {
-        console.log(error);
+        console.log(error.response.data.message);
         handleMessage(error.response.data.message);
       });
   };
@@ -91,7 +88,7 @@ const Login = ({ location, getUser, history }) => {
     <Container className="form" component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-       <img src='./images/locked.png' alt='' />
+        <img src='./images/locked.png' alt='' />
         <Typography component="h1" variant="h5">
           Login
         </Typography>
@@ -132,19 +129,18 @@ const Login = ({ location, getUser, history }) => {
             variant="contained"
             color="primary"
             className={classes.submit}
-        
           >
             Login
           </Button>
           <button
-          className="google">
-          <img src="/images/Google.png" alt="" style={{width: 21, marginRight:8, marginLeft: -4}} />
-              <Link className="login" href={process.env.REACT_APP_API_URL + '/auth/google'} variant="body2">
-                {"LOGIN COM O GOOGLE"}
-              </Link>
+            className="google">
+            <img src="/images/Google.png" alt="" style={{ width: 21, marginRight: 8, marginLeft: -4 }} />
+            <Link className="login" href={process.env.REACT_APP_API_URL + '/auth/google'} variant="body2">
+              {"LOGIN COM O GOOGLE"}
+            </Link>
 
           </button>
-              <br />
+          <br />
           <Grid container>
             <Grid item>
               <Link href="/signup" variant="body2">
@@ -158,10 +154,8 @@ const Login = ({ location, getUser, history }) => {
               {message}
             </Alert>
           ) : (
-            <h1></h1>
-          )}
-
-          
+              <Box />
+            )}
         </form>
       </div>
       <Box mt={8}>

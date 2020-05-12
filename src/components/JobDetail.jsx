@@ -5,9 +5,6 @@ import Axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
-import DeleteIcon from "@material-ui/icons/Delete";
-import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -36,6 +33,7 @@ const JobDetail = props => {
     const url = props.location.pathname.split("/")[2];
     Axios.get(process.env.REACT_APP_API_URL + "/task")
       .then(responseFromApi => {
+        // eslint-disable-next-line array-callback-return
         const task = responseFromApi.data.map(prop => {
           if (url === prop._id) {
             const { properties, aproval, _id } = prop;

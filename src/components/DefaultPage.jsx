@@ -1,5 +1,4 @@
 import React from "react";
-import Typography from "@material-ui/core/Typography";
 import Axios from "axios"
 
 
@@ -13,7 +12,6 @@ export default function DefaultPage(props) {
       withCredentials: true
     }).then(responseFromApi => {
       handleCompany(responseFromApi.data);
-      console.log("numero clients", company.length)
     }).catch(error => console.log(error))
   } 
 
@@ -22,7 +20,6 @@ export default function DefaultPage(props) {
       withCredentials: true
     }).then(responseFromApi => {
       handleTask(responseFromApi.data);
-      console.log("numero task", task.length)
     }).catch(error => console.log(error))
   } 
   
@@ -31,6 +28,7 @@ export default function DefaultPage(props) {
       getAllClient();
       getAllTasks();
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[]);
   
   

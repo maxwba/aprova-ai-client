@@ -62,7 +62,6 @@ class App extends Component {
   }
   
   render() {
-    console.log(this.state.clientSection)
     this.fetchUser();
     return (
       <div className="App">
@@ -77,13 +76,13 @@ class App extends Component {
               getTheClient={this.getTheClient}
               currentClient={this.state.currentClient}
             />
-            <Route
+            <ProtectedRoute
               path="/jobdetail"
               component={JobDetail}
               getTheClient={this.getTheClient}
               currentClient={this.state.currentClient}
             />
-            <Route
+            <ProtectedRoute
               path="/renderform"
               render={props => (
                 <Renderform
@@ -128,7 +127,7 @@ class App extends Component {
               )}
             />
           </Switch>
-        )}{" "}
+        )}
       </div>
     );
   }

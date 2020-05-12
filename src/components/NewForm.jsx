@@ -1,17 +1,14 @@
 import React, { useState } from "react";
 import { withTheme } from "react-jsonschema-form";
 import { Theme as MuiTheme } from "rjsf-material-ui";
-import { Container, Typography, Box, Button } from "@material-ui/core";
+import { Container, Box, Button } from "@material-ui/core";
 import Axios from "axios";
-import { Link } from "react-router-dom"
-import ClientDetail from "./ClientDetails";
-import { type } from "os";
 
 export default function NewForm(props) {
   const [inputs, setInputs] = useState([]);
   const Form = withTheme(MuiTheme);
   const { selectedClient } = props;
-  const [cDetail, handleClientDetail] = useState(false);
+  const [handleClientDetail] = useState(false);
 
 
   const schema = {

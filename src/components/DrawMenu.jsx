@@ -152,15 +152,13 @@ export default function MiniDrawer(props) {
   };
 
   const service = new AuthService();
-  const logoutCompany = props => {
+  const logoutCompany = () => {
     if (logout) {
       service.logout().then(response => {
         handleLogout(null);
       });
     }
   };
-
-  console.log("COMPANY -> ", company)
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -227,8 +225,7 @@ export default function MiniDrawer(props) {
 
           <ListItem button onClick={handleChangeClient}>
             <ListItemIcon>
-              {" "}
-              <AddToPhotosIcon />{" "}
+              <AddToPhotosIcon />
             </ListItemIcon>
             <ListItemText>Criar cliente</ListItemText>
           </ListItem>
@@ -238,7 +235,7 @@ export default function MiniDrawer(props) {
             component={Link}
             to="/"
             button
-            onClick={() => logoutCompany(props)}
+            onClick={() => logoutCompany()}
           >
             <ListItemIcon>
               <ExitToAppIcon />

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import { withTheme } from "react-jsonschema-form";
 import { Theme as MuiTheme } from "rjsf-material-ui";
-import { Container, Typography, Box, Button } from "@material-ui/core";
+import { Container } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
 const RenderForm = props => {
@@ -32,6 +32,7 @@ const RenderForm = props => {
   //Get Form detail
   useEffect(() => {
     Axios.get(process.env.REACT_APP_API_URL + "/form").then(responseFromApi => {
+      // eslint-disable-next-line array-callback-return
       const newForm = responseFromApi.data.map(prop => {
         if (
           currentClient._id === prop.clientId ||
@@ -46,6 +47,7 @@ const RenderForm = props => {
       });
       handleForm(newForm.filter(a => a !== undefined));
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 

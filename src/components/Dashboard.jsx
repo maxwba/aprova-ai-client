@@ -3,6 +3,7 @@ import Menu from "./DrawMenu";
 
 const Dashboard = props => {
 
+  console.log(props)
 
   return (
     <div>

@@ -2,33 +2,8 @@ import React, { useState } from "react";
 import AuthService from "./auth-service";
 
 //Material design UI
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import Link from "@material-ui/core/Link";
-import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
+import { Button, TextField, Link, Grid, Box, Typography, Container, makeStyles } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="/">
-        Aprova.AI
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -36,10 +11,6 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexDirection: "column",
     alignItems: "center"
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main
   },
   form: {
     width: "100%", // Fix IE 11 issue.
@@ -56,31 +27,29 @@ const Signup = props => {
   const [message, handleMessage] = useState("");
   const service = new AuthService();
 
-  const handleFormSubmit = event => {
-    event.preventDefault();
-    service
-      .signup(email, password)
-      .then(user => {
-        handleEmail("");
-        handlePassword("");
-        props.getUser(user);
-        props.history.push("/dashboard");
-      })
-      .catch(error => {
-        handleMessage(error.response.data.message);
-      });
+  const handleFormSubmit = (email, password) => {
+    service.signup(email, password)
+    .then(user => {
+      handleEmail('');
+      handlePassword('');
+      props.getUser(user);
+      props.history.push('/dashboard');
+    })
+    .catch(error => {
+      handleMessage(error.response.data.message)
+      console.log(error);
+    })
   };
 
   const classes = useStyles();
   return (
     <Container className="form" component="main" maxWidth="xs">
-      <CssBaseline />
       <div className={classes.paper}>
         <img src='./images/locked.png' alt='' />
         <Typography component="h1" variant="h5">
           Signup
         </Typography>
-        <form className={classes.form} onSubmit={handleFormSubmit}>
+        <form className={classes.form}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -93,7 +62,9 @@ const Signup = props => {
             autoComplete="email"
             autoFocus
             value={email}
-            onChange={e => handleEmail(e.target.value)}
+            onChange={event => {
+              handleEmail(event.target.value)
+            }}
           />
           <TextField
             variant="outlined"
@@ -106,22 +77,21 @@ const Signup = props => {
             id="password"
             autoComplete="current-password"
             value={password}
-            onChange={e => handlePassword(e.target.value)}
-          />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Lembrar"
+            onChange={event => {
+              handlePassword(event.target.value)
+            }}
           />
           <Button
-            type="submit"
+            // type="submit"
             fullWidth
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={() => handleFormSubmit(email,password)}
           >
             Signup
           </Button>
-        
+          {/*         
           <button
           className="google">
           <img src="/images/Google.png" alt="" style={{width: 21, marginRight:8, marginLeft: -4}} />
@@ -130,7 +100,7 @@ const Signup = props => {
               </Link>
 
           </button>
-          <br />
+          <br /> */}
           <Grid container>
             <Grid item>
               <Link href="/login" variant="body2">
@@ -138,19 +108,15 @@ const Signup = props => {
               </Link>
             </Grid>
           </Grid>
-
           {message ? (
             <Alert variant="outlined" severity="error">
               {message}
             </Alert>
           ) : (
-            <h1></h1>
-          )}
+              <Box />
+            )}
         </form>
       </div>
-      <Box mt={8}>
-        <Copyright />
-      </Box>
     </Container>
   );
 };

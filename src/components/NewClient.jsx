@@ -46,7 +46,7 @@ class NewClient extends Component {
     return (
       <div>
         <form onSubmit={this.handleFormSubmit}>
-          <div class="newclient form-group ">
+          <div className="newclient form-group ">
             <label className="newClient">Novo Cliente</label>
             <br />
             <input
@@ -57,7 +57,6 @@ class NewClient extends Component {
               value={this.state.name}
               onChange={this.handleChange}
             />
-          
             <input
               type="text"
               className="form-control mb-4"
@@ -66,17 +65,15 @@ class NewClient extends Component {
               value={this.state.email}
               onChange={this.handleChange}
             />
-         
             <button
               type="submit"
               value="Submit"
-              class="btnClient btn btn-primary"
+              className="btnClient btn btn-primary"
             >
               Criar
             </button>
           </div>
         </form>
-       
       </div>
     );
   }

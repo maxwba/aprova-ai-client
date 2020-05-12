@@ -3,41 +3,16 @@ import { withTheme } from "react-jsonschema-form";
 import { Theme as MuiTheme } from "rjsf-material-ui";
 import NavClient from "./NavClient";
 import { Link as LinkRouter } from "react-router-dom";
-import Renderform from "./Renderform";
 
-import { makeStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import Login from "./loginclient";
 import Axios from "axios";
 
-const useStyles = makeStyles({
-  root: {
-    minWidth: 200
-  },
-  bullet: {
-    display: "inline-block",
-    margin: "2px",
-    transform: "scale(0.8)"
-  },
-  title: {
-    fontSize: 14
-  },
-  pos: {
-    marginBottom: 12
-  }
-});
 
 export default function Dashboard(props) {
-  const classes = useStyles();
   const [auth, changeAuth] = React.useState(false);
   const Form = withTheme(MuiTheme);
   const [forms, changeForm] = React.useState([]);
   const [tasks, changeTask] = React.useState([]);
-  const [clientName, handleClientName] = React.useState(props.history.action);
   const [stateInfo, handleStateInfo] = React.useState(false);
   const [taskInfo, handleTaskInfo] = React.useState(false);
   const max = props.location.pathname.split("/")[3];
@@ -60,6 +35,7 @@ export default function Dashboard(props) {
     const url = props.location.pathname.split("/")[3];
     Axios.get(process.env.REACT_APP_API_URL + "/infos/forms")
       .then(responseFromApi => {
+        // eslint-disable-next-line array-callback-return
         const newForm = responseFromApi.data.map(prop => {
           if (url === prop.clientId) {
             const { properties, _id } = prop;
@@ -80,6 +56,7 @@ export default function Dashboard(props) {
       const url = props.location.pathname.split("/")[3];
       Axios.get(process.env.REACT_APP_API_URL + "/infos/tasks")
         .then(responseFromApi => {
+          // eslint-disable-next-line array-callback-return
           const task = responseFromApi.data.map(prop => {
             if (url === prop.clientId) {
               const { properties, _id, aproval } = prop;
