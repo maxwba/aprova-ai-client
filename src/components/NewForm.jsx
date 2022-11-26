@@ -1,18 +1,14 @@
 import React, { useState } from "react";
 import { withTheme } from "react-jsonschema-form";
 import { Theme as MuiTheme } from "rjsf-material-ui";
-import { Container, Typography, Box, Button } from "@material-ui/core";
+import { Container, Box, Button } from "@material-ui/core";
 import Axios from "axios";
-import { Link } from "react-router-dom"
-import ClientDetail from "./ClientDetails";
-import { type } from "os";
 
 export default function NewForm(props) {
   const [inputs, setInputs] = useState([]);
   const Form = withTheme(MuiTheme);
   const { selectedClient } = props;
   const [cDetail, handleClientDetail] = useState(false);
-
 
   const schema = {
     title: "Crie seu formulário",
@@ -22,21 +18,21 @@ export default function NewForm(props) {
     properties: {
       prop: {
         type: "string",
-        title: "Nome da propriedade"
+        title: "Nome da propriedade",
       },
       description: {
         type: "string",
-        title: "Descrição"
+        title: "Descrição",
       },
       type: {
         type: "string", //Enum, de valores definidos, string, date, email, password, bla
-        enum: ["string", "date", "number", "files"]
-      }
-    }
+        enum: ["string", "date", "number", "files"],
+      },
+    },
   };
 
   const handleSubmit = ({ formData }) => {
-    setInputs(inputs => [...inputs, { ...formData }]);
+    setInputs((inputs) => [...inputs, { ...formData }]);
   };
 
   const turnClientDetail = () => {
@@ -51,8 +47,8 @@ export default function NewForm(props) {
           [key]: {
             type: "string",
             format: "date",
-            description: description
-          }
+            description: description,
+          },
         };
       } else if (type === "files") {
         return {
@@ -60,25 +56,25 @@ export default function NewForm(props) {
             type: "string",
             format: "data-url",
             title: prop,
-            description: description
-          }
+            description: description,
+          },
         };
       } else {
         return {
           [key]: {
             type,
-            description: description
-          }
+            description: description,
+          },
         };
       }
     });
 
-    const convertArrayToObject = array => {
+    const convertArrayToObject = (array) => {
       const initialValue = {};
       return array.reduce((obj, item) => {
         return {
           ...obj,
-          ...item
+          ...item,
         };
       }, initialValue);
     };
@@ -87,7 +83,7 @@ export default function NewForm(props) {
       title: "Formulario criado pelo user",
       description: "User cria para empresa responder",
       type: "string",
-      properties: convertArrayToObject(data)
+      properties: convertArrayToObject(data),
     };
 
     const handleFormSubmit = () => {
@@ -99,11 +95,11 @@ export default function NewForm(props) {
         { properties, clientId: _id },
         { withCredentials: true }
       )
-        .then(data => {
+        .then((data) => {
           setInputs([]);
-          props.handleDrawerClose()
+          props.handleDrawerClose();
         })
-        .catch(error => console.log(error));
+        .catch((error) => console.log(error));
     };
 
     handleFormSubmit();
@@ -117,13 +113,11 @@ export default function NewForm(props) {
 
   return (
     <>
-         <div className="name">
-          
-            <h2 className="mt-2">{selectedClient.name}</h2>
-            
-            </div>
-            <br />
-       
+      <div className="name">
+        <h2 className="mt-2">{selectedClient.name}</h2>
+      </div>
+      <br />
+
       <Container className="newForm">
         <Form schema={schema} onSubmit={handleSubmit} />
         {inputs &&
@@ -133,21 +127,28 @@ export default function NewForm(props) {
                 <form action="/action_page.php">
                   {description}:<br />
                   <div class="form-group createForm">
-              <input type={type} name={title}  class="form-control createForm" id="exampleInputEmail1" />
-                    </div>
-
+                    <input
+                      type={type}
+                      name={title}
+                      class="form-control createForm"
+                      id="exampleInputEmail1"
+                    />
+                  </div>
                 </form>
               </Box>
             );
           })}
         <br />
-     
-        <Button style={{backgroundColor: "#2F6F84" }} variant="contained" color="primary" onClick={handleFormSave}>
+
+        <Button
+          style={{ backgroundColor: "#2F6F84" }}
+          variant="contained"
+          color="primary"
+          onClick={handleFormSave}
+        >
           Salvar Formulário
         </Button>
-
       </Container>
-
     </>
   );
 }
